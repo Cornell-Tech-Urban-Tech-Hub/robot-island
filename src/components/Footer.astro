@@ -1,0 +1,90 @@
+---
+// Site footer
+---
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <span class="footer-title">The <strong>Atlas</strong> of NYC AV Futures</span>
+        </div>
+        <nav class="footer-links">
+            <a href="/about">About the Project</a>
+            <a href="/research">The Research</a>
+            <a href="/#map-section">Explore Map</a>
+        </nav>
+        <p class="footer-tagline">A research project exploring urban tech futures.</p>
+    </div>
+</footer>
+
+<style>
+    .site-footer {
+        background: #333;
+        color: #eee;
+        padding: 3rem 0;
+    }
+
+    .footer-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .footer-brand {
+        font-family: var(--font-sans);
+    }
+
+    .footer-title {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #eee;
+    }
+
+    .footer-title strong {
+        font-weight: 700;
+    }
+
+    .footer-links {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    .footer-links a {
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
+        color: #ccc;
+        text-decoration: none;
+    }
+
+    .footer-links a:hover {
+        color: #fff;
+        text-decoration: underline;
+    }
+
+    .footer-tagline {
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
+        color: #999;
+        margin-bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding-top: 1.5rem;
+        border-top: 1px solid #555;
+        margin-top: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .footer-inner {
+            flex-direction: column;
+            text-align: center;
+        }
+        .footer-links {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+</style>
