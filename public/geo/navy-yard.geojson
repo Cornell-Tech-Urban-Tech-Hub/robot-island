@@ -1,0 +1,25 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Brooklyn Navy Yard",
+        "type": "Industrial Park"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-73.9774, 40.7024],
+            [-73.9740, 40.7056],
+            [-73.9678, 40.7031],
+            [-73.9625, 40.6985],
+            [-73.9750, 40.6960],
+            [-73.9774, 40.7024]
+          ]
+        ]
+      }
+    }
+  ]
+}

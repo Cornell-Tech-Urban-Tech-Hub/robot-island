@@ -1,0 +1,246 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SplitLayout from "../../layouts/SplitLayout.astro";
+import { getCollection } from "astro:content";
+
+export const prerender = true;
+
+// Define dynamic routes for all case studies
+export async function getStaticPaths() {
+    const caseStudies = await getCollection("case-studies");
+    return caseStudies.map((study) => ({
+        params: { slug: study.slug },
+        props: { study },
+    }));
+}
+
+const { study } = Astro.props;
+const { Content } = await study.render();
+---
+
+<Layout title={`${study.data.title} | NYC AV Atlas`}>
+    <SplitLayout>
+        <article
+            class="case-study-detail"
+            data-geojson={study.data.geojson}
+            id="detail-container"
+        >
+            <header class="detail-header">
+                <a href="/#case-studies" class="back-link"
+                    >&lsaquo; Back to Atlas</a
+                >
+                <h1>{study.data.title}</h1>
+                {
+                    study.data.author && (
+                        <p class="author">By {study.data.author}</p>
+                    )
+                }
+            </header>
+
+            <div class="content-body">
+                <Content />
+            </div>
+        </article>
+    </SplitLayout>
+</Layout>
+
+<style>
+    .case-study-detail {
+        padding: 1rem 0 4rem;
+        background-color: var(
+            --color-bg-base
+        ); /* match split layout background */
+    }
+
+    .detail-header {
+        margin-bottom: 3rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .back-link {
+        display: inline-block;
+        margin-bottom: 2rem;
+        font-weight: 600;
+        color: var(--color-accent);
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.05em;
+        font-family: var(--font-sans);
+    }
+
+    h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #111;
+        letter-spacing: -0.02em;
+    }
+
+    .author {
+        color: var(--color-text-muted);
+        font-size: 1.1rem;
+        font-style: italic;
+    }
+
+    .content-body {
+        font-size: 1.15rem;
+        line-height: 1.8;
+        color: var(--color-text-primary);
+    }
+
+    .content-body :global(h2) {
+        margin-top: 3rem;
+        font-size: 2rem;
+        color: #222;
+        font-family: var(--font-sans);
+    }
+
+    .content-body :global(h3) {
+        margin-top: 2rem;
+        font-size: 1.5rem;
+        font-family: var(--font-sans);
+    }
+
+    .content-body :global(p) {
+        margin-bottom: 1.75rem;
+        font-family: var(--font-serif);
+    }
+
+    .content-body :global(ul),
+    .content-body :global(ol) {
+        margin-bottom: 1.75rem;
+        padding-left: 2rem;
+        font-family: var(--font-serif);
+    }
+
+    .content-body :global(li) {
+        margin-bottom: 0.5rem;
+    }
+
+    .content-body :global(blockquote) {
+        border-left: 4px solid var(--color-accent);
+        padding: 1.5rem 2rem;
+        font-style: italic;
+        color: var(--color-text-secondary);
+        background-color: var(--color-bg-white);
+        margin: 2.5rem 0;
+        font-size: 1.25rem;
+        font-family: var(--font-serif);
+    }
+</style>
+
+<script>
+    async function initCaseStudyMap() {
+        const container = document.getElementById("detail-container");
+        if (!container) return;
+
+        const geojsonUrl = container.dataset.geojson;
+        if (!geojsonUrl) return;
+
+        const map = (window as any).atlasMap;
+        if (!map) return;
+
+        try {
+            const response = await fetch("/" + geojsonUrl);
+            const data = await response.json();
+
+            if (data && data.features && data.features.length > 0) {
+                let minLng = 180,
+                    minLat = 90,
+                    maxLng = -180,
+                    maxLat = -90;
+
+                const extractCoords = (coords: any) => {
+                    if (typeof coords[0] === "number") {
+                        minLng = Math.min(minLng, coords[0]);
+                        maxLng = Math.max(maxLng, coords[0]);
+                        minLat = Math.min(minLat, coords[1]);
+                        maxLat = Math.max(maxLat, coords[1]);
+                    } else {
+                        coords.forEach(extractCoords);
+                    }
+                };
+
+                data.features.forEach((f: any) => {
+                    if (f.geometry && f.geometry.coordinates) {
+                        extractCoords(f.geometry.coordinates);
+                    }
+                });
+
+                if (minLng !== 180) {
+                    map.fitBounds(
+                        [
+                            [minLng, minLat],
+                            [maxLng, maxLat],
+                        ],
+                        {
+                            padding: {
+                                top: 80,
+                                bottom: 80,
+                                left: 80,
+                                right: 80,
+                            },
+                            maxZoom: 16,
+                            duration: 0, // Instant transition on page load
+                        },
+                    );
+                }
+
+                const sourceId = "case-detail-source";
+                if (!map.getSource(sourceId)) {
+                    map.addSource(sourceId, {
+                        type: "geojson",
+                        data: data,
+                    });
+
+                    map.addLayer({
+                        id: sourceId + "-fill",
+                        type: "fill",
+                        source: sourceId,
+                        paint: {
+                            "fill-color": "#c8102e", // Atlas Red Highlight
+                            "fill-opacity": 0.4,
+                        },
+                    });
+
+                    map.addLayer({
+                        id: sourceId + "-line",
+                        type: "line",
+                        source: sourceId,
+                        paint: {
+                            "line-color": "#c8102e",
+                            "line-width": 3,
+                        },
+                    });
+                } else {
+                    map.getSource(sourceId).setData(data);
+                }
+            }
+        } catch (e) {
+            console.error("Error loading GeoJSON for case study map:", e);
+        }
+    }
+
+    function init() {
+        const checkMap = setInterval(() => {
+            if ((window as any).atlasMap && (window as any).atlasMap.loaded()) {
+                clearInterval(checkMap);
+                initCaseStudyMap();
+            } else if ((window as any).atlasMap) {
+                clearInterval(checkMap);
+                (window as any).atlasMap.on("load", initCaseStudyMap);
+            }
+        }, 100);
+    }
+
+    document.addEventListener("astro:page-load", init);
+
+    if (
+        document.readyState === "complete" ||
+        document.readyState === "interactive"
+    ) {
+        init();
+    } else {
+        document.addEventListener("DOMContentLoaded", init);
+    }
+</script>

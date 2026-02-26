@@ -1,0 +1,42 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "JFK Airport Terminal 4"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -73.784,
+                            40.640
+                        ],
+                        [
+                            -73.780,
+                            40.645
+                        ],
+                        [
+                            -73.775,
+                            40.643
+                        ],
+                        [
+                            -73.774,
+                            40.638
+                        ],
+                        [
+                            -73.780,
+                            40.635
+                        ],
+                        [
+                            -73.784,
+                            40.640
+                        ]
+                    ]
+                ]
+            }
+        }
+    ]
+}

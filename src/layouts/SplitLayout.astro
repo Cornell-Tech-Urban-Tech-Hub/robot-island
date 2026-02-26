@@ -1,0 +1,99 @@
+---
+import Map from "../components/Map.astro";
+
+interface Props {
+    // We can pass initial map coordinates here if we want
+    initialLng?: number;
+    initialLat?: number;
+    initialZoom?: number;
+}
+
+const {
+    initialLng = -73.935242,
+    initialLat = 40.73061,
+    initialZoom = 11,
+} = Astro.props;
+---
+
+<div class="split-layout">
+    <div class="map-container">
+        <Map lng={initialLng} lat={initialLat} zoom={initialZoom} />
+    </div>
+
+    <div class="content-container">
+        <div class="content-scroll-area">
+            <slot />
+        </div>
+    </div>
+</div>
+
+<style>
+    .split-layout {
+        display: flex;
+        height: 100vh;
+        width: 100vw;
+        padding-top: var(--header-height);
+    }
+
+    /* Map is fixed on the left/background */
+    .map-container {
+        flex: 1;
+        position: relative;
+        height: calc(100vh - var(--header-height));
+        z-index: var(--z-map);
+    }
+
+    /* Content scrolls over the right side */
+    .content-container {
+        width: 50vw;
+        max-width: 700px;
+        flex-shrink: 0;
+        height: calc(100vh - var(--header-height));
+        background-color: var(--color-bg-base);
+        border-left: 1px solid var(--color-border);
+        position: relative;
+        z-index: var(--z-sidebar);
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .content-scroll-area {
+        height: 100%;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+        padding: 4rem;
+    }
+
+    @media (max-width: 1024px) {
+        .content-container {
+            width: 40vw;
+            min-width: 400px;
+        }
+        .content-scroll-area {
+            padding: 2.5rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .split-layout {
+            flex-direction: column;
+        }
+
+        .map-container {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            width: 100vw;
+            height: 50vh;
+        }
+
+        .content-container {
+            width: 100vw;
+            max-width: 100%;
+            margin-top: 50vh;
+            height: 50vh; /* Takes remaining half */
+            border-left: none;
+            border-top: 1px solid var(--color-border);
+            background-color: var(--color-bg-base);
+        }
+    }
+</style>

@@ -1,0 +1,30 @@
+---
+import '../styles/global.css';
+import Navigation from '../components/Navigation.astro';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "A global atlas of case studies for autonomous vehicle futures in NYC." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} | NYC AV Atlas</title>
+		
+		<!-- Mapbox GL CSS -->
+		<link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
+	</head>
+	<body>
+		<Navigation />
+		<slot />
+	</body>
+</html>

@@ -1,0 +1,134 @@
+---
+// Atlas of Urban Tech Header Style
+const isHome =
+    Astro.url.pathname === "/" || Astro.url.pathname === "/index.html";
+---
+
+<header class="atlas-main-header">
+    <div
+        class="container header-inner"
+        style={isHome ? "justify-content: flex-end;" : ""}
+    >
+        {
+            !isHome && (
+                <a href="/" class="brand-logotype">
+                    <>
+                        <span class="the-text">The </span>
+                        <span class="atlas-text">Atlas</span>
+                        <br />
+                    </>
+                    <span class="sub-text">of NYC AV Futures</span>
+                </a>
+            )
+        }
+
+        <nav class="atlas-links">
+            <a href="/about">About the Project</a>
+            <a href="/research">The Research</a>
+            <a href="/#case-studies">Explore Map</a>
+        </nav>
+    </div>
+</header>
+
+<style>
+    .atlas-main-header {
+        background-color: transparent;
+        position: absolute; /* Float over hero */
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: var(--z-header);
+        padding: 2rem 0;
+    }
+
+    .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .brand-logotype {
+        font-family: var(--font-sans);
+        line-height: 1.1;
+        color: #333;
+        display: inline-block;
+    }
+
+    .brand-logotype:hover {
+        text-decoration: none;
+    }
+
+    .the-text {
+        font-size: 2.2rem;
+        font-weight: 700;
+    }
+
+    .atlas-text {
+        font-size: 4rem;
+        font-weight: 700;
+        color: var(--color-accent); /* Red */
+        letter-spacing: -0.02em;
+    }
+
+    .sub-text {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #444;
+    }
+
+    .atlas-links {
+        display: flex;
+        gap: 2.5rem;
+        margin-top: 1rem;
+        background-color: var(--color-bg-base);
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .atlas-links a {
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        font-weight: 600;
+        color: #555;
+        position: relative;
+        padding-bottom: 0.25rem;
+        text-decoration: none;
+    }
+
+    .atlas-links a:hover,
+    .atlas-links a.active {
+        color: var(--color-accent);
+    }
+
+    .atlas-links a::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--color-accent);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform var(--transition-fast);
+    }
+
+    .atlas-links a:hover::after,
+    .atlas-links a.active::after {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
+    @media (max-width: 768px) {
+        .header-inner {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .atlas-links {
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+    }
+</style>

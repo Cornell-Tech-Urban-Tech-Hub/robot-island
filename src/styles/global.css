@@ -1,0 +1,134 @@
+/* 
+  NYC AV Atlas - Global Styles
+  Matched to atlasofurbantech.org exact visual style
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;600;700&display=swap');
+
+:root {
+  /* Color Palette - Atlas Light Mode */
+  --color-bg-base: #F9F6ED;
+  /* Cream/off-white */
+  --color-bg-alt: #E8D8D8;
+  /* Light pink/beige for sections */
+  --color-bg-white: #FFFFFF;
+
+  --color-text-primary: #333333;
+  --color-text-secondary: #555555;
+  --color-text-muted: #888888;
+
+  /* Primary Atlas Accent - Red */
+  --color-accent: #C8102E;
+  /* Signature Red */
+  --color-accent-hover: #A00C25;
+
+  --color-border: #E0E0E0;
+
+  /* Typography */
+  --font-sans: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Merriweather', Georgia, serif;
+  --font-heading: 'IBM Plex Serif', var(--font-serif);
+
+  /* Layout constraints */
+  --max-width: 1200px;
+  --header-height: 80px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 300ms ease-in-out;
+
+  /* Z-index layering */
+  --z-map: 0;
+  --z-sidebar: 10;
+  --z-header: 1000;
+  --z-modal: 2000;
+}
+
+/* Base Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-serif);
+  line-height: 1.6;
+  font-size: 18px;
+  /* Slightly larger editorial font size */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5em;
+}
+
+p {
+  margin-bottom: 1.5rem;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Utility Classes */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-padding {
+  padding: 5rem 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Base Buttons */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--color-accent);
+  background: transparent;
+  border: 1px solid var(--color-accent);
+  border-radius: 40px;
+  /* Pill shape */
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-decoration: none;
+}
+
+.btn-outline:hover {
+  background-color: var(--color-accent);
+  color: #fff;
+  text-decoration: none;
+}

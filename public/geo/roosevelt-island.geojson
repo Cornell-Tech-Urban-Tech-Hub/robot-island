@@ -1,0 +1,38 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Roosevelt Island Corridor"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -73.955,
+                            40.762
+                        ],
+                        [
+                            -73.945,
+                            40.768
+                        ],
+                        [
+                            -73.942,
+                            40.765
+                        ],
+                        [
+                            -73.952,
+                            40.758
+                        ],
+                        [
+                            -73.955,
+                            40.762
+                        ]
+                    ]
+                ]
+            }
+        }
+    ]
+}
