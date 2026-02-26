@@ -1,506 +1,464 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import SplitLayout from "../layouts/SplitLayout.astro";
 import { getCollection } from "astro:content";
 
 const allCaseStudies = await getCollection("case-studies");
-
-// Initial coordinates for NYC
-const defaultLng = -73.935242;
-const defaultLat = 40.73061;
-const defaultZoom = 11;
 ---
 
 <Layout title="NYC AV Atlas">
-	<SplitLayout
-		initialLng={defaultLng}
-		initialLat={defaultLat}
-		initialZoom={defaultZoom}
-	>
-		<div class="atlas-content">
-			<header class="atlas-header">
-				<h1>
-					The <span class="highlight-red">Atlas</span><br />of NYC AV
-					Futures
-				</h1>
-				<p>
-					A global atlas of case studies of tech-enabled urban
-					districts and municipal digital masterplans, tailored for
-					Autonomous Vehicles in NYC.
+	<main class="atlas-home">
+		<section class="hero">
+			<div class="container">
+				<h1>The <span class="accent">Atlas</span> of NYC AV Futures</h1>
+				<p class="subtitle">
+					A global atlas of case studies of tech-enabled urban districts
+					and municipal digital masterplans, tailored for Autonomous
+					Vehicles in NYC.
 				</p>
-			</header>
-
-			<div class="case-studies-list" id="case-studies-container">
-				{
-					allCaseStudies.map((study, index) => (
-						<article
-							class="case-study-card"
-							data-geojson={study.data.geojson}
-							data-index={index}
-							id={`study-${index}`}
-						>
-							<div class="card-meta">Case Study {index + 1}</div>
-							<h2>{study.data.title}</h2>
-							<p class="description">{study.data.description}</p>
-							{study.data.author && (
-								<p class="author">By {study.data.author}</p>
-							)}
-
-							<a
-								href={`/case-studies/${study.slug}`}
-								class="btn-outline btn-red mt-2"
-							>
-								Read Full Analysis
-							</a>
-						</article>
-					))
-				}
-
-				{/* Placeholder if no studies found */}
-				{
-					allCaseStudies.length === 0 && (
-						<div class="empty-state">
-							<p>
-								No case studies found. Add markdown files to{" "}
-								<code>src/content/case-studies/</code>.
-							</p>
-						</div>
-					)
-				}
 			</div>
+		</section>
 
-			<footer class="atlas-footer text-center mt-5 pt-3">
+		<section class="map-section" id="map-section">
+			<div class="map-container" id="map"></div>
+		</section>
+
+		<section class="case-studies">
+			<div class="container">
+				<h2>Case Studies</h2>
+				<div class="card-grid">
+					{allCaseStudies.map((study) => (
+						<a
+							href={`/case-studies/${study.slug}`}
+							class="card-link"
+							data-geojson={study.data.geojson}
+							data-slug={study.slug}
+						>
+							<article class="case-card">
+								{study.data.image && (
+									<div
+										class="card-image"
+										style={`background-image: url('/${study.data.image}')`}
+									></div>
+								)}
+								<div class="card-content">
+									<h3>{study.data.title}</h3>
+									<p class="card-description">{study.data.description}</p>
+									{study.data.author && (
+										<span class="card-author">By {study.data.author}</span>
+									)}
+									<span class="card-read-more">Read more &rarr;</span>
+								</div>
+							</article>
+						</a>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<footer class="atlas-footer">
+			<div class="container">
 				<p>A research project exploring urban tech futures.</p>
-			</footer>
-		</div>
-	</SplitLayout>
+			</div>
+		</footer>
+	</main>
 </Layout>
 
 <style>
-	.atlas-content {
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
-		padding-bottom: 50vh; /* Allow scrolling past the last item */
+	/* Hero Section */
+	.hero {
+		padding: 4rem 0 3rem;
 	}
 
-	.atlas-header {
-		padding: 1rem 0 3rem;
+	.hero .container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 2rem;
 	}
 
-	.atlas-header h1 {
-		font-size: 3rem;
-		line-height: 1.1;
-		margin-bottom: 1.5rem;
+	.hero h1 {
+		font-family: var(--font-sans);
+		font-size: 2.4rem;
+		font-weight: 700;
 		color: #333;
-		letter-spacing: -0.02em;
+		margin-bottom: 1rem;
 	}
 
-	.highlight-red {
+	.hero h1 .accent {
 		color: var(--color-accent);
-		font-size: 4rem;
 	}
 
-	.atlas-header p {
-		font-size: 1.25rem;
-		line-height: 1.6;
-		color: #444;
+	.hero .subtitle {
 		font-family: var(--font-serif);
-	}
-
-	.case-studies-list {
-		display: flex;
-		flex-direction: column;
-		gap: 2.5rem;
-	}
-
-	.case-study-card {
-		padding: 2.5rem;
-		background-color: var(--color-bg-white);
-		border: 1px solid var(--color-border);
-		transition:
-			transform var(--transition-base),
-			box-shadow var(--transition-base),
-			border-color var(--transition-base);
-		position: relative;
-		overflow: hidden;
-	}
-
-	.case-study-card:hover {
-		transform: translateY(-5px);
-		box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
-	}
-
-	/* The active state when scrolling highlights the card */
-	.case-study-card.is-active {
-		border-left: 4px solid var(--color-accent);
-		box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08); /* slight highlight */
-	}
-
-	.card-meta {
-		font-family: var(--font-sans);
-		font-size: 0.75rem;
-		font-weight: 800;
-		text-transform: uppercase;
-		letter-spacing: 0.15em;
-		color: var(--color-accent);
-		margin-bottom: 1.25rem;
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	.card-meta::before {
-		content: "";
-		display: inline-block;
-		width: 20px;
-		height: 2px;
-		background-color: var(--color-accent);
-	}
-
-	.case-study-card h2 {
-		font-family: var(--font-sans);
-		font-size: 1.75rem;
-		line-height: 1.2;
-		color: #111;
-		margin-bottom: 1.25rem;
-	}
-
-	.description {
-		font-family: var(--font-serif);
-		font-size: 1rem;
-		line-height: 1.7;
+		font-size: 1.1rem;
 		color: #555;
+		max-width: 600px;
+		line-height: 1.6;
+	}
+
+	/* Map Section */
+	.map-section {
+		width: 100%;
+	}
+
+	.map-container {
+		width: 100%;
+		height: 500px;
+	}
+
+	/* Case Studies Section */
+	.case-studies {
+		padding: 4rem 0;
+	}
+
+	.case-studies .container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	.case-studies h2 {
+		font-family: var(--font-sans);
+		font-size: 1.8rem;
 		margin-bottom: 2rem;
 	}
 
-	.author {
+	.card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+		gap: 2rem;
+	}
+
+	/* Card Link */
+	a.card-link {
+		text-decoration: none;
+		color: inherit;
+	}
+
+	a.card-link:hover {
+		text-decoration: none;
+	}
+
+	/* Card Design */
+	.case-card {
+		background: #fff;
+		border-radius: 4px;
+		overflow: hidden;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+		transition: transform 0.25s ease, box-shadow 0.25s ease;
+	}
+
+	a.card-link:hover .case-card {
+		transform: translateY(-4px);
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+	}
+
+	.card-image {
+		height: 200px;
+		background-size: cover;
+		background-position: center;
+	}
+
+	.card-content {
+		padding: 1.5rem;
+	}
+
+	.card-content h3 {
+		font-family: var(--font-sans);
+		font-size: 1.2rem;
+		font-weight: 700;
+		color: #333;
+		margin-bottom: 0.75rem;
+	}
+
+	.card-description {
+		font-family: var(--font-serif);
+		font-size: 0.9rem;
+		color: #555;
+		line-height: 1.5;
+		margin-bottom: 1rem;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.card-author {
+		font-family: var(--font-sans);
+		font-size: 0.8rem;
+		color: #999;
+		display: block;
+		margin-bottom: 0.75rem;
+	}
+
+	.card-read-more {
 		font-family: var(--font-sans);
 		font-size: 0.85rem;
-		color: #888;
-		margin-bottom: 1.5rem;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
+		color: var(--color-accent);
+		font-weight: 600;
 	}
 
-	.mt-2 {
-		margin-top: 1rem;
-	}
-
-	.mt-5 {
-		margin-top: 4rem;
-	}
-
-	.pt-3 {
-		padding-top: 2rem;
-	}
-
+	/* Footer */
 	.atlas-footer {
-		border-top: 1px solid var(--color-border);
-		color: var(--color-text-muted);
-		font-size: 0.9rem;
+		background: #333;
+		color: #eee;
+		padding: 3rem 0;
+		text-align: center;
+	}
+
+	.atlas-footer .container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	.atlas-footer p {
 		font-family: var(--font-sans);
+		font-size: 0.9rem;
+		margin-bottom: 0;
 	}
 </style>
 
 <script>
-	// Client-side code to handle map updates as user scrolls through cards
-	let globalBounds = { minLng: 180, minLat: 90, maxLng: -180, maxLat: -90 };
+	import mapboxgl from "mapbox-gl";
 
-	async function loadAllGeometries() {
-		const map = (window as any).atlasMap;
-		if (!map) return;
+	const token = import.meta.env.PUBLIC_MAPBOX_TOKEN;
+	if (!token) {
+		console.error("PUBLIC_MAPBOX_TOKEN is missing from your .env file!");
+	}
+	mapboxgl.accessToken = token;
 
-		const cards = document.querySelectorAll(".case-study-card");
-		const urls = Array.from(cards)
-			.map((c: any) => c.dataset.geojson)
-			.filter(Boolean);
+	function initMap() {
+		const mapContainer = document.getElementById("map");
+		if (!mapContainer) return;
 
-		if (urls.length === 0) return;
+		const map = new mapboxgl.Map({
+			container: "map",
+			style: "mapbox://styles/mapbox/light-v11",
+			center: [-73.935242, 40.73061],
+			zoom: 11,
+		});
 
-		try {
-			const responses = await Promise.all(
-				urls.map((url) => fetch("/" + url)),
-			);
-			const dataArrays = await Promise.all(
-				responses.map((res) => res.json()),
-			);
+		(window as any).atlasMap = map;
 
-			const extractCoords = (coords: any) => {
-				if (typeof coords[0] === "number") {
-					globalBounds.minLng = Math.min(
-						globalBounds.minLng,
-						coords[0],
-					);
-					globalBounds.maxLng = Math.max(
-						globalBounds.maxLng,
-						coords[0],
-					);
-					globalBounds.minLat = Math.min(
-						globalBounds.minLat,
-						coords[1],
-					);
-					globalBounds.maxLat = Math.max(
-						globalBounds.maxLat,
-						coords[1],
-					);
-				} else {
-					coords.forEach(extractCoords);
+		// Single reusable popup for hover
+		const hoverPopup = new mapboxgl.Popup({
+			closeButton: false,
+			closeOnClick: false,
+		});
+
+		map.on("load", async () => {
+			// Build slug-to-geojson mapping from card elements
+			const cards = document.querySelectorAll("a.card-link");
+			const slugToGeojson: Record<string, string> = {};
+
+			cards.forEach((card) => {
+				const el = card as HTMLElement;
+				const slug = el.dataset.slug;
+				const geojsonPath = el.dataset.geojson;
+				if (slug && geojsonPath) {
+					slugToGeojson[geojsonPath] = slug;
 				}
-			};
-
-			const allFeatures = dataArrays.flatMap((data) => {
-				if (data && data.features) {
-					data.features.forEach((f: any) => {
-						if (f.geometry && f.geometry.coordinates) {
-							extractCoords(f.geometry.coordinates);
-						}
-					});
-					return data.features;
-				}
-				return [];
 			});
 
-			const sourceId = "all-case-studies";
-			const geojsonData = {
-				type: "FeatureCollection",
-				features: allFeatures,
-			};
+			// Fetch all geojson files and merge into one FeatureCollection
+			const geojsonPaths = Object.keys(slugToGeojson);
+			if (geojsonPaths.length === 0) return;
 
-			if (!map.getSource(sourceId)) {
-				map.addSource(sourceId, {
-					type: "geojson",
-					data: geojsonData,
+			try {
+				const responses = await Promise.all(
+					geojsonPaths.map((path) => fetch("/" + path)),
+				);
+				const dataArrays = await Promise.all(
+					responses.map((res) => res.json()),
+				);
+
+				const allFeatures: any[] = [];
+
+				dataArrays.forEach((data, i) => {
+					const geojsonPath = geojsonPaths[i];
+					const slug = slugToGeojson[geojsonPath];
+
+					if (data && data.features) {
+						data.features.forEach((feature: any) => {
+							// Add slug and preserve name property
+							const enrichedFeature = {
+								...feature,
+								properties: {
+									...feature.properties,
+									slug: slug,
+									name: feature.properties?.name || slug,
+								},
+							};
+							allFeatures.push(enrichedFeature);
+						});
+					}
 				});
 
+				const mergedCollection = {
+					type: "FeatureCollection" as const,
+					features: allFeatures,
+				};
+
+				// Add source
+				map.addSource("all-boundaries", {
+					type: "geojson",
+					data: mergedCollection,
+				});
+
+				// Base fill layer
 				map.addLayer({
-					id: sourceId + "-fill",
+					id: "boundaries-fill",
 					type: "fill",
-					source: sourceId,
+					source: "all-boundaries",
 					paint: {
-						"fill-color": "#888888", // Grey for inactive base layer
-						"fill-opacity": 0.2,
+						"fill-color": "#AA142D",
+						"fill-opacity": 0.15,
 					},
 				});
 
+				// Base line layer
 				map.addLayer({
-					id: sourceId + "-line",
+					id: "boundaries-line",
 					type: "line",
-					source: sourceId,
+					source: "all-boundaries",
 					paint: {
-						"line-color": "#888888",
+						"line-color": "#AA142D",
 						"line-width": 1,
 					},
 				});
-			}
 
-			// Fly to global bounds initially
-			flyToGlobalBounds();
-		} catch (e) {
-			console.error("Error loading all GeoJSONs:", e);
-		}
-	}
+				// Hover fill layer (initially matches nothing)
+				map.addLayer({
+					id: "boundaries-fill-hover",
+					type: "fill",
+					source: "all-boundaries",
+					paint: {
+						"fill-color": "#AA142D",
+						"fill-opacity": 0.4,
+					},
+					filter: ["==", ["get", "slug"], ""],
+				});
 
-	function flyToGlobalBounds() {
-		const map = (window as any).atlasMap;
-		if (!map || globalBounds.minLng === 180) return;
+				// Hover line layer (initially matches nothing)
+				map.addLayer({
+					id: "boundaries-line-hover",
+					type: "line",
+					source: "all-boundaries",
+					paint: {
+						"line-color": "#AA142D",
+						"line-width": 3,
+					},
+					filter: ["==", ["get", "slug"], ""],
+				});
 
-		map.fitBounds(
-			[
-				[globalBounds.minLng, globalBounds.minLat],
-				[globalBounds.maxLng, globalBounds.maxLat],
-			],
-			{
-				padding: {
-					top: 50,
-					bottom: 50,
-					left: 50,
-					right: 50,
-				},
-				maxZoom: 15,
-				duration: 2000,
-			},
-		);
+				// Fit bounds to all features
+				if (allFeatures.length > 0) {
+					const bounds = new mapboxgl.LngLatBounds();
 
-		// clear active case study if any
-		if (map.getSource("active-case-study")) {
-			map.getSource("active-case-study").setData({
-				type: "FeatureCollection",
-				features: [],
-			});
-		}
-	}
+					const extractCoords = (coords: any) => {
+						if (
+							typeof coords[0] === "number" &&
+							typeof coords[1] === "number"
+						) {
+							bounds.extend([coords[0], coords[1]]);
+						} else {
+							coords.forEach(extractCoords);
+						}
+					};
 
-	function initializeObserver() {
-		const cards = document.querySelectorAll(".case-study-card");
-		const header = document.querySelector(".atlas-header");
-
-		if (!cards.length) return;
-
-		// Card observer triggering when a card hits the middle of viewport
-		const observerOptions = {
-			root: document.querySelector(".content-scroll-area"),
-			rootMargin: "-40% 0px -40% 0px",
-			threshold: 0,
-		};
-
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					// Visual update
-					cards.forEach((c) => c.classList.remove("is-active"));
-					entry.target.classList.add("is-active");
-
-					// Map update
-					const url = (entry.target as HTMLElement).dataset.geojson;
-					if (url) {
-						updateMapWithGeoJSON(url);
-					}
-				}
-			});
-		}, observerOptions);
-
-		cards.forEach((card) => observer.observe(card));
-
-		// Header observer: triggers global reset when scrolling back to top
-		if (header) {
-			const headerObserver = new IntersectionObserver(
-				(entries) => {
-					entries.forEach((entry) => {
-						// If header is substantially intersecting, reset to global bounds
-						if (entry.isIntersecting) {
-							cards.forEach((c) =>
-								c.classList.remove("is-active"),
-							);
-							flyToGlobalBounds();
+					allFeatures.forEach((feature: any) => {
+						if (
+							feature.geometry &&
+							feature.geometry.coordinates
+						) {
+							extractCoords(feature.geometry.coordinates);
 						}
 					});
-				},
-				{
-					root: document.querySelector(".content-scroll-area"),
-					rootMargin: "0px",
-					threshold: 0.2, // Trigger earlier when scrolling up
-				},
-			);
-			headerObserver.observe(header);
-		}
-	}
 
-	async function updateMapWithGeoJSON(geoJsonUrl: string) {
-		const map = (window as any).atlasMap;
-		if (!map) return;
-
-		try {
-			const response = await fetch("/" + geoJsonUrl);
-			const data = await response.json();
-
-			if (data && data.features && data.features.length > 0) {
-				let minLng = 180,
-					minLat = 90,
-					maxLng = -180,
-					maxLat = -90;
-
-				const extractCoords = (coords: any) => {
-					if (typeof coords[0] === "number") {
-						minLng = Math.min(minLng, coords[0]);
-						maxLng = Math.max(maxLng, coords[0]);
-						minLat = Math.min(minLat, coords[1]);
-						maxLat = Math.max(maxLat, coords[1]);
-					} else {
-						coords.forEach(extractCoords);
-					}
-				};
-
-				data.features.forEach((f: any) => {
-					if (f.geometry && f.geometry.coordinates) {
-						extractCoords(f.geometry.coordinates);
-					}
-				});
-
-				if (minLng !== 180) {
-					map.fitBounds(
-						[
-							[minLng, minLat],
-							[maxLng, maxLat],
-						],
-						{
-							padding: {
-								top: 50,
-								bottom: 50,
-								left: 50,
-								right: 50,
-							},
-							maxZoom: 15,
-							duration: 2000,
+					map.fitBounds(bounds, {
+						padding: {
+							top: 50,
+							bottom: 50,
+							left: 50,
+							right: 50,
 						},
-					);
+						maxZoom: 14,
+					});
 				}
 
-				updateMapLayer(map, data);
-			}
-		} catch (e) {
-			console.error("Error loading GeoJSON for map:", e);
-		}
-	}
+				// Hover behavior
+				map.on("mousemove", "boundaries-fill", (e: any) => {
+					if (e.features && e.features.length > 0) {
+						const feature = e.features[0];
+						const slug = feature.properties.slug;
+						const name = feature.properties.name;
 
-	function updateMapLayer(map: any, geojsonData: any) {
-		const sourceId = "active-case-study";
+						// Update hover layer filters
+						map.setFilter("boundaries-fill-hover", [
+							"==",
+							["get", "slug"],
+							slug,
+						]);
+						map.setFilter("boundaries-line-hover", [
+							"==",
+							["get", "slug"],
+							slug,
+						]);
 
-		if (map.getSource(sourceId)) {
-			map.getSource(sourceId).setData(geojsonData);
-		} else {
-			map.addSource(sourceId, {
-				type: "geojson",
-				data: geojsonData,
-			});
+						// Change cursor
+						map.getCanvas().style.cursor = "pointer";
 
-			map.addLayer({
-				id: sourceId + "-fill",
-				type: "fill",
-				source: sourceId,
-				paint: {
-					"fill-color": "#c8102e", // Atlas Red Highlight
-					"fill-opacity": 0.4,
-				},
-			});
-
-			map.addLayer({
-				id: sourceId + "-line",
-				type: "line",
-				source: sourceId,
-				paint: {
-					"line-color": "#c8102e",
-					"line-width": 3,
-				},
-			});
-		}
-	}
-
-	function init() {
-		// Ensure Mapbox object is fully ready before we add sources
-		const checkMap = setInterval(() => {
-			if ((window as any).atlasMap && (window as any).atlasMap.loaded()) {
-				clearInterval(checkMap);
-				loadAllGeometries();
-				initializeObserver();
-			} else if ((window as any).atlasMap) {
-				clearInterval(checkMap);
-				(window as any).atlasMap.on("load", () => {
-					loadAllGeometries();
-					initializeObserver();
+						// Show popup
+						hoverPopup
+							.setLngLat(e.lngLat)
+							.setHTML(name)
+							.addTo(map);
+					}
 				});
+
+				map.on("mouseleave", "boundaries-fill", () => {
+					// Reset hover filters
+					map.setFilter("boundaries-fill-hover", [
+						"==",
+						["get", "slug"],
+						"",
+					]);
+					map.setFilter("boundaries-line-hover", [
+						"==",
+						["get", "slug"],
+						"",
+					]);
+
+					// Reset cursor
+					map.getCanvas().style.cursor = "";
+
+					// Remove popup
+					hoverPopup.remove();
+				});
+
+				// Click behavior
+				map.on("click", "boundaries-fill", (e: any) => {
+					if (e.features && e.features.length > 0) {
+						const feature = e.features[0];
+						const slug = feature.properties.slug;
+						window.location.href = `/case-studies/${slug}`;
+					}
+				});
+			} catch (err) {
+				console.error("Error loading GeoJSON data:", err);
 			}
-		}, 100);
+		});
 	}
 
-	document.addEventListener("astro:page-load", init);
+	// Initialize on page load
+	document.addEventListener("astro:page-load", initMap);
 
 	if (
 		document.readyState === "complete" ||
 		document.readyState === "interactive"
 	) {
-		init();
+		initMap();
 	} else {
-		document.addEventListener("DOMContentLoaded", init);
+		document.addEventListener("DOMContentLoaded", initMap);
 	}
 </script>
