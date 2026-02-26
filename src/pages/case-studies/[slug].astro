@@ -18,7 +18,7 @@ const { Content } = await study.render();
 const allCaseStudies = await getCollection("case-studies");
 ---
 
-<Layout title={study.data.title}>
+<Layout title={`${study.data.title} | NYC AV Atlas`}>
     <main class="case-detail">
         <section
             class="hero-image"
@@ -213,7 +213,7 @@ const allCaseStudies = await getCollection("case-studies");
             font-size: 1.6rem;
         }
 
-        .detail-map {
+        #detail-map {
             height: 300px;
         }
 
@@ -236,7 +236,7 @@ const allCaseStudies = await getCollection("case-studies");
             font-size: 1.3rem;
         }
 
-        .detail-map {
+        #detail-map {
             height: 250px;
         }
 
