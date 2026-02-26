@@ -3,6 +3,7 @@ title: Roosevelt Island Main Street Mobility
 description: An assessment of proposing autonomous micro-transit along the main corridor of Roosevelt Island to replace the Red Bus network.
 author: Cornell Tech Planners
 geojson: geo/roosevelt-island.geojson
+image: images/roosevelt-island.svg
 ---
 
 # Micro-Transit Alternatives

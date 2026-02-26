@@ -6,7 +6,8 @@ const caseStudies = defineCollection({
         title: z.string(),
         description: z.string(),
         author: z.string().optional(),
-        geojson: z.string() // string path like 'geo/area.geojson' to parse client-side
+        geojson: z.string(), // string path like 'geo/area.geojson' to parse client-side
+        image: z.string().optional() // path like 'images/navy-yard.svg'
     })
 });
 

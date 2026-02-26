@@ -3,6 +3,7 @@ title: JFK Airport Terminal Automated People Mover
 description: Deployment of fully automated shuttles connecting rental car hubs and long-term parking directly to terminal concourses.
 author: Jane Doe
 geojson: geo/jfk-terminal.geojson
+image: images/jfk-terminal.svg
 ---
 
 # Airport Automation

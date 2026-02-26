@@ -3,6 +3,7 @@ title: The Brooklyn Navy Yard Autonomous Shuttle
 description: Analyzing the deployment of low-speed autonomous shuttles within the controlled environment of the Brooklyn Navy Yard.
 author: Anthony Townsend
 geojson: geo/navy-yard.geojson
+image: images/navy-yard.svg
 ---
 
 The **Brooklyn Navy Yard** serves as a prime testing ground for autonomous vehicle technologies in a semi-controlled urban environment. The 300-acre industrial park features a complex mix of private roads, pedestrians, cyclists, and heavy machinery, providing a robust real-world laboratory.
