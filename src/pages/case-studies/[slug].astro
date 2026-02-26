@@ -203,6 +203,47 @@ const allCaseStudies = await getCollection("case-studies");
         font-weight: 700;
     }
 
+    /* Responsive */
+    @media (max-width: 768px) {
+        .hero-image {
+            min-height: 220px;
+        }
+
+        .hero-overlay .container h1 {
+            font-size: 1.6rem;
+        }
+
+        .detail-map {
+            height: 300px;
+        }
+
+        .detail-map-section .container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .content-body {
+            padding: 1.5rem 1rem 3rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hero-image {
+            min-height: 180px;
+        }
+
+        .hero-overlay .container h1 {
+            font-size: 1.3rem;
+        }
+
+        .detail-map {
+            height: 250px;
+        }
+
+        .content-body {
+            padding: 1rem 0.75rem 2rem;
+        }
+    }
 </style>
 
 <script>
