@@ -1,41 +1,36 @@
-/* 
-  NYC AV Atlas - Global Styles
-  Matched to atlasofurbantech.org exact visual style
+/*
+  Robot Island - Global Styles
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Color Palette - Atlas Light Mode */
-  --color-bg-base: #fef6ea;
-  /* Cream/off-white */
-  --color-bg-alt: #E8D8D8;
-  /* Light pink/beige for sections */
+  /* Color Palette - Robot Island */
+  --color-bg-base: #F5F7FA;
+  --color-bg-alt: #E8EDF2;
   --color-bg-white: #FFFFFF;
 
-  --color-text-primary: hsla(0,0%,0%,0.8);
+  --color-text-primary: hsla(220, 15%, 15%, 0.9);
   --color-text-secondary: #555555;
   --color-text-muted: #888888;
 
-  /* Primary Atlas Accent - Red */
-  --color-accent: #AA142D;
-  /* Signature Red */
-  --color-accent-hover: #8B0F24;
+  --color-accent: #0066FF;
+  --color-accent-hover: #0052CC;
 
-  --color-border: #E0E0E0;
+  --color-header: #1A1A2E;
+  --color-footer: #1A1A2E;
 
-  /* Typography */
+  --color-map-highlight: #00C2FF;
+  --color-map-base: #0066FF;
+
+  --color-border: #D1D9E0;
+
   --font-sans: 'Barlow', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-serif: Georgia, serif;
 
-  /* Layout constraints */
   --max-width: 1200px;
-
-  /* Transitions */
   --transition-fast: 150ms ease-in-out;
   --transition-base: 300ms ease-in-out;
-
-  /* Z-index layering */
   --z-header: 1000;
   --z-modal: 2000;
 }
