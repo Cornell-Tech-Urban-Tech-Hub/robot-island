@@ -16,19 +16,21 @@ export async function getStaticPaths() {
 const { study } = Astro.props;
 const { Content } = await study.render();
 const allCaseStudies = await getCollection("case-studies");
+const featuredMedia = study.data.media?.find((m: any) => m.featured);
+const heroImage = featuredMedia?.file;
 ---
 
-<Layout title={`${study.data.title} | NYC AV Atlas`}>
+<Layout title={`${study.data.title} | Robot Island`}>
     <main class="case-detail">
         <section
             class="hero-image"
-            style={study.data.image
-                ? `background-image: url('/${study.data.image}')`
+            style={heroImage
+                ? `background-image: url('/${heroImage}')`
                 : "background-color: #2c3e50"}
         >
             <div class="hero-overlay">
                 <div class="container">
-                    <a href="/" class="back-link">&larr; Back to Atlas</a>
+                    <a href="/" class="back-link">&larr; Back to Robot Island</a>
                     <h1><span>{study.data.title}</span></h1>
                     {study.data.author && (
                         <p class="author">By {study.data.author}</p>
@@ -50,6 +52,26 @@ const allCaseStudies = await getCollection("case-studies");
         <article class="content-body">
             <Content />
         </article>
+
+        {study.data.media && study.data.media.filter((m: any) => !m.featured).length > 0 && (
+            <section class="media-gallery">
+                <div class="container">
+                    <h2>Media</h2>
+                    <div class="gallery-grid">
+                        {study.data.media.filter((m: any) => !m.featured).map((item: any) => (
+                            <figure class="gallery-item">
+                                {item.file.endsWith('.mp4') ? (
+                                    <video controls src={`/${item.file}`}></video>
+                                ) : (
+                                    <img src={`/${item.file}`} alt={item.caption} loading="lazy" />
+                                )}
+                                <figcaption>{item.caption}</figcaption>
+                            </figure>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        )}
 
         <Footer />
     </main>
@@ -203,6 +225,43 @@ const allCaseStudies = await getCollection("case-studies");
         font-weight: 700;
     }
 
+    /* Media Gallery */
+    .media-gallery {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 2rem 4rem;
+    }
+
+    .media-gallery h2 {
+        font-family: var(--font-sans);
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .gallery-item {
+        margin: 0;
+    }
+
+    .gallery-item img,
+    .gallery-item video {
+        width: 100%;
+        border-radius: 4px;
+        display: block;
+    }
+
+    .gallery-item figcaption {
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
+        color: var(--color-text-muted);
+        margin-top: 0.5rem;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
         .hero-image {
@@ -225,6 +284,14 @@ const allCaseStudies = await getCollection("case-studies");
         .content-body {
             padding: 1.5rem 1rem 3rem;
         }
+
+        .media-gallery {
+            padding: 0 1rem 3rem;
+        }
+
+        .gallery-grid {
+            grid-template-columns: 1fr;
+        }
     }
 
     @media (max-width: 480px) {
@@ -242,6 +309,10 @@ const allCaseStudies = await getCollection("case-studies");
 
         .content-body {
             padding: 1rem 0.75rem 2rem;
+        }
+
+        .media-gallery {
+            padding: 0 0.75rem 2rem;
         }
     }
 </style>
@@ -267,8 +338,9 @@ const allCaseStudies = await getCollection("case-studies");
         const map = new mapboxgl.Map({
             container: "detail-map",
             style: "mapbox://styles/mapbox/light-v11",
-            center: [-73.935242, 40.73061],
-            zoom: 11,
+            center: [-73.950, 40.762],
+            zoom: 14,
+            bearing: 28,
         });
 
         const hoverPopup = new mapboxgl.Popup({
@@ -310,14 +382,14 @@ const allCaseStudies = await getCollection("case-studies");
                 id: "all-boundaries-fill",
                 type: "fill",
                 source: "all-boundaries",
-                paint: { "fill-color": "#888", "fill-opacity": 0.15 },
+                paint: { "fill-color": "#94A3B8", "fill-opacity": 0.15 },
             });
 
             map.addLayer({
                 id: "all-boundaries-line",
                 type: "line",
                 source: "all-boundaries",
-                paint: { "line-color": "#888", "line-width": 1 },
+                paint: { "line-color": "#94A3B8", "line-width": 1 },
             });
 
             // Add active boundary (accent color) — just the current case study features
@@ -336,14 +408,14 @@ const allCaseStudies = await getCollection("case-studies");
                 id: "active-boundary-fill",
                 type: "fill",
                 source: "active-boundary",
-                paint: { "fill-color": "#AA142D", "fill-opacity": 0.4 },
+                paint: { "fill-color": "#0066FF", "fill-opacity": 0.4 },
             });
 
             map.addLayer({
                 id: "active-boundary-line",
                 type: "line",
                 source: "active-boundary",
-                paint: { "line-color": "#AA142D", "line-width": 3 },
+                paint: { "line-color": "#0066FF", "line-width": 3 },
             });
 
             // Fit bounds to current case study
@@ -366,6 +438,7 @@ const allCaseStudies = await getCollection("case-studies");
                         right: 80,
                     },
                     maxZoom: 15,
+                    bearing: 28,
                 });
             }
 
