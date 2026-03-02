@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Lighthouse Park",
+                "type": "Park terminus"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-73.9445, 40.7721],
+                    [-73.9435, 40.7721],
+                    [-73.9435, 40.7729],
+                    [-73.9445, 40.7729],
+                    [-73.9445, 40.7721]
+                ]]
+            }
+        }
+    ]
+}

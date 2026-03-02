@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Coler Hospital Campus",
+                "type": "Healthcare facility"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-73.9465, 40.7701],
+                    [-73.9455, 40.7701],
+                    [-73.9455, 40.7709],
+                    [-73.9465, 40.7709],
+                    [-73.9465, 40.7701]
+                ]]
+            }
+        }
+    ]
+}

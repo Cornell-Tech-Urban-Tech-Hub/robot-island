@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Cornell Tech Campus Circle",
+                "type": "Campus road"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-73.9545, 40.7541],
+                    [-73.9535, 40.7541],
+                    [-73.9535, 40.7549],
+                    [-73.9545, 40.7549],
+                    [-73.9545, 40.7541]
+                ]]
+            }
+        }
+    ]
+}

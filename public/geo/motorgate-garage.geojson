@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Motorgate Garage",
+                "type": "Parking structure"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-73.9540, 40.7561],
+                    [-73.9530, 40.7561],
+                    [-73.9530, 40.7569],
+                    [-73.9540, 40.7569],
+                    [-73.9540, 40.7561]
+                ]]
+            }
+        }
+    ]
+}

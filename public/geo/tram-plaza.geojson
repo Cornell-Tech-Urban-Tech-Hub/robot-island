@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Tram Plaza",
+                "type": "Transit hub"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-73.9548, 40.7568],
+                    [-73.9538, 40.7568],
+                    [-73.9538, 40.7576],
+                    [-73.9548, 40.7576],
+                    [-73.9548, 40.7568]
+                ]]
+            }
+        }
+    ]
+}

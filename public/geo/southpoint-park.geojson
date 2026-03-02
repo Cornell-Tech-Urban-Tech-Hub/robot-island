@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Southpoint Park",
+                "type": "Park loop"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-73.9495, 40.7516],
+                    [-73.9485, 40.7516],
+                    [-73.9485, 40.7524],
+                    [-73.9495, 40.7524],
+                    [-73.9495, 40.7516]
+                ]]
+            }
+        }
+    ]
+}

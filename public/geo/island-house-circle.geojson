@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Island House Circle",
+                "type": "Residential plaza"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-73.9535, 40.7576],
+                    [-73.9525, 40.7576],
+                    [-73.9525, 40.7584],
+                    [-73.9535, 40.7584],
+                    [-73.9535, 40.7576]
+                ]]
+            }
+        }
+    ]
+}

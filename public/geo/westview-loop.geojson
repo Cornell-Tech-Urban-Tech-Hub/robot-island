@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Westview Loop",
+                "type": "Residential drop-off"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-73.9530, 40.7591],
+                    [-73.9520, 40.7591],
+                    [-73.9520, 40.7599],
+                    [-73.9530, 40.7599],
+                    [-73.9530, 40.7591]
+                ]]
+            }
+        }
+    ]
+}

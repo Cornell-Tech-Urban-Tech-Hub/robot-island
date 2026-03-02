@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Sportspark Drive",
+                "type": "Recreation zone"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-73.9495, 40.7651],
+                    [-73.9485, 40.7651],
+                    [-73.9485, 40.7659],
+                    [-73.9495, 40.7659],
+                    [-73.9495, 40.7651]
+                ]]
+            }
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Blackwell Park",
+                "type": "Park"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-73.9490, 40.7641],
+                    [-73.9480, 40.7641],
+                    [-73.9480, 40.7649],
+                    [-73.9490, 40.7649],
+                    [-73.9490, 40.7641]
+                ]]
+            }
+        }
+    ]
+}

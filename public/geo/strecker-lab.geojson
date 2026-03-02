@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Strecker Memorial Lab",
+                "type": "Historic landmark"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-73.9515, 40.7621],
+                    [-73.9505, 40.7621],
+                    [-73.9505, 40.7629],
+                    [-73.9515, 40.7629],
+                    [-73.9515, 40.7621]
+                ]]
+            }
+        }
+    ]
+}

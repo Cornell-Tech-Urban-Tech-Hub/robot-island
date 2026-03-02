@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Goldwater Hospital Site",
+                "type": "Redevelopment zone"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-73.9485, 40.7661],
+                    [-73.9475, 40.7661],
+                    [-73.9475, 40.7669],
+                    [-73.9485, 40.7669],
+                    [-73.9485, 40.7661]
+                ]]
+            }
+        }
+    ]
+}

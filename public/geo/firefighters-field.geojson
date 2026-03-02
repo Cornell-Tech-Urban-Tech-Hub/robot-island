@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Firefighters Field",
+                "type": "Open space"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-73.9483, 40.7671],
+                    [-73.9473, 40.7671],
+                    [-73.9473, 40.7679],
+                    [-73.9483, 40.7679],
+                    [-73.9483, 40.7671]
+                ]]
+            }
+        }
+    ]
+}

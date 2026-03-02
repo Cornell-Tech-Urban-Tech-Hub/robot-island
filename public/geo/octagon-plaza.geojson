@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Octagon Plaza",
+                "type": "Residential/historic"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-73.9490, 40.7681],
+                    [-73.9480, 40.7681],
+                    [-73.9480, 40.7689],
+                    [-73.9490, 40.7689],
+                    [-73.9490, 40.7681]
+                ]]
+            }
+        }
+    ]
+}

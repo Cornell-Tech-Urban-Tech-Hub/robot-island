@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Rivercross Courtyard",
+                "type": "Residential plaza"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-73.9525, 40.7606],
+                    [-73.9515, 40.7606],
+                    [-73.9515, 40.7614],
+                    [-73.9525, 40.7614],
+                    [-73.9525, 40.7606]
+                ]]
+            }
+        }
+    ]
+}

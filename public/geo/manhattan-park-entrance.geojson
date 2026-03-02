@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Manhattan Park Entrance",
+                "type": "Residential entry"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-73.9510, 40.7626],
+                    [-73.9500, 40.7626],
+                    [-73.9500, 40.7634],
+                    [-73.9510, 40.7634],
+                    [-73.9510, 40.7626]
+                ]]
+            }
+        }
+    ]
+}

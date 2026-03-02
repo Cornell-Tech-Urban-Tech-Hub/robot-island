@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "FDR Four Freedoms Park",
+                "type": "Memorial park"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-73.9495, 40.7501],
+                    [-73.9485, 40.7501],
+                    [-73.9485, 40.7509],
+                    [-73.9495, 40.7509],
+                    [-73.9495, 40.7501]
+                ]]
+            }
+        }
+    ]
+}

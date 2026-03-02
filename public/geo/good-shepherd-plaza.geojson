@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Good Shepherd Plaza",
+                "type": "Plaza"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-73.9525, 40.7586],
+                    [-73.9515, 40.7586],
+                    [-73.9515, 40.7594],
+                    [-73.9525, 40.7594],
+                    [-73.9525, 40.7586]
+                ]]
+            }
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Main Street & West Road",
+                "type": "Intersection"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-73.9515, 40.7606],
+                    [-73.9505, 40.7606],
+                    [-73.9505, 40.7614],
+                    [-73.9515, 40.7614],
+                    [-73.9515, 40.7606]
+                ]]
+            }
+        }
+    ]
+}
