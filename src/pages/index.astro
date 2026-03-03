@@ -429,10 +429,10 @@ const allCaseStudies = await getCollection("case-studies");
 						// Change cursor
 						map.getCanvas().style.cursor = "pointer";
 
-						// Show popup
+						// Show popup with name and link
 						hoverPopup
 							.setLngLat(e.lngLat)
-							.setHTML(name)
+							.setHTML(`<strong>${name}</strong><br><a href="/case-studies/${slug}" style="color:#0066FF;font-size:0.85em;">View case study &rarr;</a>`)
 							.addTo(map);
 					}
 				});

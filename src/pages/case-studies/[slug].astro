@@ -454,7 +454,7 @@ const heroImage = featuredMedia?.file;
                     map.getCanvas().style.cursor = "pointer";
                     hoverPopup
                         .setLngLat(e.lngLat)
-                        .setHTML(feature.properties.name)
+                        .setHTML(`<strong>${feature.properties.name}</strong><br><a href="/case-studies/${feature.properties.slug}" style="color:#0066FF;font-size:0.85em;">View case study &rarr;</a>`)
                         .addTo(map);
                 }
             });
