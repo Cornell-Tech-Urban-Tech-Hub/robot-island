@@ -471,7 +471,7 @@ const youtubeId = (url: string) => {
             style: "mapbox://styles/mapbox/light-v11",
             center: [-73.950, 40.762],
             zoom: 14,
-            bearing: 0,
+            bearing: 28,
         });
 
         map.on("load", async () => {
@@ -524,7 +524,7 @@ const youtubeId = (url: string) => {
                 map.fitBounds(bounds, {
                     padding: { top: 40, bottom: 40, left: 40, right: 40 },
                     maxZoom: 16,
-                    bearing: 0,
+                    bearing: 28,
                 });
             } catch (e) {
                 console.error("Error loading GeoJSON:", e);
