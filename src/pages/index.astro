@@ -24,6 +24,8 @@ const allCaseStudies = await getCollection("case-studies");
 								class="card-link"
 								data-geojson={study.data.geojson}
 								data-slug={study.slug}
+								data-concept={study.data.concept}
+								data-image={cardImage ? (cardImage.startsWith('http') ? cardImage : '/' + cardImage) : ''}
 							>
 								<article class="case-card">
 									<div
@@ -31,7 +33,6 @@ const allCaseStudies = await getCollection("case-studies");
 										style={cardImage ? `background-image: url('${cardImage.startsWith('http') ? cardImage : '/' + cardImage}')` : 'background-color: #334155'}
 									>
 										<span class={`card-type card-type--${study.data.type}`}>{study.data.type}</span>
-										<span class="card-place-pin"><svg class="place-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>{study.data.place}</span>
 									</div>
 									<div class="card-content">
 										<h3>{study.data.concept}</h3>
@@ -51,6 +52,13 @@ const allCaseStudies = await getCollection("case-studies");
 </Layout>
 
 <style>
+	/* Mapbox popup override */
+	:global(.mapboxgl-popup-content) {
+		padding: 0 !important;
+		border-radius: 4px !important;
+		overflow: hidden;
+	}
+
 	/* Split Layout */
 	.atlas-home {
 		display: flex;
@@ -160,28 +168,6 @@ const allCaseStudies = await getCollection("case-studies");
 		line-height: 1.3;
 	}
 
-	.card-place-pin {
-		position: absolute;
-		top: 0.5rem;
-		left: 0.5rem;
-		display: inline-flex;
-		align-items: center;
-		gap: 0.2rem;
-		font-family: var(--font-sans);
-		font-size: 0.65rem;
-		font-weight: 600;
-		color: #fff;
-		background: rgba(0, 0, 0, 0.55);
-		padding: 0.2em 0.5em 0.2em 0.3em;
-		border-radius: 3px;
-	}
-
-	.place-icon {
-		width: 12px;
-		height: 12px;
-		flex-shrink: 0;
-		color: var(--color-accent);
-	}
 
 	.card-type {
 		position: absolute;
@@ -290,6 +276,7 @@ const allCaseStudies = await getCollection("case-studies");
 			// Build slug-to-geojson mapping from card elements
 			const cards = document.querySelectorAll("a.card-link");
 			const slugToGeojson: Record<string, string> = {};
+			const slugToCard: Record<string, { concept: string; image: string }> = {};
 
 			cards.forEach((card) => {
 				const el = card as HTMLElement;
@@ -297,6 +284,12 @@ const allCaseStudies = await getCollection("case-studies");
 				const geojsonPath = el.dataset.geojson;
 				if (slug && geojsonPath) {
 					slugToGeojson[geojsonPath] = slug;
+				}
+				if (slug) {
+					slugToCard[slug] = {
+						concept: el.dataset.concept || slug,
+						image: el.dataset.image || "",
+					};
 				}
 			});
 
@@ -459,10 +452,21 @@ const allCaseStudies = await getCollection("case-studies");
 						// Change cursor
 						map.getCanvas().style.cursor = "pointer";
 
-						// Show popup with name and link
+						// Show popup with image, concept, and link
+						const cardData = slugToCard[slug];
+						const imgHtml = cardData?.image
+							? `<img src="${cardData.image}" style="width:100%;height:80px;object-fit:cover;border-radius:3px 3px 0 0;display:block;" />`
+							: "";
 						hoverPopup
 							.setLngLat(e.lngLat)
-							.setHTML(`<strong>${name}</strong><br><a href="/case-studies/${slug}" style="color:#0066FF;font-size:0.85em;">View case study &rarr;</a>`)
+							.setHTML(
+								`<div style="width:160px;font-family:Barlow,sans-serif;">`
+								+ imgHtml
+								+ `<div style="padding:6px 8px;">`
+								+ `<strong style="font-size:0.8em;line-height:1.3;display:block;">${cardData?.concept || name}</strong>`
+								+ `<span style="font-size:0.7em;color:#888;">${name}</span>`
+								+ `</div></div>`
+							)
 							.addTo(map);
 					}
 				});
@@ -494,6 +498,38 @@ const allCaseStudies = await getCollection("case-studies");
 						const slug = feature.properties.slug;
 						window.location.href = `/case-studies/${slug}`;
 					}
+				});
+			// Card hover → highlight map zone
+				cards.forEach((card) => {
+					const el = card as HTMLElement;
+					const slug = el.dataset.slug;
+					if (!slug) return;
+
+					el.addEventListener("mouseenter", () => {
+						map.setFilter("boundaries-fill-hover", [
+							"==",
+							["get", "slug"],
+							slug,
+						]);
+						map.setFilter("boundaries-line-hover", [
+							"==",
+							["get", "slug"],
+							slug,
+						]);
+					});
+
+					el.addEventListener("mouseleave", () => {
+						map.setFilter("boundaries-fill-hover", [
+							"==",
+							["get", "slug"],
+							"",
+						]);
+						map.setFilter("boundaries-line-hover", [
+							"==",
+							["get", "slug"],
+							"",
+						]);
+					});
 				});
 			} catch (err) {
 				console.error("Error loading GeoJSON data:", err);
