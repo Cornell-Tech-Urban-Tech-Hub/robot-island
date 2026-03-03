@@ -414,7 +414,7 @@ const allCaseStudies = await getCollection("case-studies");
 						bearing: 28,
 					});
 					map.once("moveend", () => {
-						map.zoomTo(map.getZoom() + 1, { duration: 0 });
+						map.zoomTo(map.getZoom() + 0.5, { duration: 0 });
 					});
 
 					// Re-fit on window resize so map adapts to container size changes
@@ -425,7 +425,7 @@ const allCaseStudies = await getCollection("case-studies");
 							bearing: 28,
 						});
 						map.once("moveend", () => {
-							map.zoomTo(map.getZoom() + 1, { duration: 0 });
+							map.zoomTo(map.getZoom() + 0.5, { duration: 0 });
 						});
 					});
 				}
