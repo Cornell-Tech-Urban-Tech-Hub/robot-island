@@ -1,9 +1,19 @@
 ---
-title: "Strecker Memorial Lab — [Your AV Concept]"
-description: "A case study exploring autonomous vehicle deployment at Roosevelt Island's Strecker Memorial Lab historic landmark."
+title: "Strecker Lab — AV Research Testbed"
+place: "Strecker Lab"
+concept: "AV Research Testbed"
+description: "A repurposed historic laboratory serving as the island's autonomous vehicle R&D and testing center."
 author: ""
+type: "service"
 geojson: "geo/strecker-lab.geojson"
-media: []
+media:
+  - file: "https://picsum.photos/seed/strecker-lab-01/800/500"
+    caption: "Overview rendering of the av research testbed concept"
+    featured: true
+  - file: "https://picsum.photos/seed/strecker-lab-02/800/500"
+    caption: "Street-level perspective showing autonomous vehicle operations"
+  - file: "https://picsum.photos/seed/strecker-lab-03/800/500"
+    caption: "Detail view of key infrastructure and design elements"
 ---
 
 ## Summary

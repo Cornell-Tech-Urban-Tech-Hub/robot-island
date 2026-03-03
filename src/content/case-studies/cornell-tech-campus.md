@@ -1,9 +1,19 @@
 ---
-title: "Cornell Tech Campus Circle — [Your AV Concept]"
-description: "A case study exploring autonomous vehicle deployment at Roosevelt Island's Cornell Tech Campus Circle campus road."
+title: "Cornell Tech Campus — Research Shuttle Network"
+place: "Cornell Tech Campus"
+concept: "Research Shuttle Network"
+description: "An on-campus autonomous shuttle circulator connecting academic buildings, housing, and the subway."
 author: ""
+type: "passenger"
 geojson: "geo/cornell-tech-campus.geojson"
-media: []
+media:
+  - file: "https://picsum.photos/seed/cornell-tech-campus-01/800/500"
+    caption: "Overview rendering of the research shuttle network concept"
+    featured: true
+  - file: "https://picsum.photos/seed/cornell-tech-campus-02/800/500"
+    caption: "Street-level perspective showing autonomous vehicle operations"
+  - file: "https://picsum.photos/seed/cornell-tech-campus-03/800/500"
+    caption: "Detail view of key infrastructure and design elements"
 ---
 
 ## Summary

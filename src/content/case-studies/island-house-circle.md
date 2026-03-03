@@ -1,9 +1,19 @@
 ---
-title: "Island House Circle — [Your AV Concept]"
-description: "A case study exploring autonomous vehicle deployment at Roosevelt Island's Island House Circle residential plaza."
+title: "Island House Circle — Senior Mobility Shuttle"
+place: "Island House Circle"
+concept: "Senior Mobility Shuttle"
+description: "A low-speed autonomous shuttle providing door-to-door service for elderly residents."
 author: ""
+type: "passenger"
 geojson: "geo/island-house-circle.geojson"
-media: []
+media:
+  - file: "https://picsum.photos/seed/island-house-circle-01/800/500"
+    caption: "Overview rendering of the senior mobility shuttle concept"
+    featured: true
+  - file: "https://picsum.photos/seed/island-house-circle-02/800/500"
+    caption: "Street-level perspective showing autonomous vehicle operations"
+  - file: "https://picsum.photos/seed/island-house-circle-03/800/500"
+    caption: "Detail view of key infrastructure and design elements"
 ---
 
 ## Summary

@@ -1,23 +1,19 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Footer from "../components/Footer.astro";
 import { getCollection } from "astro:content";
 
 const allCaseStudies = await getCollection("case-studies");
 ---
 
-<Layout title="Robot Island">
+<Layout title="Robot Island" hideNav={true}>
 	<main class="atlas-home">
 		<div class="content-side">
 			<section class="hero">
 				<h1><span class="accent">Robot</span> Island</h1>
-				<p class="subtitle">
-					Autonomous vehicle case studies on Roosevelt Island. Each site explores how AVs could reshape mobility, access, and public space on this unique New York City island.
-				</p>
+				<p class="subtitle">Autonomous vehicle futures on Roosevelt Island</p>
 			</section>
 
 			<section class="case-studies">
-				<h2>Case Studies</h2>
 				<div class="card-grid">
 					{allCaseStudies.map((study) => {
 						const featuredMedia = study.data.media?.find(m => m.featured);
@@ -30,19 +26,15 @@ const allCaseStudies = await getCollection("case-studies");
 								data-slug={study.slug}
 							>
 								<article class="case-card">
-									{cardImage && (
-										<div
-											class="card-image"
-											style={`background-image: url('/${cardImage}')`}
-										></div>
-									)}
+									<div
+										class="card-image"
+										style={cardImage ? `background-image: url('${cardImage.startsWith('http') ? cardImage : '/' + cardImage}')` : 'background-color: #334155'}
+									>
+										<span class={`card-type card-type--${study.data.type}`}>{study.data.type}</span>
+									</div>
 									<div class="card-content">
-										<h3>{study.data.title}</h3>
-										<p class="card-description">{study.data.description}</p>
-										{study.data.author && (
-											<span class="card-author">By {study.data.author}</span>
-										)}
-										<span class="card-read-more">Read more &rarr;</span>
+										<p class="card-place">📍 {study.data.place}</p>
+										<h3>{study.data.concept}</h3>
 									</div>
 								</article>
 							</a>
@@ -51,7 +43,6 @@ const allCaseStudies = await getCollection("case-studies");
 				</div>
 			</section>
 
-			<Footer />
 		</div>
 		<div class="map-side">
 			<div class="map-container" id="map"></div>
@@ -63,18 +54,19 @@ const allCaseStudies = await getCollection("case-studies");
 	/* Split Layout */
 	.atlas-home {
 		display: flex;
-		height: calc(100vh - 56px);
+		height: 100vh;
 		overflow: hidden;
 	}
 
 	.content-side {
-		width: 50%;
+		width: 66.666%;
 		overflow-y: auto;
 		padding: 2rem;
+		background: var(--color-header);
 	}
 
 	.map-side {
-		width: 50%;
+		width: 33.333%;
 		position: relative;
 	}
 
@@ -95,7 +87,7 @@ const allCaseStudies = await getCollection("case-studies");
 		font-family: var(--font-sans);
 		font-size: 2.4rem;
 		font-weight: 700;
-		color: var(--color-text-primary);
+		color: #fff;
 		margin-bottom: 1rem;
 	}
 
@@ -106,28 +98,23 @@ const allCaseStudies = await getCollection("case-studies");
 	.hero .subtitle {
 		font-family: var(--font-serif);
 		font-size: 1.1rem;
-		color: var(--color-text-secondary);
+		color: rgba(255, 255, 255, 0.7);
 		max-width: 600px;
 		line-height: 1.6;
 	}
 
-	/* Case Studies Section */
-	.case-studies h2 {
-		font-family: var(--font-sans);
-		font-size: 1.8rem;
-		margin-bottom: 2rem;
-	}
-
+	/* Card Grid */
 	.card-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-		gap: 2rem;
+		grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+		gap: 1.25rem;
 	}
 
 	/* Card Link */
 	a.card-link {
 		text-decoration: none;
 		color: inherit;
+		display: flex;
 	}
 
 	a.card-link:hover {
@@ -137,60 +124,76 @@ const allCaseStudies = await getCollection("case-studies");
 	/* Card Design */
 	.case-card {
 		background: #fff;
-		border-radius: 4px;
+		border-radius: 6px;
 		overflow: hidden;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 		transition: transform 0.25s ease, box-shadow 0.25s ease;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
 	}
 
 	a.card-link:hover .case-card {
 		transform: translateY(-4px);
-		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 	}
 
 	.card-image {
-		height: 200px;
+		height: 140px;
 		background-size: cover;
 		background-position: center;
+		position: relative;
 	}
 
 	.card-content {
-		padding: 1.5rem;
+		padding: 1rem;
+		flex: 1;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.card-content h3 {
 		font-family: var(--font-sans);
-		font-size: 1.2rem;
+		font-size: 1rem;
 		font-weight: 700;
 		color: var(--color-text-primary);
-		margin-bottom: 0.75rem;
+		margin-bottom: 0.5rem;
+		line-height: 1.3;
 	}
 
-	.card-description {
-		font-family: var(--font-serif);
-		font-size: 0.9rem;
-		color: var(--color-text-secondary);
-		line-height: 1.5;
-		margin-bottom: 1rem;
-		display: -webkit-box;
-		-webkit-line-clamp: 3;
-		-webkit-box-orient: vertical;
-		overflow: hidden;
-	}
-
-	.card-author {
+	.card-place {
 		font-family: var(--font-sans);
 		font-size: 0.8rem;
-		color: var(--color-text-muted);
-		display: block;
-		margin-bottom: 0.75rem;
+		color: var(--color-text-secondary);
+		margin-bottom: 0.5rem;
 	}
 
-	.card-read-more {
+	.card-type {
+		position: absolute;
+		top: 0.5rem;
+		right: 0.5rem;
+		display: inline-block;
 		font-family: var(--font-sans);
-		font-size: 0.85rem;
-		color: var(--color-accent);
+		font-size: 0.65rem;
 		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		padding: 0.25em 0.6em;
+		border-radius: 3px;
+	}
+
+	.card-type--passenger {
+		background: #DBEAFE;
+		color: #1E40AF;
+	}
+
+	.card-type--freight {
+		background: #FEF3C7;
+		color: #92400E;
+	}
+
+	.card-type--service {
+		background: #D1FAE5;
+		color: #065F46;
 	}
 
 	/* Responsive */
@@ -256,7 +259,7 @@ const allCaseStudies = await getCollection("case-studies");
 			style: "mapbox://styles/mapbox/light-v11",
 			center: [-73.950, 40.762],
 			zoom: 14,
-			bearing: 28,
+			bearing: 0,
 		});
 
 		(window as any).atlasMap = map;
@@ -403,7 +406,7 @@ const allCaseStudies = await getCollection("case-studies");
 							right: 50,
 						},
 						maxZoom: 14,
-						bearing: 28,
+						bearing: 0,
 					});
 				}
 

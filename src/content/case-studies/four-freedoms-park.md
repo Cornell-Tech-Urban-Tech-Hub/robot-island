@@ -1,9 +1,19 @@
 ---
-title: "FDR Four Freedoms Park — [Your AV Concept]"
-description: "A case study exploring autonomous vehicle deployment at Roosevelt Island's FDR Four Freedoms Park memorial park."
+title: "Four Freedoms Park — Autonomous Security Patrol"
+place: "Four Freedoms Park"
+concept: "Autonomous Security Patrol"
+description: "Autonomous security and monitoring robots patrolling the memorial park after hours."
 author: ""
+type: "service"
 geojson: "geo/four-freedoms-park.geojson"
-media: []
+media:
+  - file: "https://picsum.photos/seed/four-freedoms-park-01/800/500"
+    caption: "Overview rendering of the autonomous security patrol concept"
+    featured: true
+  - file: "https://picsum.photos/seed/four-freedoms-park-02/800/500"
+    caption: "Street-level perspective showing autonomous vehicle operations"
+  - file: "https://picsum.photos/seed/four-freedoms-park-03/800/500"
+    caption: "Detail view of key infrastructure and design elements"
 ---
 
 ## Summary

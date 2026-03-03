@@ -1,7 +1,10 @@
 ---
 title: "[Location Name] — [Short AV Concept]"
+place: "[Location Name]"
+concept: "[Short AV Concept]"
 description: "One-sentence summary of the case study."
 author: ""
+type: "passenger"
 geojson: "geo/[slug].geojson"
 media:
   - file: "media/[slug]-01.jpg"

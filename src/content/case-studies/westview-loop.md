@@ -1,9 +1,19 @@
 ---
-title: "Westview Loop — [Your AV Concept]"
-description: "A case study exploring autonomous vehicle deployment at Roosevelt Island's Westview Loop residential drop-off."
+title: "Westview Loop — Grocery Delivery Circuit"
+place: "Westview Loop"
+concept: "Grocery Delivery Circuit"
+description: "An autonomous delivery loop bringing groceries from Main Street shops to Westview residents."
 author: ""
+type: "freight"
 geojson: "geo/westview-loop.geojson"
-media: []
+media:
+  - file: "https://picsum.photos/seed/westview-loop-01/800/500"
+    caption: "Overview rendering of the grocery delivery circuit concept"
+    featured: true
+  - file: "https://picsum.photos/seed/westview-loop-02/800/500"
+    caption: "Street-level perspective showing autonomous vehicle operations"
+  - file: "https://picsum.photos/seed/westview-loop-03/800/500"
+    caption: "Detail view of key infrastructure and design elements"
 ---
 
 ## Summary

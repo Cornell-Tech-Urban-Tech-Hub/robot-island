@@ -1,15 +1,18 @@
 ---
 title: "Tram Plaza — Last-Mile Autonomous Shuttle Hub"
+place: "Tram Plaza"
+concept: "Last-Mile Autonomous Shuttle Hub"
 description: "An autonomous shuttle hub at Roosevelt Island's Tram Plaza connects aerial tramway passengers to island destinations via a continuous low-speed pod loop."
 author: "Robot Island Studio"
+type: "passenger"
 geojson: "geo/tram-plaza.geojson"
 media:
-  - file: "media/tram-plaza-aerial.jpg"
+  - file: "https://picsum.photos/seed/tram-plaza-01/800/500"
     caption: "Aerial view of Tram Plaza showing proposed shuttle loop and passenger loading zones"
     featured: true
-  - file: "media/tram-plaza-street-level.jpg"
+  - file: "https://picsum.photos/seed/tram-plaza-02/800/500"
     caption: "Street-level rendering of autonomous shuttle at the passenger loading zone"
-  - file: "media/tram-plaza-sequence.mp4"
+  - file: "https://www.youtube.com/watch?v=k3BUq2015bk"
     caption: "Animation showing shuttle arrival, passenger boarding, and departure sequence"
 ---
 

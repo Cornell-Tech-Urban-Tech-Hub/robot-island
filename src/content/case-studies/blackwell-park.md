@@ -1,9 +1,19 @@
 ---
-title: "Blackwell Park — [Your AV Concept]"
-description: "A case study exploring autonomous vehicle deployment at Roosevelt Island's Blackwell Park park."
+title: "Blackwell Park — Mobile Concession Unit"
+place: "Blackwell Park"
+concept: "Mobile Concession Unit"
+description: "An autonomous mobile vending vehicle serving refreshments along the park's paths."
 author: ""
+type: "service"
 geojson: "geo/blackwell-park.geojson"
-media: []
+media:
+  - file: "https://picsum.photos/seed/blackwell-park-01/800/500"
+    caption: "Overview rendering of the mobile concession unit concept"
+    featured: true
+  - file: "https://picsum.photos/seed/blackwell-park-02/800/500"
+    caption: "Street-level perspective showing autonomous vehicle operations"
+  - file: "https://picsum.photos/seed/blackwell-park-03/800/500"
+    caption: "Detail view of key infrastructure and design elements"
 ---
 
 ## Summary

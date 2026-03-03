@@ -1,9 +1,19 @@
 ---
-title: "Manhattan Park Entrance — [Your AV Concept]"
-description: "A case study exploring autonomous vehicle deployment at Roosevelt Island's Manhattan Park Entrance residential entry."
+title: "Manhattan Park Entrance — Ride-Hail Staging Zone"
+place: "Manhattan Park Entrance"
+concept: "Ride-Hail Staging Zone"
+description: "A designated autonomous ride-hail pickup and drop-off zone at the complex's main entrance."
 author: ""
+type: "passenger"
 geojson: "geo/manhattan-park-entrance.geojson"
-media: []
+media:
+  - file: "https://picsum.photos/seed/manhattan-park-entrance-01/800/500"
+    caption: "Overview rendering of the ride-hail staging zone concept"
+    featured: true
+  - file: "https://picsum.photos/seed/manhattan-park-entrance-02/800/500"
+    caption: "Street-level perspective showing autonomous vehicle operations"
+  - file: "https://picsum.photos/seed/manhattan-park-entrance-03/800/500"
+    caption: "Detail view of key infrastructure and design elements"
 ---
 
 ## Summary

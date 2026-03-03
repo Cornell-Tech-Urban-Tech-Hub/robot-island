@@ -1,9 +1,19 @@
 ---
-title: "Firefighters Field — [Your AV Concept]"
-description: "A case study exploring autonomous vehicle deployment at Roosevelt Island's Firefighters Field open space."
+title: "Firefighters Field — Emergency Response Drone Base"
+place: "Firefighters Field"
+concept: "Emergency Response Drone Base"
+description: "An autonomous drone and ground robot station for rapid emergency response across the island."
 author: ""
+type: "service"
 geojson: "geo/firefighters-field.geojson"
-media: []
+media:
+  - file: "https://picsum.photos/seed/firefighters-field-01/800/500"
+    caption: "Overview rendering of the emergency response drone base concept"
+    featured: true
+  - file: "https://picsum.photos/seed/firefighters-field-02/800/500"
+    caption: "Street-level perspective showing autonomous vehicle operations"
+  - file: "https://picsum.photos/seed/firefighters-field-03/800/500"
+    caption: "Detail view of key infrastructure and design elements"
 ---
 
 ## Summary

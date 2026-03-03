@@ -1,9 +1,19 @@
 ---
-title: "Coler Hospital Campus — [Your AV Concept]"
-description: "A case study exploring autonomous vehicle deployment at Roosevelt Island's Coler Hospital Campus healthcare facility."
+title: "Coler Hospital — Medical Supply Courier"
+place: "Coler Hospital"
+concept: "Medical Supply Courier"
+description: "Autonomous vehicles providing continuous medical supply delivery to the long-term care facility."
 author: ""
+type: "freight"
 geojson: "geo/coler-hospital.geojson"
-media: []
+media:
+  - file: "https://picsum.photos/seed/coler-hospital-01/800/500"
+    caption: "Overview rendering of the medical supply courier concept"
+    featured: true
+  - file: "https://picsum.photos/seed/coler-hospital-02/800/500"
+    caption: "Street-level perspective showing autonomous vehicle operations"
+  - file: "https://picsum.photos/seed/coler-hospital-03/800/500"
+    caption: "Detail view of key infrastructure and design elements"
 ---
 
 ## Summary

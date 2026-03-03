@@ -5,9 +5,10 @@ import Navigation from '../components/Navigation.astro';
 interface Props {
 	title: string;
 	description?: string;
+	hideNav?: boolean;
 }
 
-const { title, description = "Autonomous vehicle case studies on Roosevelt Island." } = Astro.props;
+const { title, description = "Autonomous vehicle case studies on Roosevelt Island.", hideNav = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -29,7 +30,7 @@ const { title, description = "Autonomous vehicle case studies on Roosevelt Islan
 		<link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
 	</head>
 	<body>
-		<Navigation />
+		{!hideNav && <Navigation />}
 		<slot />
 	</body>
 </html>

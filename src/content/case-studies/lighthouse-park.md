@@ -1,9 +1,19 @@
 ---
-title: "Lighthouse Park — [Your AV Concept]"
-description: "A case study exploring autonomous vehicle deployment at Roosevelt Island's Lighthouse Park park terminus."
+title: "Lighthouse Park — Accessible Trail Shuttle"
+place: "Lighthouse Park"
+concept: "Accessible Trail Shuttle"
+description: "A small autonomous tram providing accessible transport through the park's waterfront trails."
 author: ""
+type: "passenger"
 geojson: "geo/lighthouse-park.geojson"
-media: []
+media:
+  - file: "https://picsum.photos/seed/lighthouse-park-01/800/500"
+    caption: "Overview rendering of the accessible trail shuttle concept"
+    featured: true
+  - file: "https://picsum.photos/seed/lighthouse-park-02/800/500"
+    caption: "Street-level perspective showing autonomous vehicle operations"
+  - file: "https://picsum.photos/seed/lighthouse-park-03/800/500"
+    caption: "Detail view of key infrastructure and design elements"
 ---
 
 ## Summary

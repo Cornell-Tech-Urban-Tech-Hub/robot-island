@@ -1,9 +1,19 @@
 ---
-title: "Good Shepherd Plaza — [Your AV Concept]"
-description: "A case study exploring autonomous vehicle deployment at Roosevelt Island's Good Shepherd Plaza plaza."
+title: "Good Shepherd Plaza — Community Delivery Hub"
+place: "Good Shepherd Plaza"
+concept: "Community Delivery Hub"
+description: "A neighborhood logistics hub where autonomous delivery robots serve the surrounding residential towers."
 author: ""
+type: "freight"
 geojson: "geo/good-shepherd-plaza.geojson"
-media: []
+media:
+  - file: "https://picsum.photos/seed/good-shepherd-plaza-01/800/500"
+    caption: "Overview rendering of the community delivery hub concept"
+    featured: true
+  - file: "https://picsum.photos/seed/good-shepherd-plaza-02/800/500"
+    caption: "Street-level perspective showing autonomous vehicle operations"
+  - file: "https://picsum.photos/seed/good-shepherd-plaza-03/800/500"
+    caption: "Detail view of key infrastructure and design elements"
 ---
 
 ## Summary

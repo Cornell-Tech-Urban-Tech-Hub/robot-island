@@ -1,9 +1,19 @@
 ---
-title: "Rivercross Courtyard — [Your AV Concept]"
-description: "A case study exploring autonomous vehicle deployment at Roosevelt Island's Rivercross Courtyard residential plaza."
+title: "Rivercross Courtyard — Resident Micro-Transit Stop"
+place: "Rivercross Courtyard"
+concept: "Resident Micro-Transit Stop"
+description: "An on-demand autonomous micro-transit pickup point serving Rivercross residents."
 author: ""
+type: "passenger"
 geojson: "geo/rivercross-courtyard.geojson"
-media: []
+media:
+  - file: "https://picsum.photos/seed/rivercross-courtyard-01/800/500"
+    caption: "Overview rendering of the resident micro-transit stop concept"
+    featured: true
+  - file: "https://picsum.photos/seed/rivercross-courtyard-02/800/500"
+    caption: "Street-level perspective showing autonomous vehicle operations"
+  - file: "https://picsum.photos/seed/rivercross-courtyard-03/800/500"
+    caption: "Detail view of key infrastructure and design elements"
 ---
 
 ## Summary

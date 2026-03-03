@@ -1,9 +1,19 @@
 ---
-title: "Southpoint Park — [Your AV Concept]"
-description: "A case study exploring autonomous vehicle deployment at Roosevelt Island's Southpoint Park park loop."
+title: "Southpoint Park — Park Maintenance Fleet"
+place: "Southpoint Park"
+concept: "Park Maintenance Fleet"
+description: "A fleet of autonomous grounds-keeping robots that maintain the park's lawns, paths, and landscaping."
 author: ""
+type: "service"
 geojson: "geo/southpoint-park.geojson"
-media: []
+media:
+  - file: "https://picsum.photos/seed/southpoint-park-01/800/500"
+    caption: "Overview rendering of the park maintenance fleet concept"
+    featured: true
+  - file: "https://picsum.photos/seed/southpoint-park-02/800/500"
+    caption: "Street-level perspective showing autonomous vehicle operations"
+  - file: "https://picsum.photos/seed/southpoint-park-03/800/500"
+    caption: "Detail view of key infrastructure and design elements"
 ---
 
 ## Summary

@@ -1,9 +1,19 @@
 ---
-title: "Roosevelt Island Bridge — [Your AV Concept]"
-description: "A case study exploring autonomous vehicle deployment at Roosevelt Island's Roosevelt Island Bridge bridge approach."
+title: "Roosevelt Island Bridge — Freight Gateway Checkpoint"
+place: "Roosevelt Island Bridge"
+concept: "Freight Gateway Checkpoint"
+description: "An automated freight inspection and routing station at the island's only vehicle bridge."
 author: ""
+type: "freight"
 geojson: "geo/ri-bridge.geojson"
-media: []
+media:
+  - file: "https://picsum.photos/seed/ri-bridge-01/800/500"
+    caption: "Overview rendering of the freight gateway checkpoint concept"
+    featured: true
+  - file: "https://picsum.photos/seed/ri-bridge-02/800/500"
+    caption: "Street-level perspective showing autonomous vehicle operations"
+  - file: "https://picsum.photos/seed/ri-bridge-03/800/500"
+    caption: "Detail view of key infrastructure and design elements"
 ---
 
 ## Summary

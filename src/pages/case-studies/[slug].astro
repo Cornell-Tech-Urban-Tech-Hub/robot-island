@@ -15,204 +15,270 @@ export async function getStaticPaths() {
 
 const { study } = Astro.props;
 const { Content } = await study.render();
-const allCaseStudies = await getCollection("case-studies");
-const featuredMedia = study.data.media?.find((m: any) => m.featured);
-const heroImage = featuredMedia?.file;
+const allMedia = study.data.media || [];
+const mediaUrl = (file: string) => file.startsWith('http') ? file : '/' + file;
+const youtubeId = (url: string) => {
+    const m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
+    return m ? m[1] : null;
+};
 ---
 
 <Layout title={`${study.data.title} | Robot Island`}>
     <main class="case-detail">
-        <section
-            class="hero-image"
-            style={heroImage
-                ? `background-image: url('/${heroImage}')`
-                : "background-color: #2c3e50"}
-        >
-            <div class="hero-overlay">
-                <div class="container">
-                    <a href="/" class="back-link">&larr; Back to Robot Island</a>
-                    <h1><span>{study.data.title}</span></h1>
-                    {study.data.author && (
-                        <p class="author">By {study.data.author}</p>
-                    )}
+        <header class="case-header">
+            <div class="header-inner">
+                <div class="header-top">
+                    <span class="header-place">{study.data.place}</span>
+                    <span class={`header-type header-type--${study.data.type}`}>{study.data.type}</span>
                 </div>
+                <h1>{study.data.concept}</h1>
+                {study.data.author && (
+                    <p class="header-author">{study.data.author}</p>
+                )}
             </div>
-        </section>
+        </header>
 
-        <section class="detail-map-section">
-            <div class="container">
-                <div
-                    id="detail-map"
-                    data-current-geojson={study.data.geojson}
-                    data-current-slug={study.slug}
-                ></div>
-            </div>
-        </section>
+        <div class="case-body">
+            <article class="content-main">
+                <Content />
+            </article>
 
-        <article class="content-body">
-            <Content />
-        </article>
-
-        {study.data.media && study.data.media.filter((m: any) => !m.featured).length > 0 && (
-            <section class="media-gallery">
-                <div class="container">
-                    <h2>Media</h2>
-                    <div class="gallery-grid">
-                        {study.data.media.filter((m: any) => !m.featured).map((item: any) => (
-                            <figure class="gallery-item">
-                                {item.file.endsWith('.mp4') ? (
-                                    <video controls src={`/${item.file}`}></video>
-                                ) : (
-                                    <img src={`/${item.file}`} alt={item.caption} loading="lazy" />
-                                )}
-                                <figcaption>{item.caption}</figcaption>
-                            </figure>
-                        ))}
-                    </div>
+            <aside class="content-sidebar">
+                <div class="sidebar-map-wrap">
+                    <div
+                        id="detail-map"
+                        data-current-geojson={study.data.geojson}
+                        data-current-slug={study.slug}
+                    ></div>
                 </div>
-            </section>
-        )}
+
+                {allMedia.map((item: any, idx: number) => {
+                    const ytId = youtubeId(item.file);
+                    return (
+                        <figure class="sidebar-media-item">
+                            {ytId ? (
+                                <div class="video-embed" data-lightbox-index={idx}>
+                                    <iframe
+                                        src={`https://www.youtube.com/embed/${ytId}`}
+                                        title={item.caption}
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen
+                                    ></iframe>
+                                </div>
+                            ) : item.file.endsWith('.mp4') ? (
+                                <video controls src={mediaUrl(item.file)} data-lightbox-index={idx}></video>
+                            ) : (
+                                <img
+                                    src={mediaUrl(item.file)}
+                                    alt={item.caption}
+                                    loading="lazy"
+                                    class="lightbox-trigger"
+                                    data-lightbox-index={idx}
+                                />
+                            )}
+                            <figcaption>{item.caption}</figcaption>
+                        </figure>
+                    );
+                })}
+            </aside>
+        </div>
 
         <Footer />
     </main>
 
-    <script id="all-studies-data" type="application/json" set:html={JSON.stringify(allCaseStudies.map(s => ({ slug: s.slug, geojson: s.data.geojson, name: s.data.title })))} />
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <button class="lightbox-prev" aria-label="Previous">&lsaquo;</button>
+        <button class="lightbox-next" aria-label="Next">&rsaquo;</button>
+        <div class="lightbox-content">
+            <img class="lightbox-img" id="lightbox-img" />
+            <div class="lightbox-video" id="lightbox-video"></div>
+        </div>
+        <p class="lightbox-caption" id="lightbox-caption"></p>
+        <p class="lightbox-counter" id="lightbox-counter"></p>
+    </div>
+
+    <script id="lightbox-media-data" type="application/json" set:html={JSON.stringify(allMedia.map(m => ({
+        file: m.file,
+        caption: m.caption,
+        youtube: youtubeId(m.file) || null,
+        isVideo: m.file.endsWith('.mp4'),
+    })))} />
 </Layout>
 
 <style>
-    /* Hero Image Section */
-    .hero-image {
-        position: relative;
-        min-height: 300px;
-        background-size: cover;
-        background-position: center;
+    /* Header */
+    .case-header {
+        background: #fff;
+        border-bottom: 1px solid #E2E8F0;
+        padding: 1.25rem 0;
     }
 
-    .hero-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-            to top,
-            rgba(0, 0, 0, 0.7) 0%,
-            rgba(0, 0, 0, 0.2) 60%,
-            rgba(0, 0, 0, 0.1) 100%
-        );
-    }
-
-    .hero-overlay .container {
-        position: relative;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        min-height: 300px;
-    }
-
-    .back-link {
-        position: absolute;
-        top: 2rem;
-        left: 2rem;
-        color: white;
-        font-family: var(--font-sans);
-        font-size: 0.85rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        text-decoration: none;
-        display: inline-block;
-    }
-
-    .back-link:hover {
-        text-decoration: underline;
-    }
-
-    h1 {
-        color: white;
-        font-family: var(--font-sans);
-        font-size: 2.4rem;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
-    }
-
-    h1 span {
-        background: white;
-        color: #333;
-        box-decoration-break: clone;
-        -webkit-box-decoration-break: clone;
-        padding: 0.15em 0.4em;
-        line-height: 1.5;
-        box-shadow: 0.4em 0 0 white, -0.4em 0 0 white;
-    }
-
-    .author {
-        color: white;
-        font-family: var(--font-sans);
-        font-size: 1rem;
-        margin-top: 1rem;
-        opacity: 0.9;
-    }
-
-    /* Map Section */
-    .detail-map-section {
-        padding: 3rem 0;
-    }
-
-    .detail-map-section .container {
+    .header-inner {
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 2rem;
     }
 
+    .header-top {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .header-place {
+        font-family: var(--font-sans);
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--color-text-muted);
+    }
+
+    .header-type {
+        display: inline-block;
+        font-family: var(--font-sans);
+        font-size: 0.6rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.15em 0.5em;
+        border-radius: 3px;
+    }
+
+    .header-type--passenger {
+        background: #DBEAFE;
+        color: #1E40AF;
+    }
+
+    .header-type--freight {
+        background: #FEF3C7;
+        color: #92400E;
+    }
+
+    .header-type--service {
+        background: #D1FAE5;
+        color: #065F46;
+    }
+
+    h1 {
+        font-family: var(--font-sans);
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        margin-bottom: 0;
+        line-height: 1.2;
+    }
+
+    .header-author {
+        font-family: var(--font-sans);
+        font-size: 0.8rem;
+        color: var(--color-text-muted);
+        margin-top: 0.25rem;
+        margin-bottom: 0;
+    }
+
+    /* Sidebar Layout */
+    .case-body {
+        display: flex;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        gap: 2rem;
+    }
+
+    .content-main {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .content-sidebar {
+        width: 380px;
+        flex-shrink: 0;
+    }
+
+    /* Map in sidebar */
+    .sidebar-map-wrap {
+        margin-bottom: 1.5rem;
+    }
+
     #detail-map {
         width: 100%;
-        height: 400px;
-        border-radius: 4px;
+        height: 300px;
+        border-radius: 6px;
         overflow: hidden;
     }
 
-    /* Content Body */
-    .content-body {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 2rem 2rem 4rem;
+    /* Media items in sidebar */
+    .sidebar-media-item {
+        margin: 0 0 1.5rem 0;
     }
 
-    .content-body :global(h2) {
-        margin-top: 2.5rem;
-        font-size: 1.8rem;
+    .sidebar-media-item img,
+    .sidebar-media-item video {
+        width: 100%;
+        border-radius: 6px;
+        display: block;
+    }
+
+    .video-embed {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        border-radius: 6px;
+    }
+
+    .video-embed iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    .sidebar-media-item figcaption {
         font-family: var(--font-sans);
+        font-size: 0.8rem;
+        color: var(--color-text-muted);
+        margin-top: 0.4rem;
+        line-height: 1.4;
     }
 
-    .content-body :global(h3) {
+    /* Content Body Typography */
+    .content-main :global(h2) {
         margin-top: 2rem;
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         font-family: var(--font-sans);
     }
 
-    .content-body :global(p) {
+    .content-main :global(h3) {
+        margin-top: 1.5rem;
+        font-size: 1.1rem;
+        font-family: var(--font-sans);
+    }
+
+    .content-main :global(p) {
         font-family: Georgia, serif;
         line-height: 1.8;
         margin-bottom: 1.5rem;
     }
 
-    .content-body :global(ul),
-    .content-body :global(ol) {
+    .content-main :global(ul),
+    .content-main :global(ol) {
         padding-left: 2rem;
         font-family: Georgia, serif;
         margin-bottom: 1.5rem;
     }
 
-    .content-body :global(li) {
+    .content-main :global(li) {
         margin-bottom: 0.5rem;
     }
 
-    .content-body :global(blockquote) {
+    .content-main :global(blockquote) {
         border-left: 4px solid var(--color-accent);
         padding: 1.5rem 2rem;
         font-style: italic;
@@ -221,99 +287,169 @@ const heroImage = featuredMedia?.file;
         font-size: 1.1rem;
     }
 
-    .content-body :global(strong) {
+    .content-main :global(strong) {
         font-weight: 700;
-    }
-
-    /* Media Gallery */
-    .media-gallery {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 0 2rem 4rem;
-    }
-
-    .media-gallery h2 {
-        font-family: var(--font-sans);
-        font-size: 1.8rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .gallery-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 1.5rem;
-    }
-
-    .gallery-item {
-        margin: 0;
-    }
-
-    .gallery-item img,
-    .gallery-item video {
-        width: 100%;
-        border-radius: 4px;
-        display: block;
-    }
-
-    .gallery-item figcaption {
-        font-family: var(--font-sans);
-        font-size: 0.85rem;
-        color: var(--color-text-muted);
-        margin-top: 0.5rem;
     }
 
     /* Responsive */
     @media (max-width: 768px) {
-        .hero-image {
-            min-height: 220px;
+        .case-body {
+            flex-direction: column;
+            padding: 1.5rem 1rem;
         }
 
-        .hero-overlay .container h1 {
-            font-size: 1.6rem;
+        .content-sidebar {
+            width: 100%;
+            order: -1;
         }
 
-        #detail-map {
-            height: 300px;
-        }
-
-        .detail-map-section .container {
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
-
-        .content-body {
-            padding: 1.5rem 1rem 3rem;
-        }
-
-        .media-gallery {
-            padding: 0 1rem 3rem;
-        }
-
-        .gallery-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .hero-image {
-            min-height: 180px;
-        }
-
-        .hero-overlay .container h1 {
-            font-size: 1.3rem;
+        .sidebar-map-wrap {
+            position: relative;
+            top: 0;
         }
 
         #detail-map {
             height: 250px;
         }
 
-        .content-body {
-            padding: 1rem 0.75rem 2rem;
+        h1 {
+            font-size: 1.5rem;
         }
 
-        .media-gallery {
-            padding: 0 0.75rem 2rem;
+        .header-inner {
+            padding: 0 1rem;
         }
+    }
+
+    @media (max-width: 480px) {
+        #detail-map {
+            height: 200px;
+        }
+
+        h1 {
+            font-size: 1.3rem;
+        }
+    }
+
+    /* Lightbox trigger */
+    .lightbox-trigger {
+        cursor: pointer;
+    }
+
+    /* Lightbox overlay */
+    .lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(0, 0, 0, 0.92);
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .lightbox.active {
+        display: flex;
+    }
+
+    .lightbox-content {
+        width: 90vw;
+        max-width: 1100px;
+    }
+
+    .lightbox-img {
+        max-width: 100%;
+        max-height: 75vh;
+        object-fit: contain;
+        border-radius: 4px;
+        display: none;
+        margin: 0 auto;
+    }
+
+    .lightbox-img.visible {
+        display: block;
+    }
+
+    :global(.lightbox-video) {
+        display: none;
+        width: 100%;
+        padding-bottom: 56.25%;
+        position: relative;
+    }
+
+    :global(.lightbox-video.visible) {
+        display: block;
+    }
+
+    :global(.lightbox-video iframe),
+    :global(.lightbox-video video) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        border-radius: 4px;
+    }
+
+
+    .lightbox-close,
+    .lightbox-prev,
+    .lightbox-next {
+        position: absolute;
+        background: none;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        font-family: var(--font-sans);
+        z-index: 10000;
+    }
+
+    .lightbox-close {
+        top: 1.5rem;
+        right: 1.5rem;
+        font-size: 2.5rem;
+        line-height: 1;
+    }
+
+    .lightbox-prev,
+    .lightbox-next {
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 3rem;
+        padding: 0.5rem;
+        opacity: 0.7;
+        transition: opacity 0.15s;
+    }
+
+    .lightbox-prev:hover,
+    .lightbox-next:hover {
+        opacity: 1;
+    }
+
+    .lightbox-prev {
+        left: 1.5rem;
+    }
+
+    .lightbox-next {
+        right: 1.5rem;
+    }
+
+    .lightbox-caption {
+        color: rgba(255, 255, 255, 0.85);
+        font-family: var(--font-sans);
+        font-size: 0.9rem;
+        margin-top: 1rem;
+        text-align: center;
+        max-width: 600px;
+        padding: 0 2rem;
+    }
+
+    .lightbox-counter {
+        color: rgba(255, 255, 255, 0.5);
+        font-family: var(--font-sans);
+        font-size: 0.75rem;
+        margin-top: 0.5rem;
     }
 </style>
 
@@ -330,149 +466,69 @@ const heroImage = featuredMedia?.file;
         const currentGeojson = mapEl.dataset.currentGeojson;
         const currentSlug = mapEl.dataset.currentSlug;
 
-        // Parse all studies data
-        const allStudiesEl = document.getElementById("all-studies-data");
-        if (!allStudiesEl) return;
-        const allStudies = JSON.parse(allStudiesEl.textContent || "[]");
-
         const map = new mapboxgl.Map({
             container: "detail-map",
             style: "mapbox://styles/mapbox/light-v11",
             center: [-73.950, 40.762],
             zoom: 14,
-            bearing: 28,
-        });
-
-        const hoverPopup = new mapboxgl.Popup({
-            closeButton: false,
-            closeOnClick: false,
+            bearing: 0,
         });
 
         map.on("load", async () => {
-            // Fetch ALL geojson files
-            const allFeatures: any[] = [];
-            for (const study of allStudies) {
-                try {
-                    const res = await fetch("/" + study.geojson);
-                    const data = await res.json();
-                    if (data && data.features) {
-                        data.features.forEach((f: any) => {
-                            allFeatures.push({
-                                ...f,
-                                properties: {
-                                    ...f.properties,
-                                    slug: study.slug,
-                                    name: f.properties?.name || study.name,
-                                },
-                            });
-                        });
-                    }
-                } catch (e) {
-                    console.error("Error fetching", study.geojson, e);
-                }
-            }
+            if (!currentGeojson) return;
 
-            // Add all-boundaries source (gray)
-            map.addSource("all-boundaries", {
-                type: "geojson",
-                data: { type: "FeatureCollection", features: allFeatures },
-            });
+            try {
+                const res = await fetch("/" + currentGeojson);
+                const data = await res.json();
 
-            map.addLayer({
-                id: "all-boundaries-fill",
-                type: "fill",
-                source: "all-boundaries",
-                paint: { "fill-color": "#94A3B8", "fill-opacity": 0.15 },
-            });
+                if (!data || !data.features) return;
 
-            map.addLayer({
-                id: "all-boundaries-line",
-                type: "line",
-                source: "all-boundaries",
-                paint: { "line-color": "#94A3B8", "line-width": 1 },
-            });
+                const features = data.features.map((f: any) => ({
+                    ...f,
+                    properties: {
+                        ...f.properties,
+                        slug: currentSlug,
+                    },
+                }));
 
-            // Add active boundary (accent color) — just the current case study features
-            const activeFeatures = allFeatures.filter(
-                (f: any) => f.properties.slug === currentSlug,
-            );
-            map.addSource("active-boundary", {
-                type: "geojson",
-                data: {
-                    type: "FeatureCollection",
-                    features: activeFeatures,
-                },
-            });
+                map.addSource("active-boundary", {
+                    type: "geojson",
+                    data: { type: "FeatureCollection", features },
+                });
 
-            map.addLayer({
-                id: "active-boundary-fill",
-                type: "fill",
-                source: "active-boundary",
-                paint: { "fill-color": "#0066FF", "fill-opacity": 0.4 },
-            });
+                map.addLayer({
+                    id: "active-boundary-fill",
+                    type: "fill",
+                    source: "active-boundary",
+                    paint: { "fill-color": "#0066FF", "fill-opacity": 0.3 },
+                });
 
-            map.addLayer({
-                id: "active-boundary-line",
-                type: "line",
-                source: "active-boundary",
-                paint: { "line-color": "#0066FF", "line-width": 3 },
-            });
+                map.addLayer({
+                    id: "active-boundary-line",
+                    type: "line",
+                    source: "active-boundary",
+                    paint: { "line-color": "#0066FF", "line-width": 3 },
+                });
 
-            // Fit bounds to current case study
-            if (activeFeatures.length > 0) {
+                // Fit bounds to this case study
                 const bounds = new mapboxgl.LngLatBounds();
                 const extractCoords = (coords: any) => {
                     if (typeof coords[0] === "number")
                         bounds.extend([coords[0], coords[1]]);
                     else coords.forEach(extractCoords);
                 };
-                activeFeatures.forEach((f: any) => {
+                features.forEach((f: any) => {
                     if (f.geometry?.coordinates)
                         extractCoords(f.geometry.coordinates);
                 });
                 map.fitBounds(bounds, {
-                    padding: {
-                        top: 80,
-                        bottom: 80,
-                        left: 80,
-                        right: 80,
-                    },
-                    maxZoom: 15,
-                    bearing: 28,
+                    padding: { top: 40, bottom: 40, left: 40, right: 40 },
+                    maxZoom: 16,
+                    bearing: 0,
                 });
+            } catch (e) {
+                console.error("Error loading GeoJSON:", e);
             }
-
-            // Hover on non-active boundaries
-            map.on("mousemove", "all-boundaries-fill", (e: any) => {
-                if (e.features?.length > 0) {
-                    const feature = e.features[0];
-                    if (feature.properties.slug === currentSlug) {
-                        map.getCanvas().style.cursor = "";
-                        hoverPopup.remove();
-                        return;
-                    }
-                    map.getCanvas().style.cursor = "pointer";
-                    hoverPopup
-                        .setLngLat(e.lngLat)
-                        .setHTML(`<strong>${feature.properties.name}</strong><br><a href="/case-studies/${feature.properties.slug}" style="color:#0066FF;font-size:0.85em;">View case study &rarr;</a>`)
-                        .addTo(map);
-                }
-            });
-
-            map.on("mouseleave", "all-boundaries-fill", () => {
-                map.getCanvas().style.cursor = "";
-                hoverPopup.remove();
-            });
-
-            // Click to navigate
-            map.on("click", "all-boundaries-fill", (e: any) => {
-                if (e.features?.length > 0) {
-                    const feature = e.features[0];
-                    if (feature.properties.slug !== currentSlug) {
-                        window.location.href = `/case-studies/${feature.properties.slug}`;
-                    }
-                }
-            });
         });
     }
 
@@ -485,5 +541,98 @@ const heroImage = featuredMedia?.file;
         initDetailMap();
     } else {
         document.addEventListener("DOMContentLoaded", initDetailMap);
+    }
+
+    // Lightbox
+    function initLightbox() {
+        const dataEl = document.getElementById("lightbox-media-data");
+        if (!dataEl) return;
+        const media = JSON.parse(dataEl.textContent || "[]");
+        if (media.length === 0) return;
+
+        const lightbox = document.getElementById("lightbox")!;
+        const imgEl = document.getElementById("lightbox-img") as HTMLImageElement;
+        const videoEl = document.getElementById("lightbox-video")!;
+        const captionEl = document.getElementById("lightbox-caption")!;
+        const counterEl = document.getElementById("lightbox-counter")!;
+
+        let current = 0;
+
+        function mediaUrl(file: string) {
+            return file.startsWith("http") ? file : "/" + file;
+        }
+
+        function show(idx: number) {
+            current = ((idx % media.length) + media.length) % media.length;
+            const item = media[current];
+
+            imgEl.classList.remove("visible");
+            videoEl.classList.remove("visible");
+            videoEl.innerHTML = "";
+
+            if (item.youtube) {
+                videoEl.innerHTML = `<iframe src="https://www.youtube.com/embed/${item.youtube}?autoplay=1" title="${item.caption}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                videoEl.classList.add("visible");
+            } else if (item.isVideo) {
+                videoEl.innerHTML = `<video controls autoplay src="${mediaUrl(item.file)}" style="width:100%;height:100%;border-radius:4px"></video>`;
+                videoEl.classList.add("visible");
+            } else {
+                imgEl.src = mediaUrl(item.file);
+                imgEl.alt = item.caption;
+                imgEl.classList.add("visible");
+            }
+
+            captionEl.textContent = item.caption;
+            counterEl.textContent = `${current + 1} / ${media.length}`;
+            lightbox.classList.add("active");
+            document.body.style.overflow = "hidden";
+        }
+
+        function close() {
+            lightbox.classList.remove("active");
+            videoEl.innerHTML = "";
+            document.body.style.overflow = "";
+        }
+
+        // Click triggers on sidebar images
+        document.querySelectorAll(".lightbox-trigger").forEach((el) => {
+            el.addEventListener("click", () => {
+                const idx = parseInt((el as HTMLElement).dataset.lightboxIndex || "0");
+                show(idx);
+            });
+        });
+
+        // Also allow clicking video embeds to open in lightbox
+        document.querySelectorAll(".video-embed[data-lightbox-index]").forEach((el) => {
+            el.addEventListener("click", (e) => {
+                e.preventDefault();
+                const idx = parseInt((el as HTMLElement).dataset.lightboxIndex || "0");
+                show(idx);
+            });
+        });
+
+        lightbox.querySelector(".lightbox-close")!.addEventListener("click", close);
+        lightbox.querySelector(".lightbox-prev")!.addEventListener("click", () => show(current - 1));
+        lightbox.querySelector(".lightbox-next")!.addEventListener("click", () => show(current + 1));
+
+        // Click backdrop to close
+        lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) close();
+        });
+
+        // Keyboard navigation
+        document.addEventListener("keydown", (e) => {
+            if (!lightbox.classList.contains("active")) return;
+            if (e.key === "Escape") close();
+            if (e.key === "ArrowLeft") show(current - 1);
+            if (e.key === "ArrowRight") show(current + 1);
+        });
+    }
+
+    document.addEventListener("astro:page-load", initLightbox);
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+        initLightbox();
+    } else {
+        document.addEventListener("DOMContentLoaded", initLightbox);
     }
 </script>

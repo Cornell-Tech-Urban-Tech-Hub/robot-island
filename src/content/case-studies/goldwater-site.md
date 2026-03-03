@@ -1,9 +1,19 @@
 ---
-title: "Goldwater Hospital Site — [Your AV Concept]"
-description: "A case study exploring autonomous vehicle deployment at Roosevelt Island's Goldwater Hospital Site redevelopment zone."
+title: "Goldwater Site — Construction Logistics Yard"
+place: "Goldwater Site"
+concept: "Construction Logistics Yard"
+description: "Autonomous material haulers serving the active redevelopment site of the former Goldwater Hospital."
 author: ""
+type: "freight"
 geojson: "geo/goldwater-site.geojson"
-media: []
+media:
+  - file: "https://picsum.photos/seed/goldwater-site-01/800/500"
+    caption: "Overview rendering of the construction logistics yard concept"
+    featured: true
+  - file: "https://picsum.photos/seed/goldwater-site-02/800/500"
+    caption: "Street-level perspective showing autonomous vehicle operations"
+  - file: "https://picsum.photos/seed/goldwater-site-03/800/500"
+    caption: "Detail view of key infrastructure and design elements"
 ---
 
 ## Summary

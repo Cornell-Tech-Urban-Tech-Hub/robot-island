@@ -1,9 +1,19 @@
 ---
-title: "Main Street & West Road — [Your AV Concept]"
-description: "A case study exploring autonomous vehicle deployment at Roosevelt Island's Main Street & West Road intersection."
+title: "Main Street West Road — Autonomous Shuttle Corridor"
+place: "Main Street West Road"
+concept: "Autonomous Shuttle Corridor"
+description: "A dedicated autonomous shuttle lane running the length of the island's western road."
 author: ""
+type: "passenger"
 geojson: "geo/main-street-west-road.geojson"
-media: []
+media:
+  - file: "https://picsum.photos/seed/main-street-west-road-01/800/500"
+    caption: "Overview rendering of the autonomous shuttle corridor concept"
+    featured: true
+  - file: "https://picsum.photos/seed/main-street-west-road-02/800/500"
+    caption: "Street-level perspective showing autonomous vehicle operations"
+  - file: "https://picsum.photos/seed/main-street-west-road-03/800/500"
+    caption: "Detail view of key infrastructure and design elements"
 ---
 
 ## Summary

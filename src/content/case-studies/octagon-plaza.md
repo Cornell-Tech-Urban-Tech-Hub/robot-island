@@ -1,9 +1,19 @@
 ---
-title: "Octagon Plaza — [Your AV Concept]"
-description: "A case study exploring autonomous vehicle deployment at Roosevelt Island's Octagon Plaza residential/historic."
+title: "Octagon Plaza — Multimodal Transfer Point"
+place: "Octagon Plaza"
+concept: "Multimodal Transfer Point"
+description: "An autonomous shuttle and e-bike docking station creating a northern mobility hub."
 author: ""
+type: "passenger"
 geojson: "geo/octagon-plaza.geojson"
-media: []
+media:
+  - file: "https://picsum.photos/seed/octagon-plaza-01/800/500"
+    caption: "Overview rendering of the multimodal transfer point concept"
+    featured: true
+  - file: "https://picsum.photos/seed/octagon-plaza-02/800/500"
+    caption: "Street-level perspective showing autonomous vehicle operations"
+  - file: "https://picsum.photos/seed/octagon-plaza-03/800/500"
+    caption: "Detail view of key infrastructure and design elements"
 ---
 
 ## Summary

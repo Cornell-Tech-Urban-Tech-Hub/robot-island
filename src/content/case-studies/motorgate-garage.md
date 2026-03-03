@@ -1,9 +1,19 @@
 ---
-title: "Motorgate Garage — [Your AV Concept]"
-description: "A case study exploring autonomous vehicle deployment at Roosevelt Island's Motorgate Garage parking structure."
+title: "Motorgate Garage — Automated Valet Parking"
+place: "Motorgate Garage"
+concept: "Automated Valet Parking"
+description: "A robotic valet system that autonomously parks and retrieves vehicles in the island's main parking structure."
 author: ""
+type: "passenger"
 geojson: "geo/motorgate-garage.geojson"
-media: []
+media:
+  - file: "https://picsum.photos/seed/motorgate-garage-01/800/500"
+    caption: "Overview rendering of the automated valet parking concept"
+    featured: true
+  - file: "https://picsum.photos/seed/motorgate-garage-02/800/500"
+    caption: "Street-level perspective showing autonomous vehicle operations"
+  - file: "https://picsum.photos/seed/motorgate-garage-03/800/500"
+    caption: "Detail view of key infrastructure and design elements"
 ---
 
 ## Summary

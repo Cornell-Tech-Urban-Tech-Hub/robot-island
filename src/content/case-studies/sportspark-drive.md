@@ -1,9 +1,19 @@
 ---
-title: "Sportspark Drive — [Your AV Concept]"
-description: "A case study exploring autonomous vehicle deployment at Roosevelt Island's Sportspark Drive recreation zone."
+title: "Sportspark Drive — Event Shuttle Service"
+place: "Sportspark Drive"
+concept: "Event Shuttle Service"
+description: "On-demand autonomous shuttles serving the sports complex during games and events."
 author: ""
+type: "passenger"
 geojson: "geo/sportspark-drive.geojson"
-media: []
+media:
+  - file: "https://picsum.photos/seed/sportspark-drive-01/800/500"
+    caption: "Overview rendering of the event shuttle service concept"
+    featured: true
+  - file: "https://picsum.photos/seed/sportspark-drive-02/800/500"
+    caption: "Street-level perspective showing autonomous vehicle operations"
+  - file: "https://picsum.photos/seed/sportspark-drive-03/800/500"
+    caption: "Detail view of key infrastructure and design elements"
 ---
 
 ## Summary
