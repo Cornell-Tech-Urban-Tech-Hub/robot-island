@@ -398,15 +398,26 @@ const allCaseStudies = await getCollection("case-studies");
 						}
 					});
 
+					// fitBounds uses an axis-aligned bbox which wastes space
+					// when the map is rotated. Fit first, then zoom in to compensate.
 					map.fitBounds(bounds, {
-						padding: {
-							top: 50,
-							bottom: 50,
-							left: 50,
-							right: 50,
-						},
-						maxZoom: 15,
+						padding: 0,
 						bearing: 28,
+					});
+					map.once("moveend", () => {
+						map.zoomTo(map.getZoom() + 1, { duration: 0 });
+					});
+
+					// Re-fit on window resize so map adapts to container size changes
+					window.addEventListener("resize", () => {
+						map.resize();
+						map.fitBounds(bounds, {
+							padding: 0,
+							bearing: 28,
+						});
+						map.once("moveend", () => {
+							map.zoomTo(map.getZoom() + 1, { duration: 0 });
+						});
 					});
 				}
 
