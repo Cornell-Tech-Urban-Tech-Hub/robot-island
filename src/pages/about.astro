@@ -1,0 +1,237 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="About — Robot Island">
+	<main class="about-page">
+		<section class="about-hero">
+			<div class="container">
+				<h1>About Robot Island</h1>
+				<p class="lead">Robot Island collects case studies created by Cornell Tech students exploring how autonomous vehicles could reshape life on Roosevelt Island — one of New York City's most unique urban environments.</p>
+			</div>
+		</section>
+
+		<section class="about-section">
+			<div class="container">
+				<h2>The Project</h2>
+				<p>Roosevelt Island is a 2-mile-long sliver of land in New York City's East River, home to about 12,000 residents, a major academic campus, parks, hospitals, and historic landmarks. Its compact geography, limited car access, and single main road make it an ideal testing ground for imagining autonomous vehicle futures.</p>
+				<p>Robot Island asks students to design speculative AV deployments for 20 specific locations across the island — from the Tram Plaza to Lighthouse Park, from Cornell Tech to the Goldwater site. Each case study considers the unique characteristics of its location, the needs of its users, and the broader implications for urban mobility.</p>
+			</div>
+		</section>
+
+		<section class="about-section alt">
+			<div class="container">
+				<h2>Case Study Types</h2>
+				<div class="type-grid">
+					<div class="type-card">
+						<span class="type-badge type-badge--passenger">Passenger</span>
+						<h3>People Movers</h3>
+						<p>Autonomous transit, shuttles, and on-demand passenger services connecting residents, workers, and visitors across the island and to the broader city.</p>
+					</div>
+					<div class="type-card">
+						<span class="type-badge type-badge--freight">Freight</span>
+						<h3>Goods Movement</h3>
+						<p>Automated delivery, logistics, and supply chain solutions serving the island's residential complexes, hospital campus, and commercial areas.</p>
+					</div>
+					<div class="type-card">
+						<span class="type-badge type-badge--service">Service</span>
+						<h3>Civic Services</h3>
+						<p>Autonomous vehicles performing maintenance, waste collection, emergency response, and other public services that keep the island running.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="about-section">
+			<div class="container">
+				<h2>Key Questions</h2>
+				<ol class="question-list">
+					<li><strong>Place matters.</strong> The physical and social characteristics of each location — its terrain, infrastructure, population, and culture — fundamentally shape what autonomous vehicles can and should do there.</li>
+					<li><strong>People come first.</strong> Successful AV deployments must be designed around the needs and behaviors of the people who live, work, and visit these places — not the other way around.</li>
+					<li><strong>Integration is everything.</strong> Autonomous vehicles don't operate in isolation. They must connect with existing transit, infrastructure, buildings, and public spaces to create genuine value.</li>
+				</ol>
+			</div>
+		</section>
+
+		<section class="about-section alt">
+			<div class="container">
+				<h2>About the Class</h2>
+				<p>Robot Island is a project of the Urban Tech Hub at Cornell Tech. Students in the urban technology program develop these case studies as part of their coursework, combining field research on Roosevelt Island with design thinking and technical analysis.</p>
+				<p>The goal is to move beyond abstract speculation about autonomous vehicles and ground the conversation in real places, real communities, and real constraints. Each case study is both a design exercise and a piece of applied research.</p>
+			</div>
+		</section>
+
+		<section class="about-section">
+			<div class="container">
+				<h2>Credits</h2>
+				<p>Robot Island is a project of the <a href="https://urban.tech.cornell.edu/" target="_blank" rel="noopener">Jacobs Urban Tech Hub</a> at <a href="https://tech.cornell.edu/" target="_blank" rel="noopener">Cornell Tech</a>.</p>
+				<p class="credits-note">Case studies are created by students in the <a href="https://tech.cornell.edu/programs/masters-programs/jacobs-technion-cornell-dual-ms-urban-tech/" target="_blank" rel="noopener">Urban Tech Master's</a> program.</p>
+			</div>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<style>
+	.about-page {
+		background: var(--color-bg-base);
+	}
+
+	.about-hero {
+		background: var(--color-header);
+		padding: 4rem 0;
+	}
+
+	.about-hero h1 {
+		font-family: var(--font-sans);
+		font-size: 2.4rem;
+		font-weight: 700;
+		color: #fff;
+		margin-bottom: 1rem;
+	}
+
+	.about-hero .lead {
+		font-family: var(--font-serif);
+		font-size: 1.15rem;
+		color: rgba(255, 255, 255, 0.75);
+		max-width: 700px;
+		line-height: 1.7;
+	}
+
+	.container {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	.about-section {
+		padding: 3rem 0;
+	}
+
+	.about-section.alt {
+		background: var(--color-bg-alt);
+	}
+
+	.about-section h2 {
+		font-family: var(--font-sans);
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: var(--color-text-primary);
+		margin-bottom: 1rem;
+	}
+
+	.about-section p {
+		font-family: var(--font-serif);
+		font-size: 1rem;
+		color: var(--color-text-secondary);
+		line-height: 1.7;
+	}
+
+	.about-section a {
+		color: var(--color-accent);
+	}
+
+	.about-section a:hover {
+		text-decoration: underline;
+	}
+
+	/* Type Grid */
+	.type-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+		margin-top: 1.5rem;
+	}
+
+	.type-card {
+		background: #fff;
+		border-radius: 6px;
+		padding: 1.5rem;
+	}
+
+	.type-card h3 {
+		font-family: var(--font-sans);
+		font-size: 1.1rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.type-card p {
+		font-size: 0.9rem;
+		margin-bottom: 0;
+	}
+
+	.type-badge {
+		display: inline-block;
+		font-family: var(--font-sans);
+		font-size: 0.65rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		padding: 0.25em 0.6em;
+		border-radius: 3px;
+		margin-bottom: 0.75rem;
+	}
+
+	.type-badge--passenger {
+		background: #DBEAFE;
+		color: #1E40AF;
+	}
+
+	.type-badge--freight {
+		background: #FEF3C7;
+		color: #92400E;
+	}
+
+	.type-badge--service {
+		background: #D1FAE5;
+		color: #065F46;
+	}
+
+	/* Question List */
+	.question-list {
+		list-style: none;
+		counter-reset: questions;
+		padding: 0;
+	}
+
+	.question-list li {
+		counter-increment: questions;
+		font-family: var(--font-serif);
+		font-size: 1rem;
+		color: var(--color-text-secondary);
+		line-height: 1.7;
+		margin-bottom: 1.25rem;
+		padding-left: 2rem;
+		position: relative;
+	}
+
+	.question-list li::before {
+		content: counter(questions);
+		position: absolute;
+		left: 0;
+		font-family: var(--font-sans);
+		font-weight: 700;
+		font-size: 1.1rem;
+		color: var(--color-accent);
+	}
+
+	.question-list li strong {
+		color: var(--color-text-primary);
+	}
+
+	.credits-note {
+		color: var(--color-text-muted) !important;
+		font-size: 0.9rem !important;
+	}
+
+	@media (max-width: 768px) {
+		.about-hero h1 {
+			font-size: 1.8rem;
+		}
+
+		.type-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

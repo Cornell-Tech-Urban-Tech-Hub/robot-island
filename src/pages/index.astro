@@ -11,6 +11,7 @@ const allCaseStudies = await getCollection("case-studies");
 			<section class="hero">
 				<h1><span class="accent">Robot</span> Island</h1>
 				<p class="subtitle">Autonomous vehicle futures on Roosevelt Island</p>
+				<p class="intro">Explore speculative case studies designed by Cornell Tech students imagining how autonomous vehicles could transform Roosevelt Island — from passenger shuttles to freight delivery to civic services. Each study is grounded in a real location on the island. <a href="/about">Learn more &rarr;</a></p>
 			</section>
 
 			<section class="case-studies">
@@ -109,6 +110,24 @@ const allCaseStudies = await getCollection("case-studies");
 		color: rgba(255, 255, 255, 0.7);
 		max-width: 600px;
 		line-height: 1.6;
+	}
+
+	.hero .intro {
+		font-family: var(--font-sans);
+		font-size: 0.85rem;
+		color: rgba(255, 255, 255, 0.55);
+		max-width: 600px;
+		line-height: 1.6;
+		margin-top: 0.75rem;
+	}
+
+	.hero .intro a {
+		color: var(--color-accent);
+		text-decoration: none;
+	}
+
+	.hero .intro a:hover {
+		text-decoration: underline;
 	}
 
 	/* Card Grid */
