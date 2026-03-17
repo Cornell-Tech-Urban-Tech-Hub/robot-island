@@ -1,18 +1,18 @@
 ---
-title: "Cornell Tech Campus (North) — Research Shuttle Network"
-place: "Cornell Tech Campus (North)"
-concept: "Research Shuttle Network"
-description: "An on-campus autonomous shuttle circulator connecting the built-out academic buildings, housing, and the subway station."
+title: "Cornell Tech South Campus — Autonomous Construction & Site Logistics"
+place: "Cornell Tech South Campus"
+concept: "Autonomous Construction & Site Logistics"
+description: "Autonomous construction vehicles and logistics robots supporting the phased buildout of Cornell Tech's undeveloped southern campus parcels."
 author: ""
-type: "passenger"
-geojson: "geo/cornell-tech-campus.geojson"
+type: "service"
+geojson: "geo/cornell-tech-south.geojson"
 media:
-  - file: "https://picsum.photos/seed/cornell-tech-campus-01/800/500"
-    caption: "Overview rendering of the research shuttle network concept"
+  - file: "https://picsum.photos/seed/cornell-tech-south-01/800/500"
+    caption: "Overview rendering of the autonomous construction logistics concept"
     featured: true
-  - file: "https://picsum.photos/seed/cornell-tech-campus-02/800/500"
+  - file: "https://picsum.photos/seed/cornell-tech-south-02/800/500"
     caption: "Street-level perspective showing autonomous vehicle operations"
-  - file: "https://picsum.photos/seed/cornell-tech-campus-03/800/500"
+  - file: "https://picsum.photos/seed/cornell-tech-south-03/800/500"
     caption: "Detail view of key infrastructure and design elements"
 ---
 

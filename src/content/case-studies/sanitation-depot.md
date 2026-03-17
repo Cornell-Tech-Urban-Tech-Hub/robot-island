@@ -1,18 +1,18 @@
 ---
-title: "Cornell Tech Campus (North) — Research Shuttle Network"
-place: "Cornell Tech Campus (North)"
-concept: "Research Shuttle Network"
-description: "An on-campus autonomous shuttle circulator connecting the built-out academic buildings, housing, and the subway station."
+title: "Sanitation Depot — Autonomous Waste Collection Fleet"
+place: "Sanitation Depot"
+concept: "Autonomous Waste Collection Fleet"
+description: "A fleet of autonomous compact waste haulers operating from the DSNY depot to service the island's residential and public waste streams."
 author: ""
-type: "passenger"
-geojson: "geo/cornell-tech-campus.geojson"
+type: "service"
+geojson: "geo/sanitation-depot.geojson"
 media:
-  - file: "https://picsum.photos/seed/cornell-tech-campus-01/800/500"
-    caption: "Overview rendering of the research shuttle network concept"
+  - file: "https://picsum.photos/seed/sanitation-depot-01/800/500"
+    caption: "Overview rendering of the autonomous waste collection fleet concept"
     featured: true
-  - file: "https://picsum.photos/seed/cornell-tech-campus-02/800/500"
+  - file: "https://picsum.photos/seed/sanitation-depot-02/800/500"
     caption: "Street-level perspective showing autonomous vehicle operations"
-  - file: "https://picsum.photos/seed/cornell-tech-campus-03/800/500"
+  - file: "https://picsum.photos/seed/sanitation-depot-03/800/500"
     caption: "Detail view of key infrastructure and design elements"
 ---
 

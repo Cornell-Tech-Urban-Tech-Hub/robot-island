@@ -1,18 +1,18 @@
 ---
-title: "Cornell Tech Campus (North) — Research Shuttle Network"
-place: "Cornell Tech Campus (North)"
-concept: "Research Shuttle Network"
-description: "An on-campus autonomous shuttle circulator connecting the built-out academic buildings, housing, and the subway station."
+title: "Subway Station & Bus Stop — Autonomous Multimodal Transfer Hub"
+place: "Subway Station & Bus Stop"
+concept: "Autonomous Multimodal Transfer Hub"
+description: "An autonomous shuttle and microtransit hub at the F train subway station coordinating transfers between subway, bus, and on-demand AV service."
 author: ""
 type: "passenger"
-geojson: "geo/cornell-tech-campus.geojson"
+geojson: "geo/subway-bus-stop.geojson"
 media:
-  - file: "https://picsum.photos/seed/cornell-tech-campus-01/800/500"
-    caption: "Overview rendering of the research shuttle network concept"
+  - file: "https://picsum.photos/seed/subway-bus-stop-01/800/500"
+    caption: "Overview rendering of the multimodal transfer hub concept"
     featured: true
-  - file: "https://picsum.photos/seed/cornell-tech-campus-02/800/500"
+  - file: "https://picsum.photos/seed/subway-bus-stop-02/800/500"
     caption: "Street-level perspective showing autonomous vehicle operations"
-  - file: "https://picsum.photos/seed/cornell-tech-campus-03/800/500"
+  - file: "https://picsum.photos/seed/subway-bus-stop-03/800/500"
     caption: "Detail view of key infrastructure and design elements"
 ---
 

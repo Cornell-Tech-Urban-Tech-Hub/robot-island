@@ -1,18 +1,18 @@
 ---
-title: "Cornell Tech Campus (North) — Research Shuttle Network"
-place: "Cornell Tech Campus (North)"
-concept: "Research Shuttle Network"
-description: "An on-campus autonomous shuttle circulator connecting the built-out academic buildings, housing, and the subway station."
+title: "Roosevelt Island Garden Club — Autonomous Groundskeeping Robot"
+place: "Roosevelt Island Garden Club"
+concept: "Autonomous Groundskeeping Robot"
+description: "A fleet of small autonomous gardening robots that assist with watering, weeding, and soil monitoring across the community garden plots."
 author: ""
-type: "passenger"
-geojson: "geo/cornell-tech-campus.geojson"
+type: "service"
+geojson: "geo/ri-garden-club.geojson"
 media:
-  - file: "https://picsum.photos/seed/cornell-tech-campus-01/800/500"
-    caption: "Overview rendering of the research shuttle network concept"
+  - file: "https://picsum.photos/seed/ri-garden-club-01/800/500"
+    caption: "Overview rendering of the autonomous groundskeeping robot concept"
     featured: true
-  - file: "https://picsum.photos/seed/cornell-tech-campus-02/800/500"
+  - file: "https://picsum.photos/seed/ri-garden-club-02/800/500"
     caption: "Street-level perspective showing autonomous vehicle operations"
-  - file: "https://picsum.photos/seed/cornell-tech-campus-03/800/500"
+  - file: "https://picsum.photos/seed/ri-garden-club-03/800/500"
     caption: "Detail view of key infrastructure and design elements"
 ---
 

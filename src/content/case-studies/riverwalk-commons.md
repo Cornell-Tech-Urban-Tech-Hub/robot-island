@@ -1,18 +1,18 @@
 ---
-title: "Cornell Tech Campus (North) — Research Shuttle Network"
-place: "Cornell Tech Campus (North)"
-concept: "Research Shuttle Network"
-description: "An on-campus autonomous shuttle circulator connecting the built-out academic buildings, housing, and the subway station."
+title: "Riverwalk Commons — Autonomous Delivery & Errand Runner"
+place: "Riverwalk Commons"
+concept: "Autonomous Delivery & Errand Runner"
+description: "A neighborhood autonomous delivery service using sidewalk robots and small cargo vehicles to handle grocery, pharmacy, and package deliveries for Riverwalk residents."
 author: ""
-type: "passenger"
-geojson: "geo/cornell-tech-campus.geojson"
+type: "service"
+geojson: "geo/riverwalk-commons.geojson"
 media:
-  - file: "https://picsum.photos/seed/cornell-tech-campus-01/800/500"
-    caption: "Overview rendering of the research shuttle network concept"
+  - file: "https://picsum.photos/seed/riverwalk-commons-01/800/500"
+    caption: "Overview rendering of the autonomous delivery service concept"
     featured: true
-  - file: "https://picsum.photos/seed/cornell-tech-campus-02/800/500"
+  - file: "https://picsum.photos/seed/riverwalk-commons-02/800/500"
     caption: "Street-level perspective showing autonomous vehicle operations"
-  - file: "https://picsum.photos/seed/cornell-tech-campus-03/800/500"
+  - file: "https://picsum.photos/seed/riverwalk-commons-03/800/500"
     caption: "Detail view of key infrastructure and design elements"
 ---
 
