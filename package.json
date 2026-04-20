@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "process": "node scripts/process-submissions.js"
   },
   "dependencies": {
     "@astrojs/netlify": "^6.6.4",

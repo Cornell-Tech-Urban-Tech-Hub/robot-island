@@ -14,6 +14,7 @@ Robot Island — an interactive web atlas of autonomous vehicle deployment case 
 npm run dev       # Dev server at localhost:4321
 npm run build     # Production build to ./dist/
 npm run preview   # Preview production build
+npm run process   # Process student submissions from submissions/
 npm install       # Install dependencies
 ```
 
@@ -30,13 +31,25 @@ No test framework is configured.
 
 ## Architecture
 
+### Student Submission Workflow
+
+**Students submit self-contained folders** via `submissions/` directory. Each folder contains:
+- `case-study.md` or `index.md` — Content with frontmatter
+- `boundary.geojson` — Site boundary polygon
+- Media files (`.jpg`, `.png`, `.mp4`, etc.)
+
+**Processing**: Run `npm run process` (script at `scripts/process-submissions.js`) to:
+1. Copy markdown files to `src/content/case-studies/[slug].md`
+2. Copy assets to `public/case-studies/[slug]/`
+3. Update frontmatter paths to reference public URLs
+
+**Template**: Students receive `docs/example-submission/` (also available as `docs/example-submission.zip`). See `docs/INSTRUCTOR-GUIDE.md` for full workflow.
+
+**Folder naming**: Folder name becomes URL slug (e.g., `motorgate-garage` → `/case-studies/motorgate-garage`)
+
 ### Content-Driven Routing
 
-Case studies live in `src/content/case-studies/*.md` with schema defined in `src/content/config.ts`. Each has frontmatter: `title`, `description`, `author?`, `geojson` (path to boundary file in `public/geo/`), `media?` (array of `{ file, caption, featured? }`).
-
-A student template is at `src/content/case-studies/_TEMPLATE.md` (underscore prefix = ignored by Astro).
-
-20 Roosevelt Island locations are pre-created as stub case studies. One sample (Tram Plaza) is fully built out.
+Case studies live in `src/content/case-studies/*.md` with schema defined in `src/content/config.ts`. Each has frontmatter: `title`, `place`, `concept`, `description`, `author?`, `type` (passenger/freight/service), `geojson`, `media?` (array of `{ file, caption, featured? }`).
 
 Routes:
 - `/` — Home page with split-screen: card grid (left) + map (right)
@@ -64,27 +77,40 @@ Map is initialized inline in page scripts (no separate Map component). Style: `m
 
 ### GeoJSON Files
 
-Located in `public/geo/*.geojson`. 20 files for Roosevelt Island locations. FeatureCollection format with Polygon geometries. Properties include `name` and `type`.
+**Legacy location**: `public/geo/*.geojson` — 20 pre-created Roosevelt Island site boundaries.
+
+**Student submissions**: `public/case-studies/[slug]/boundary.geojson` — Created by processing script from student submission folders.
+
+All files use FeatureCollection format with Polygon geometries. Properties include `name` and `type`.
 
 ### Content Schema
 
 ```typescript
 {
-    title: string,
-    description: string,
-    author?: string,
-    geojson: string,        // "geo/[slug].geojson"
+    title: string,          // Full title: "Place — Concept"
+    place: string,          // Location name only
+    concept: string,        // Short concept description
+    description: string,    // One-sentence summary
+    author?: string,        // Student/author name
+    type: 'passenger' | 'freight' | 'service',
+    geojson: string,        // "case-studies/[slug]/boundary.geojson" or legacy "geo/[slug].geojson"
     media?: Array<{
-        file: string,       // "media/[slug]-01.jpg"
+        file: string,       // "case-studies/[slug]/image.jpg" or "https://..."
         caption: string,
-        featured?: boolean, // true = hero image
+        featured?: boolean, // true = hero image (only one should be true)
     }>,
 }
 ```
 
 ### Media
 
-Student media files go in `public/media/`. Referenced from frontmatter. The first item with `featured: true` becomes the hero image on the detail page. Non-featured items render in a gallery grid below the content body.
+**Student submissions**: Media files go in `public/case-studies/[slug]/` (via processing script).
+
+**Legacy/manual uploads**: `public/media/` still supported for backward compatibility.
+
+**Frontmatter reference**: Can be relative paths (`"case-studies/slug/image.jpg"`), legacy paths (`"media/image.jpg"`), or external URLs (`"https://..."`).
+
+The item with `featured: true` becomes the hero image on detail pages. Non-featured items render in a gallery grid below content. YouTube embeds supported via full URL.
 
 ### Design System
 

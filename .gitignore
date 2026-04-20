@@ -20,6 +20,10 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# Student submissions (processed by scripts/process-submissions.js)
+submissions/*
+!submissions/.gitkeep
+
 # jetbrains setting folder
 .idea/
 
