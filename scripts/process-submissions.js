@@ -1,10 +1,17 @@
 /**
  * Process Submissions
  *
- * Reads student submission folders from submissions/ and processes them into the Astro project:
- * - Copies markdown to src/content/case-studies/
- * - Copies assets (geojson, images, videos) to public/case-studies/
- * - Updates frontmatter paths to reference the correct public URLs
+ * Reads student submission folders from submissions/ and copies them into
+ * src/content/case-studies/[slug]/ as self-contained case study folders
+ * (markdown + geojson + media all colocated).
+ *
+ * Each submission folder must contain:
+ *   - index.md (or case-study.md, which is renamed to index.md)
+ *   - boundary.geojson
+ *   - any referenced media files
+ *
+ * The folder name becomes the URL slug. If the markdown frontmatter does not
+ * already declare `slug:`, one is injected based on the folder name.
  *
  * Usage: node scripts/process-submissions.js
  */
@@ -19,71 +26,49 @@ const ROOT = path.resolve(__dirname, '..');
 
 const SUBMISSIONS_DIR = path.join(ROOT, 'submissions');
 const CONTENT_DIR = path.join(ROOT, 'src', 'content', 'case-studies');
-const PUBLIC_DIR = path.join(ROOT, 'public', 'case-studies');
 
 async function ensureDir(dir) {
-    try {
-        await fs.mkdir(dir, { recursive: true });
-    } catch (error) {
-        if (error.code !== 'EEXIST') throw error;
-    }
+    await fs.mkdir(dir, { recursive: true });
+}
+
+function injectSlug(content, slug) {
+    const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
+    if (!fmMatch) return content;
+    const fm = fmMatch[1];
+    if (/^slug:/m.test(fm)) return content;
+    const newFm = `${fm}\nslug: "${slug}"`;
+    return content.replace(fmMatch[0], `---\n${newFm}\n---`);
 }
 
 async function processSubmission(submissionPath) {
     const slug = path.basename(submissionPath);
     console.log(`Processing: ${slug}`);
 
-    // Read all files in submission folder
     const files = await fs.readdir(submissionPath);
 
-    // Find markdown file (index.md or case-study.md)
     const mdFile = files.find(f => f === 'index.md' || f === 'case-study.md');
     if (!mdFile) {
         console.warn(`  ⚠️  No markdown file found in ${slug}, skipping`);
         return;
     }
 
-    // Read markdown content
+    const destDir = path.join(CONTENT_DIR, slug);
+    await ensureDir(destDir);
+
     const mdPath = path.join(submissionPath, mdFile);
     let content = await fs.readFile(mdPath, 'utf-8');
+    content = injectSlug(content, slug);
 
-    // Update frontmatter paths
-    // geojson: "boundary.geojson" → geojson: "case-studies/[slug]/boundary.geojson"
-    content = content.replace(
-        /geojson:\s*["']([^"']+)["']/g,
-        (match, p1) => {
-            if (p1.startsWith('http')) return match;
-            return `geojson: "case-studies/${slug}/${p1.replace('./', '')}"`;
-        }
-    );
-
-    // file: "image.jpg" → file: "case-studies/[slug]/image.jpg"
-    content = content.replace(
-        /file:\s*["']([^"']+)["']/gm,
-        (match, p1) => {
-            if (p1.startsWith('http')) return match;
-            return `file: "case-studies/${slug}/${p1.replace('./', '')}"`;
-        }
-    );
-
-    // Write processed markdown to content directory
-    await ensureDir(CONTENT_DIR);
-    const outputMdPath = path.join(CONTENT_DIR, `${slug}.md`);
+    const outputMdPath = path.join(destDir, 'index.md');
     await fs.writeFile(outputMdPath, content);
-    console.log(`  ✓ Markdown → src/content/case-studies/${slug}.md`);
-
-    // Copy asset files to public directory
-    const publicSlugDir = path.join(PUBLIC_DIR, slug);
-    await ensureDir(publicSlugDir);
+    console.log(`  ✓ Markdown → src/content/case-studies/${slug}/index.md`);
 
     for (const file of files) {
         if (file === mdFile || file.startsWith('.')) continue;
-
         const srcPath = path.join(submissionPath, file);
-        const destPath = path.join(publicSlugDir, file);
-
+        const destPath = path.join(destDir, file);
         await fs.copyFile(srcPath, destPath);
-        console.log(`  ✓ Asset → public/case-studies/${slug}/${file}`);
+        console.log(`  ✓ Asset → src/content/case-studies/${slug}/${file}`);
     }
 }
 

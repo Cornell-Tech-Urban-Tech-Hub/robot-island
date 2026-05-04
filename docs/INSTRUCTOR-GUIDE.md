@@ -40,12 +40,12 @@ Copy each student's folder into `submissions/`:
 ```
 submissions/
 ├── motorgate-garage/
-│   ├── case-study.md
+│   ├── index.md
 │   ├── boundary.geojson
 │   ├── hero-image.jpg
 │   └── street-view.jpg
 ├── tram-plaza/
-│   ├── case-study.md
+│   ├── index.md
 │   ├── boundary.geojson
 │   └── media files...
 └── lighthouse-park/
@@ -60,24 +60,22 @@ submissions/
 npm run process
 ```
 
-This script:
-- Reads all folders from `submissions/`
-- Copies markdown files to `src/content/case-studies/[slug].md`
-- Copies assets (geojson, images, videos) to `public/case-studies/[slug]/`
-- Updates frontmatter paths to reference the correct URLs
+This script copies each submission folder to `src/content/case-studies/[slug]/`, keeping the markdown, geojson, and media colocated. It renames `case-study.md` to `index.md` if needed and injects `slug:` into the frontmatter when missing.
 
 **Output example**:
 ```
 🤖 Processing student submissions...
 
 Processing: motorgate-garage
-  ✓ Markdown → src/content/case-studies/motorgate-garage.md
-  ✓ Asset → public/case-studies/motorgate-garage/boundary.geojson
-  ✓ Asset → public/case-studies/motorgate-garage/hero-image.jpg
-  ✓ Asset → public/case-studies/motorgate-garage/street-view.jpg
+  ✓ Markdown → src/content/case-studies/motorgate-garage/index.md
+  ✓ Asset → src/content/case-studies/motorgate-garage/boundary.geojson
+  ✓ Asset → src/content/case-studies/motorgate-garage/hero-image.jpg
+  ✓ Asset → src/content/case-studies/motorgate-garage/street-view.jpg
 
 ✅ Processed 1 submission(s)
 ```
+
+You can also skip the script entirely and drop a submission folder directly into `src/content/case-studies/[slug]/` — as long as it has `index.md`, a `boundary.geojson`, and any referenced media, the build picks it up.
 
 ### Step 3: Review and test locally
 
@@ -105,9 +103,9 @@ Netlify will automatically rebuild and deploy the site.
 
 ### "No markdown file found in [slug], skipping"
 
-The folder is missing `case-study.md` or `index.md`. Check:
+The folder is missing `index.md` (or the legacy `case-study.md`). Check:
 - File exists in the folder
-- File is named exactly `case-study.md` (lowercase, hyphen)
+- File is named exactly `index.md` (lowercase)
 
 ### Invalid frontmatter errors
 
@@ -146,17 +144,18 @@ The script processes all folders in `submissions/` every time. To avoid reproces
 
 ### Remove a published case study
 
-1. Delete the markdown file: `src/content/case-studies/[slug].md`
-2. Delete the assets folder: `public/case-studies/[slug]/`
-3. Rebuild and deploy
+1. Delete the folder: `src/content/case-studies/[slug]/`
+2. Rebuild and deploy
+
+(To preserve it as reference material without publishing, move the folder to `archive/case-studies/[slug]/` instead.)
 
 ## Student template customization
 
 To modify the template students receive:
 
-1. Edit `docs/example-submission/case-study.md`
+1. Edit `docs/example-submission/index.md`
 2. Update frontmatter schema in `src/content/config.ts` if adding fields
-3. Re-zip: `cd docs && zip -r example-submission.zip example-submission/`
+3. Re-zip: `cd docs && rm example-submission.zip && zip -r example-submission.zip example-submission/ -x '**/.DS_Store'`
 4. Distribute the updated template
 
 ## Grading checklist
@@ -164,7 +163,7 @@ To modify the template students receive:
 Use this checklist when reviewing submissions:
 
 - [ ] Folder name is lowercase with hyphens (no spaces)
-- [ ] `case-study.md` exists and has all required frontmatter fields
+- [ ] `index.md` exists and has all required frontmatter fields
 - [ ] All content sections are completed (no example text remaining)
 - [ ] `boundary.geojson` is valid and shows the correct site location
 - [ ] At least one media file exists and is referenced in frontmatter

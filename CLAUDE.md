@@ -33,23 +33,24 @@ No test framework is configured.
 
 ### Student Submission Workflow
 
-**Students submit self-contained folders** via `submissions/` directory. Each folder contains:
-- `case-study.md` or `index.md` — Content with frontmatter
+**Each case study is a self-contained folder** at `src/content/case-studies/[slug]/` containing:
+- `index.md` — Content with frontmatter (required; `slug: [slug]` matches folder name)
 - `boundary.geojson` — Site boundary polygon
-- Media files (`.jpg`, `.png`, `.mp4`, etc.)
+- Media files (`.jpg`, `.png`, `.svg`, `.mp4`, etc.) — referenced by bare filename in frontmatter
 
-**Processing**: Run `npm run process` (script at `scripts/process-submissions.js`) to:
-1. Copy markdown files to `src/content/case-studies/[slug].md`
-2. Copy assets to `public/case-studies/[slug]/`
-3. Update frontmatter paths to reference public URLs
+To publish: either drop the folder directly into `src/content/case-studies/`, or place it under `submissions/` and run `npm run process` (script at `scripts/process-submissions.js`), which copies submissions into `src/content/case-studies/[slug]/`, renames `case-study.md` → `index.md`, and injects `slug:` if missing.
 
 **Template**: Students receive `docs/example-submission/` (also available as `docs/example-submission.zip`). See `docs/INSTRUCTOR-GUIDE.md` for full workflow.
 
-**Folder naming**: Folder name becomes URL slug (e.g., `motorgate-garage` → `/case-studies/motorgate-garage`)
+**Folder naming**: Folder name = URL slug (e.g., `motorgate-garage` → `/case-studies/motorgate-garage`).
+
+**Archive**: `archive/case-studies/[slug]/` at the repo root holds prior sample content. It lives outside `src/content/` so it is not built into the site but remains browsable in git.
 
 ### Content-Driven Routing
 
-Case studies live in `src/content/case-studies/*.md` with schema defined in `src/content/config.ts`. Each has frontmatter: `title`, `place`, `concept`, `description`, `author?`, `type` (passenger/freight/service), `geojson`, `media?` (array of `{ file, caption, featured? }`).
+Case studies live in `src/content/case-studies/[slug]/index.md` with schema defined in `src/content/config.ts`. Each has frontmatter: `title`, `place`, `concept`, `description`, `author?`, `type` (passenger/freight/service), `slug` (must match folder name), `geojson` (bare filename, e.g. `"boundary.geojson"`), `media?` (array of `{ file, caption, featured? }` — `file` is a bare filename or an external URL).
+
+Asset URLs (geojson, media) are resolved at build time via `import.meta.glob(..., { query: '?url' })` against `/src/content/case-studies/**`. Vite hashes and bundles them like any `src/` asset; the `public/` directory is no longer used for case study content.
 
 Routes:
 - `/` — Home page with split-screen: card grid (left) + map (right)
@@ -77,11 +78,7 @@ Map is initialized inline in page scripts (no separate Map component). Style: `m
 
 ### GeoJSON Files
 
-**Legacy location**: `public/geo/*.geojson` — 20 pre-created Roosevelt Island site boundaries.
-
-**Student submissions**: `public/case-studies/[slug]/boundary.geojson` — Created by processing script from student submission folders.
-
-All files use FeatureCollection format with Polygon geometries. Properties include `name` and `type`.
+Each case study's boundary lives at `src/content/case-studies/[slug]/boundary.geojson` (colocated with `index.md`). Files use FeatureCollection format with Polygon geometries; properties typically include `name` and `type`. Archived boundaries (non-live sample content) are at `archive/case-studies/[slug]/boundary.geojson`.
 
 ### Content Schema
 
@@ -93,24 +90,22 @@ All files use FeatureCollection format with Polygon geometries. Properties inclu
     description: string,    // One-sentence summary
     author?: string,        // Student/author name
     type: 'passenger' | 'freight' | 'service',
-    geojson: string,        // "case-studies/[slug]/boundary.geojson" or legacy "geo/[slug].geojson"
+    geojson: string,        // Bare filename, e.g. "boundary.geojson"
     media?: Array<{
-        file: string,       // "case-studies/[slug]/image.jpg" or "https://..."
+        file: string,       // Bare filename (e.g. "hero.jpg") or external URL (https://...)
         caption: string,
         featured?: boolean, // true = hero image (only one should be true)
     }>,
 }
 ```
 
+`slug` is also required in frontmatter and must match the folder name — Astro uses it to override the default nested slug derived from `[slug]/index.md`.
+
 ### Media
 
-**Student submissions**: Media files go in `public/case-studies/[slug]/` (via processing script).
+Media files live alongside `index.md` in `src/content/case-studies/[slug]/`. Frontmatter references them by bare filename (e.g. `"hero.jpg"`) or by external URL (`"https://..."`, including YouTube watch links).
 
-**Legacy/manual uploads**: `public/media/` still supported for backward compatibility.
-
-**Frontmatter reference**: Can be relative paths (`"case-studies/slug/image.jpg"`), legacy paths (`"media/image.jpg"`), or external URLs (`"https://..."`).
-
-The item with `featured: true` becomes the hero image on detail pages. Non-featured items render in a gallery grid below content. YouTube embeds supported via full URL.
+The item with `featured: true` becomes the hero image on detail pages. Non-featured items render in a gallery grid below content. YouTube embeds are supported via full URL.
 
 ### Design System
 

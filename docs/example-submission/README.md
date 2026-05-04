@@ -4,7 +4,7 @@ This folder contains everything you need to create your Robot Island case study.
 
 ## What's in this folder?
 
-- `case-study.md` — Your case study content (edit this file)
+- `index.md` — Your case study content (edit this file)
 - `boundary.geojson` — The boundary polygon for your selected site
 - `hero-image.jpg` — Your featured image (replace this placeholder)
 - `street-view.jpg` — Additional media (replace this placeholder)
@@ -23,7 +23,7 @@ Rename this folder to match your site using lowercase with hyphens:
 
 ### Step 2: Edit the case study markdown
 
-Open `case-study.md` and update all sections:
+Open `index.md` and update all sections:
 
 1. **Frontmatter** (the section between `---` at the top):
    - `title`: Your full title (e.g., "Motorgate Garage — Autonomous Freight Hub")
@@ -114,7 +114,6 @@ Once everything is complete:
 When processed, your case study will appear at:
 - `robotisland.urbantech.info/case-studies/your-folder-name`
 
-Your media files will be accessible at:
-- `robotisland.urbantech.info/case-studies/your-folder-name/hero-image.jpg`
+Your media files are bundled with the page by the build pipeline — they load automatically from their folder.
 
 The map will load and display your boundary from the GeoJSON file.

@@ -3,6 +3,21 @@ import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
 const allCaseStudies = await getCollection("case-studies");
+
+const geojsonUrls = import.meta.glob(
+	"/src/content/case-studies/**/*.geojson",
+	{ query: "?url", import: "default", eager: true },
+) as Record<string, string>;
+const mediaUrls = import.meta.glob(
+	"/src/content/case-studies/**/*.{jpg,jpeg,png,svg,webp,gif,mp4}",
+	{ query: "?url", import: "default", eager: true },
+) as Record<string, string>;
+
+function assetUrl(slug: string, file: string | undefined, map: Record<string, string>) {
+	if (!file) return "";
+	if (file.startsWith("http")) return file;
+	return map[`/src/content/case-studies/${slug}/${file}`] ?? "";
+}
 ---
 
 <Layout title="Robot Island" hideNav={true}>
@@ -18,20 +33,21 @@ const allCaseStudies = await getCollection("case-studies");
 				<div class="card-grid">
 					{allCaseStudies.map((study) => {
 						const featuredMedia = study.data.media?.find(m => m.featured);
-						const cardImage = featuredMedia?.file;
+						const cardImage = assetUrl(study.slug, featuredMedia?.file, mediaUrls);
+						const geojsonUrl = assetUrl(study.slug, study.data.geojson, geojsonUrls);
 						return (
 							<a
 								href={`/case-studies/${study.slug}`}
 								class="card-link"
-								data-geojson={study.data.geojson}
+								data-geojson={geojsonUrl}
 								data-slug={study.slug}
 								data-concept={study.data.concept}
-								data-image={cardImage ? (cardImage.startsWith('http') ? cardImage : '/' + cardImage) : ''}
+								data-image={cardImage}
 							>
 								<article class="case-card">
 									<div
 										class="card-image"
-										style={cardImage ? `background-image: url('${cardImage.startsWith('http') ? cardImage : '/' + cardImage}')` : 'background-color: #334155'}
+										style={cardImage ? `background-image: url('${cardImage}')` : 'background-color: #334155'}
 									>
 										<span class={`card-type card-type--${study.data.type}`}>{study.data.type}</span>
 									</div>
@@ -300,9 +316,9 @@ const allCaseStudies = await getCollection("case-studies");
 			cards.forEach((card) => {
 				const el = card as HTMLElement;
 				const slug = el.dataset.slug;
-				const geojsonPath = el.dataset.geojson;
-				if (slug && geojsonPath) {
-					slugToGeojson[geojsonPath] = slug;
+				const geojsonUrl = el.dataset.geojson;
+				if (slug && geojsonUrl) {
+					slugToGeojson[geojsonUrl] = slug;
 				}
 				if (slug) {
 					slugToCard[slug] = {
@@ -318,7 +334,7 @@ const allCaseStudies = await getCollection("case-studies");
 
 			try {
 				const responses = await Promise.all(
-					geojsonPaths.map((path) => fetch("/" + path)),
+					geojsonPaths.map((url) => fetch(url)),
 				);
 				const dataArrays = await Promise.all(
 					responses.map((res) => res.json()),

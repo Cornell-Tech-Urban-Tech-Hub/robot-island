@@ -5,12 +5,13 @@ concept: "[Short AV Concept]"
 description: "One-sentence summary of the case study."
 author: ""
 type: "passenger"
-geojson: "geo/[slug].geojson"
+slug: "[slug]"
+geojson: "boundary.geojson"
 media:
-  - file: "media/[slug]-01.jpg"
+  - file: "hero.jpg"
     caption: "Description of this image or video"
     featured: true
-  - file: "media/[slug]-02.jpg"
+  - file: "secondary.jpg"
     caption: "Description of this image or video"
 ---
 
