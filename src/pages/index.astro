@@ -110,10 +110,10 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 
 	.hero h1 {
 		font-family: var(--font-sans);
-		font-size: 2.4rem;
+		font-size: 3.5rem;
 		font-weight: 700;
 		color: #fff;
-		margin-bottom: 1rem;
+		margin-bottom: 1.5rem;
 	}
 
 	.hero h1 .accent {
@@ -122,19 +122,20 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 
 	.hero .subtitle {
 		font-family: var(--font-serif);
-		font-size: 1.1rem;
-		color: rgba(255, 255, 255, 0.7);
+		font-size: 1.5rem;
+		color: rgba(255, 255, 255, 0.85);
 		max-width: 600px;
 		line-height: 1.6;
+		margin-bottom: 1.5rem;
 	}
 
 	.hero .intro {
 		font-family: var(--font-sans);
-		font-size: 0.85rem;
-		color: rgba(255, 255, 255, 0.55);
-		max-width: 600px;
+		font-size: 1.1rem;
+		color: rgba(255, 255, 255, 0.7);
+		max-width: none;
 		line-height: 1.6;
-		margin-top: 0.75rem;
+		margin-top: 1.5rem;
 	}
 
 	.hero .intro a {
@@ -254,10 +255,14 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 		}
 
 		.hero h1 {
-			font-size: 1.8rem;
+			font-size: 2.5rem;
 		}
 
 		.hero .subtitle {
+			font-size: 1.25rem;
+		}
+
+		.hero .intro {
 			font-size: 1rem;
 		}
 
@@ -273,7 +278,7 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 		}
 
 		.hero h1 {
-			font-size: 1.5rem;
+			font-size: 2rem;
 		}
 	}
 </style>
@@ -379,7 +384,7 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 					source: "all-boundaries",
 					paint: {
 						"fill-color": "#0066FF",
-						"fill-opacity": 0.15,
+						"fill-opacity": 0.05,
 					},
 				});
 
@@ -390,7 +395,8 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 					source: "all-boundaries",
 					paint: {
 						"line-color": "#0066FF",
-						"line-width": 1,
+						"line-width": 0.5,
+						"line-opacity": 0.3,
 					},
 				});
 

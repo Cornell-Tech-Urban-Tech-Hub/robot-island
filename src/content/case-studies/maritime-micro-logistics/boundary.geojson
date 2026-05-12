@@ -1,0 +1,39 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Water Pod Operating Area",
+        "type": "Operating Area"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.9575601,
+              40.7593612
+            ],
+            [
+              -73.9570303,
+              40.7598182
+            ],
+            [
+              -73.9543296,
+              40.7587424
+            ],
+            [
+              -73.9548079,
+              40.7581795
+            ],
+            [
+              -73.9575601,
+              40.7593612
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

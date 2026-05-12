@@ -1,0 +1,25 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Renwick Smallpox Hospital Ruins",
+        "type": "Emergency response staging base"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-73.96002324933238, 40.75157277804732],
+            [-73.95970549418405, 40.75138729672918],
+            [-73.95933673710968, 40.75173838036591],
+            [-73.95965628536263, 40.75193197404420],
+            [-73.95984052541860, 40.75175424344825],
+            [-73.96002324933238, 40.75157277804732]
+          ]
+        ]
+      }
+    }
+  ]
+}
