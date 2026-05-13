@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import RatingDisplay from "../components/RatingDisplay.astro";
+import Footer from "../components/Footer.astro";
 import { getCollection } from "astro:content";
 
 const allCaseStudies = await getCollection("case-studies");
@@ -168,6 +169,7 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 				)}
 			</section>
 
+			<Footer />
 		</div>
 		<div class="map-side">
 			<div class="map-container" id="map"></div>
@@ -255,6 +257,10 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 	}
 
 	/* Type Sections */
+	.case-studies {
+		margin-bottom: 4rem;
+	}
+
 	.type-section {
 		margin-bottom: 3rem;
 	}
@@ -374,11 +380,14 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 		}
 	}
 
-	@media (max-width: 480px) {
+	/* Hide map on mobile portrait */
+	@media (max-width: 768px) and (orientation: portrait) {
 		.map-side {
-			height: 300px;
+			display: none;
 		}
+	}
 
+	@media (max-width: 480px) {
 		.hero h1 {
 			font-size: 2rem;
 		}
