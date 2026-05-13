@@ -65,7 +65,9 @@ Local businesses and institutions benefit from more predictable short trips alon
 
 Technology providers supply the autonomous driving stack, charging systems, fleet management software, and maintenance support. Useful comparisons include May Mobility, which develops autonomous transit services for real-world public and shared-mobility settings, and Beep, which operates autonomous shuttle services and has moved from pilots into larger public-transit deployments. For a provider like this, the Blue Loop offers visibility, controlled real-world testing, regulatory learning, and a potential path to expansion in other dense urban districts. Their role is not just to demonstrate novelty, but to deliver public-service reliability: wheelchair access, weather resilience, transparent incident reporting, vandalism-resistant design, and a human support channel.
 
-## NACTO Blueprint Site Changes
+## Relevant Blueprints for Autonomous Urbanism
+
+The following urban design strategies are drawn from the [NACTO Blueprint for Autonomous Urbanism, 2nd Edition](https://www.nacto.org/wp-content/uploads/NACTO_Blueprint_2nd_Edition_Part1.pdf).
 
 ### Curbside Management / Flexible Curb: The Induction Strip
 

@@ -70,7 +70,9 @@ Red Bus operators see scope reduction on paratransit-flagged trips. RIOC commits
 
 **Job displacement** is mitigated through retraining and a no-layoff guarantee. **Equity**: free at point of use for Coler residents, RIOC residents 65 and over, and paratransit-eligible riders.
 
-## Blueprints
+## Relevant Blueprints for Autonomous Urbanism
+
+The following urban design strategies are drawn from the [NACTO Blueprint for Autonomous Urbanism, 2nd Edition](https://www.nacto.org/wp-content/uploads/NACTO_Blueprint_2nd_Edition_Part1.pdf).
 
 ### Streets for Safety: Slow-Speed Geofencing
 

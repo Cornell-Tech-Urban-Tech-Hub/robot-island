@@ -100,7 +100,9 @@ Every affected group has its own unique concerns. These concerns correspond to s
 **Pedestrian and cyclist safety on the corridor** — Concerns: Even if the speed is only 15 km/h, the driving behavior of autonomous vehicles may still be unpredictable when passing through five "Greenway" intersections. * Design response: The maximum speed limit of the autonomous driving module (Pods) on the whole island is set to 15 km/h. In areas within 10 meters of any pedestrian crossing facility, the speed limit will be further reduced to 5 km/h. The V2X communication module carried by the vehicle can interact with the four traffic light-controlled intersections and five greenway intersections along the way in real time. In addition, the remote operator can take over and manually control any autonomous driving module at any time within 30 seconds. For the intersection itself, we have upgraded it to a "raised pedestrian crossing" and laid continuous blind path tactile paving. This "pedestrian-first" transformation measure also plays the role of Traffic Calming, helping to regulate the driving behavior of a very small number of private vehicles passing through Main Street.
 
 
-## Blueprints
+## Relevant Blueprints for Autonomous Urbanism
+
+The following urban design strategies are drawn from the [NACTO Blueprint for Autonomous Urbanism, 2nd Edition](https://www.nacto.org/wp-content/uploads/NACTO_Blueprint_2nd_Edition_Part1.pdf).
 
 This section reverses the usual order of justification. Each subsection states the NACTO mandate first, and only then describes the specific physical change at this site. The design derives from the guideline; not the other way around.
 

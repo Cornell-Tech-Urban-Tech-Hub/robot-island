@@ -24,13 +24,13 @@ slug: "elderly-first-av-corridor"
 # Roosevelt Access Loop
 ### An Elderly-First Autonomous Mobility Corridor on Roosevelt Island
 
----
+
 
 ## Summary
 
 The Main Street corridor on Roosevelt Island provides the only north-south roadway through which residents can move throughout their lives. Yet, for many of the island’s elderly and mobility impaired residents, the distance (2.1 kilometers) from the Tram Plaza to the Octagon represents a significant obstacle in accessing their community, especially during inclement weather or at nighttime. Additionally, access to key community resources such as pharmacies, clinics, and the tram station located near residential buildings creates barriers to accessing these services. This Case Study will present the concept of a system called the “Roosevelt Access Loop”, consisting of eight Level 4 Autonomous Electric Shuttle Pods operating within the confines of this defined Main Street Corridor; along with a newly designed street environment that promotes slow traffic speeds, safe and easy access to boarding areas and pedestrians. Unlike most transportation systems that are designed to maximize the number of passengers moved per hour, the proposed loop is based on one fundamental premise – providing aging residents with the same ease of movement as they experience when traveling inside a building via an elevator – seamless, silent and always available.
 
----
+
 
 ## AV Use Case
 
@@ -46,7 +46,7 @@ The AV’s will run in a continuous loop along Main Street, from Tram Plaza at t
 
 The Main Street corridor from Tram Plaza to the Octagon represents a primary residential mobility artery for residents of Roosevelt Island. The corridor connects three large elderly housing developments — Rivercross, Westview, and Island House — to the tram station, medical services and grocery stores. While Roosevelt Island is small enough to walk around easily, the distance from the Octagon to Tram Plaza is sufficient to exceed twenty minutes on foot — particularly under cold weather conditions — and thus serves as a serious obstacle for many seniors with limited mobility. A public transit bus service currently operates throughout the island (the Red Bus), although it runs infrequently, has no accessible entry features and travels at speeds consistent with standard buses. Therefore, the Main Street corridor provides an ideal combination of low traffic volume, lack of heavy truck usage, and minimal grade changes — representing an exceptionally suitable environment for low-speed autonomous vehicles to operate.
 
----
+
 
 ## Stakeholders
 
@@ -66,9 +66,11 @@ As the owner of all roads on Roosevelt Island, RIOC is able to create its own Bo
 ### How does it address their concerns?
 
 RIOC and Cornell Tech were concerned with pedestrian/cyclist safety, particularly when considering how fast an autonomous vehicle could operate in a densely populated area. To mitigate this concern, speed limits will be programmed into the vehicle's firmware at 15 km/h throughout the corridor, with an additional 10 km/h limit geofenced within 20 meters of each boarding node. In addition, bollards and blue tinted pavement will be used to visually separate each boarding node from moving traffic. Accessibility was designed into every aspect of the Autonomous Vehicle Shuttle system - including each pod and boarding node - as a requirement rather than an afterthought. Each pod and node will meet flush-level, ramped, tactile guided standards. RIOC will fund a retraining program for displaced Red Bus operators in anticipation of transitioning them into Remote Monitoring Operator positions at the Cornell Tech Operations Center, Fleet Maintenance Technician positions at May Mobility, and Priority Hires for New RIOC Facilities Roles; RIOC will negotiate this program as a condition of contract award.
----
 
-## Blueprints
+
+## Relevant Blueprints for Autonomous Urbanism
+
+The following urban design strategies are drawn from the [NACTO Blueprint for Autonomous Urbanism, 2nd Edition](https://www.nacto.org/wp-content/uploads/NACTO_Blueprint_2nd_Edition_Part1.pdf).
 
 ### Blueprint 1 — Slow Zone and Mixed Traffic Design
 
@@ -78,7 +80,7 @@ Designate corridors for slow travel speeds for all types of vehicles, including 
 
 The NACTO Blueprints calls for creating clearly designated and physically separated areas to load AVs so that there are no conflict issues related to passengers boarding the AVs, traffic in motion or pedestrians walking through. The Access Loop has 8 stops along the way each stop will have a standard boarding node with these components: a 2x8m level platform at pod floor height (320mm above grade) which eliminates the step from a typical bus boarding; a half enclosed shelter made of powder coated steel & translucent polycarbonate; blue tinted permeable concrete pavers extend 1.5m into the sidewalk area as a physical transition marker; recessed LED edge lighting for night time visibility; an audio announcement column with live arrival times, emergency call and multiple language capabilities; and low bollards to prevent private vehicle encroachment.
 
----
+
 
 ## Methods
 

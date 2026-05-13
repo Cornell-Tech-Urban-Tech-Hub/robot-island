@@ -55,7 +55,9 @@ The Cornell Tech contribution is its research facilities by integrating sensor-b
 
 The problem of food safety is resolved through the use of insulated and refrigerated holding areas in the robots that keep food at safe temperatures, with a strict maximum of 25 minutes for transit between vendor and student enforced by the routing algorithm. The food allergy problem is resolved by delivering digital ingredient labels for each order through the use of the app, which are obtained directly from the vendor's inputs when preparing the rescue pack. The issue for vendors concerned with associating their brands with the discounted products is resolved by positioning the rescue pack as a sustainability initiative rather than a discount. Pedestrian safety is ensured by mandating a maximum speed limit for the robots on Main Street (6 km/h), as well as yielding behavior at all intersections. This, coupled with the small width of the robots, allows them to safely co-exist with two pedestrians at once on one standard pedestrian pathway. In addition, the routing algorithm is programmed to include one delivery zone north of Cornell Tech, specifically the Westview and Rivercross lobby areas, at no additional service cost. Pricing for elderly residents on fixed incomes is subsidized at cost by the platform operator as a condition of RIOC's sidewalk permit, ensuring that the service does not function as an amenity exclusive to graduate students with institutional stipends.
 
-## Blueprints
+## Relevant Blueprints for Autonomous Urbanism
+
+The following urban design strategies are drawn from the [NACTO Blueprint for Autonomous Urbanism, 2nd Edition](https://www.nacto.org/wp-content/uploads/NACTO_Blueprint_2nd_Edition_Part1.pdf).
 
 ### Human-Scaled Freight
 

@@ -4,6 +4,11 @@ import { getCollection } from "astro:content";
 
 const allCaseStudies = await getCollection("case-studies");
 
+// Group by type
+const passengerStudies = allCaseStudies.filter(s => s.data.type === "passenger");
+const freightStudies = allCaseStudies.filter(s => s.data.type === "freight");
+const serviceStudies = allCaseStudies.filter(s => s.data.type === "service");
+
 const geojsonUrls = import.meta.glob(
 	"/src/content/case-studies/**/*.geojson",
 	{ query: "?url", import: "default", eager: true },
@@ -30,35 +35,104 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 			</section>
 
 			<section class="case-studies">
-				<div class="card-grid">
-					{allCaseStudies.map((study) => {
-						const featuredMedia = study.data.media?.find(m => m.featured);
-						const cardImage = assetUrl(study.slug, featuredMedia?.file, mediaUrls);
-						const geojsonUrl = assetUrl(study.slug, study.data.geojson, geojsonUrls);
-						return (
-							<a
-								href={`/case-studies/${study.slug}`}
-								class="card-link"
-								data-geojson={geojsonUrl}
-								data-slug={study.slug}
-								data-concept={study.data.concept}
-								data-image={cardImage}
-							>
-								<article class="case-card">
-									<div
-										class="card-image"
-										style={cardImage ? `background-image: url('${cardImage}')` : 'background-color: #334155'}
+				{passengerStudies.length > 0 && (
+					<div class="type-section">
+						<h2 class="type-heading">Passenger</h2>
+						<div class="card-grid">
+							{passengerStudies.map((study) => {
+								const featuredMedia = study.data.media?.find(m => m.featured);
+								const cardImage = assetUrl(study.slug, featuredMedia?.file, mediaUrls);
+								const geojsonUrl = assetUrl(study.slug, study.data.geojson, geojsonUrls);
+								return (
+									<a
+										href={`/case-studies/${study.slug}`}
+										class="card-link"
+										data-geojson={geojsonUrl}
+										data-slug={study.slug}
+										data-concept={study.data.concept}
+										data-image={cardImage}
 									>
-										<span class={`card-type card-type--${study.data.type}`}>{study.data.type}</span>
-									</div>
-									<div class="card-content">
-										<h3>{study.data.concept}</h3>
-									</div>
-								</article>
-							</a>
-						);
-					})}
-				</div>
+										<article class="case-card">
+											<div
+												class="card-image"
+												style={cardImage ? `background-image: url('${cardImage}')` : 'background-color: #334155'}
+											/>
+											<div class="card-content">
+												<h3>{study.data.concept}</h3>
+											</div>
+										</article>
+									</a>
+								);
+							})}
+						</div>
+					</div>
+				)}
+
+				{freightStudies.length > 0 && (
+					<div class="type-section">
+						<h2 class="type-heading">Freight</h2>
+						<div class="card-grid">
+							{freightStudies.map((study) => {
+								const featuredMedia = study.data.media?.find(m => m.featured);
+								const cardImage = assetUrl(study.slug, featuredMedia?.file, mediaUrls);
+								const geojsonUrl = assetUrl(study.slug, study.data.geojson, geojsonUrls);
+								return (
+									<a
+										href={`/case-studies/${study.slug}`}
+										class="card-link"
+										data-geojson={geojsonUrl}
+										data-slug={study.slug}
+										data-concept={study.data.concept}
+										data-image={cardImage}
+									>
+										<article class="case-card">
+											<div
+												class="card-image"
+												style={cardImage ? `background-image: url('${cardImage}')` : 'background-color: #334155'}
+											/>
+											<div class="card-content">
+												<h3>{study.data.concept}</h3>
+											</div>
+										</article>
+									</a>
+								);
+							})}
+						</div>
+					</div>
+				)}
+
+				{serviceStudies.length > 0 && (
+					<div class="type-section">
+						<h2 class="type-heading">Service</h2>
+						<div class="card-grid">
+							{serviceStudies.map((study) => {
+								const featuredMedia = study.data.media?.find(m => m.featured);
+								const cardImage = assetUrl(study.slug, featuredMedia?.file, mediaUrls);
+								const geojsonUrl = assetUrl(study.slug, study.data.geojson, geojsonUrls);
+								return (
+									<a
+										href={`/case-studies/${study.slug}`}
+										class="card-link"
+										data-geojson={geojsonUrl}
+										data-slug={study.slug}
+										data-concept={study.data.concept}
+										data-image={cardImage}
+									>
+										<article class="case-card">
+											<div
+												class="card-image"
+												style={cardImage ? `background-image: url('${cardImage}')` : 'background-color: #334155'}
+											/>
+											<div class="card-content">
+												<h3>{study.data.concept}</h3>
+											</div>
+										</article>
+									</a>
+								);
+							})}
+						</div>
+					</div>
+				)}
 			</section>
 
 		</div>
@@ -147,6 +221,24 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 		text-decoration: underline;
 	}
 
+	/* Type Sections */
+	.type-section {
+		margin-bottom: 3rem;
+	}
+
+	.type-section:last-child {
+		margin-bottom: 0;
+	}
+
+	.type-heading {
+		font-family: var(--font-sans);
+		font-size: 1.75rem;
+		font-weight: 700;
+		color: rgba(255, 255, 255, 0.95);
+		margin-bottom: 1.25rem;
+		text-transform: capitalize;
+	}
+
 	/* Card Grid */
 	.card-grid {
 		display: grid;
@@ -202,36 +294,6 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 		color: var(--color-text-primary);
 		margin-bottom: 0.5rem;
 		line-height: 1.3;
-	}
-
-
-	.card-type {
-		position: absolute;
-		top: 0.5rem;
-		right: 0.5rem;
-		display: inline-block;
-		font-family: var(--font-sans);
-		font-size: 0.65rem;
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		padding: 0.25em 0.6em;
-		border-radius: 3px;
-	}
-
-	.card-type--passenger {
-		background: #DBEAFE;
-		color: #1E40AF;
-	}
-
-	.card-type--freight {
-		background: #FEF3C7;
-		color: #92400E;
-	}
-
-	.card-type--service {
-		background: #D1FAE5;
-		color: #065F46;
 	}
 
 	/* Responsive */

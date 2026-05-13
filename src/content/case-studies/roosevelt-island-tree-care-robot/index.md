@@ -55,7 +55,9 @@ Capabilities such as site access and operational authority from RIOC as well as 
 
 To address concerns such as pedestrian safety, the robot runs slowly, stays contained within geofences routes, had emergency stop buttons, and automatic yielding for people and other barriers. To address privacy concerns people may have about sensors and cameras, the solution limiting camera use to only navitation and analysis rather than using it does any facial recognition or other uneccessary imaging. Labor concerns are addressed by using the robot as a tool within the workflow for maintainence and decision-making rather than as a full replacement for human crews. 
 
-## Blueprints
+## Relevant Blueprints for Autonomous Urbanism
+
+The following urban design strategies are drawn from the [NACTO Blueprint for Autonomous Urbanism, 2nd Edition](https://www.nacto.org/wp-content/uploads/NACTO_Blueprint_2nd_Edition_Part1.pdf).
 
 ### Slow Zones & Shared Space Design 
 

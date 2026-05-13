@@ -65,7 +65,9 @@ The system is limited to slow speeds, small vehicle sizes, and pedestrian-priori
 
 The project also creates conflicts that need to be designed around rather than ignored. Residents may worry that cherry blossom management infrastructure makes seasonal tourism feel permanent. Park workers may worry that automated tools will be used to reduce staffing rather than support difficult peak-season work. Visitors may worry that rovers will block photos, narrow the path, or make the waterfront feel surveilled. Park managers and the Four Freedoms Park Conservancy may worry that kiosks and service equipment will clutter a landscape valued for openness and quiet. These tensions are why the proposal limits the fleet seasonally, keeps kiosks at path edges, assigns rovers to support roles, and makes data collection visible and narrow.
 
-## Blueprints
+## Relevant Blueprints for Autonomous Urbanism
+
+The following urban design strategies are drawn from the [NACTO Blueprint for Autonomous Urbanism, 2nd Edition](https://www.nacto.org/wp-content/uploads/NACTO_Blueprint_2nd_Edition_Part1.pdf).
 
 ### People-First Public Realm
 

@@ -71,7 +71,9 @@ Pedestrian safety is handled through physical separation. The Cornell Tech landi
 
 Noise is addressed through limited operating windows, a cap on simultaneous drones, and a no-hover rule except during final landing. Privacy is addressed by limiting cameras to navigation and landing verification, blurring or discarding pedestrian imagery, and publishing a short data-retention policy. Equity is addressed by reserving part of the pilot for community-serving use, such as discounted delivery windows for Roosevelt Island residents with limited mobility, and by creating paid station-support roles rather than presenting automation as a pure labor-saving tool. Governance is addressed by requiring FAA and NYC take-off/landing approvals before operation and by publishing monthly safety, noise, and usage summaries.
 
-## Blueprints
+## Relevant Blueprints for Autonomous Urbanism
+
+The following urban design strategies are drawn from the [NACTO Blueprint for Autonomous Urbanism, 2nd Edition](https://www.nacto.org/wp-content/uploads/NACTO_Blueprint_2nd_Edition_Part1.pdf).
 
 ### Dedicated Drone Pickup and Drop-off Zones
 This applies NACTO’s “People come first in the autonomous age” principle, especially its direction that people walking, biking, rolling, and resting should receive first priority in street space and resource investments. It also draws from NACTO’s curb-access logic that future streets need clearly managed access zones rather than unmanaged pickup and drop-off activity.

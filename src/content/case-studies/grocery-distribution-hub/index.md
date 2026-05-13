@@ -18,7 +18,7 @@ media:
     caption: "Second neighborhood service point illustrating how the grocery AV network can rotate between residential nodes across the island."
   - file: "Video Project.mp4"
     caption: "Animation showing the autonomous grocery service cycle from Foodtown restocking to neighborhood service, inventory return, and vehicle replacement."
-slug: "autonomous-grocery-distribution-network"
+slug: "grocery-distribution-hub"
 ---
 
 ## Summary
@@ -63,7 +63,9 @@ Foodtown contributes its existing role as a grocery anchor, including inventory,
 
 The proposal uses low-speed vehicles to reduce risk to pedestrians. Instead of letting vehicles stop randomly along the street, the Foodtown edge is redesigned as a managed curb-access zone where loading, waiting, turnover, and walking space are clearly organized. This reduces conflicts between vehicles and pedestrians while keeping larger freight activity concentrated at one manageable location. By using small freight vehicles instead of larger trucks inside residential areas, the system can fit more naturally into residents' daily lives with less disruption. Equity concerns are addressed by keeping prices tied to Foodtown's normal grocery pricing and providing non-smartphone access options, while labor concerns are addressed by keeping human roles in restocking, cleaning, maintenance, and customer support.
 
-## Blueprints
+## Relevant Blueprints for Autonomous Urbanism
+
+The following urban design strategies are drawn from the [NACTO Blueprint for Autonomous Urbanism, 2nd Edition](https://www.nacto.org/wp-content/uploads/NACTO_Blueprint_2nd_Edition_Part1.pdf).
 
 ### Human-Scaled Freight
 

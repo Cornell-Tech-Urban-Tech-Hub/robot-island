@@ -53,7 +53,9 @@ The system assigns clear roles based on each stakeholder’s strengths. Park mai
 
 The system addresses concerns through safety and control measures. Geofenced routes, remote override, and defined docking zones help meet DOT regulations and limit disruption to the waterfront. For maintenance workers, it reduces physical strain while keeping them in control of their work. For residents and waterfront users, quiet electric operation and limited waterway use help preserve recreation and pedestrian space. For operators, fixed routes and standardized systems make maintenance and operations more reliable. From an equity perspective, the system reduces physically demanding labor for lower-wage workers, but its fairness depends on whether jobs are redesigned and upgraded or gradually reduced over time.
 
-## Blueprints
+## Relevant Blueprints for Autonomous Urbanism
+
+The following urban design strategies are drawn from the [NACTO Blueprint for Autonomous Urbanism, 2nd Edition](https://www.nacto.org/wp-content/uploads/NACTO_Blueprint_2nd_Edition_Part1.pdf).
 
 ### Dedicated Micro-Docking Stations
 

@@ -2,7 +2,7 @@
 title: "LumaPod - Autonomous Solar Safety Pods"
 description: Dual-purpose autonomous pod system designed for Cornell Tech and Roosevelt Island.
 place: "Cornell Tech Campus"
-concept: "Night bus / Grid-scale Battery"
+concept: "Night Bus / Battery"
 author: "Viha Srinivas"
 type: "passenger"
 geojson: "boundary.geojson"
@@ -51,7 +51,9 @@ RIOC helps make the system possible by providing access to island infrastructure
 
 Safety is a major focus of the system. At night, the pods move at low speeds and use bright interior and exterior lighting so riders feel visible and secure. Each pod includes an emergency communication feature that allows riders to quickly contact support if needed. During the day, stored solar energy powers lighting around pickup zones and campus walkways, helping improve visibility after dark. Privacy is handled through minimal data collection, secure ride tracking, and automatic deletion of ride data after a short period. Accessibility is supported through step-free entry and space for mobility devices. To prevent congestion, the number of active pods adjusts based on demand throughout the day and night.
 
-## Blueprints
+## Relevant Blueprints for Autonomous Urbanism
+
+The following urban design strategies are drawn from the [NACTO Blueprint for Autonomous Urbanism, 2nd Edition](https://www.nacto.org/wp-content/uploads/NACTO_Blueprint_2nd_Edition_Part1.pdf).
 
 ### Dedicated AV Pickup and Drop-off Zones 
 

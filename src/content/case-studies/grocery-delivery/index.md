@@ -113,7 +113,9 @@ Possible job impacts can be reduced by shifting some delivery-related work towar
 
 ---
 
-## Blueprints
+## Relevant Blueprints for Autonomous Urbanism
+
+The following urban design strategies are drawn from the [NACTO Blueprint for Autonomous Urbanism, 2nd Edition](https://www.nacto.org/wp-content/uploads/NACTO_Blueprint_2nd_Edition_Part1.pdf).
 
 ### Flexible Delivery Zones
 

@@ -57,7 +57,9 @@ RIOC's jurisdictional authority over the island's road network allows pod operat
 
 Historic preservation advocates' concerns are addressed by design: the charging base uses a modular, ground-mounted canopy system with no attachment to the ruins structure, all cabling is surface-routed and removable, and the visual design of the base is intentionally minimal so that the ruins remain the dominant visual element. Pedestrian safety concerns are addressed through the pod's multi-sensor approach detection, mandatory 8 km/h speed cap on pedestrian paths, and audible approach tones tuned to be audible without being alarming. Privacy concerns are addressed by limiting onboard cameras to navigation and safety functions only, with no facial recognition capability, a 24-hour data retention cap, and an explicit policy that footage from pod cameras is not accessible to RIOC or law enforcement without a court order. Residents Committee concerns about nighttime lighting are addressed by keeping the charging base's ambient lighting at low lux levels, with only the embedded esplanade path corridor lights activating during active dispatch.
 
-## Blueprints
+## Relevant Blueprints for Autonomous Urbanism
+
+The following urban design strategies are drawn from the [NACTO Blueprint for Autonomous Urbanism, 2nd Edition](https://www.nacto.org/wp-content/uploads/NACTO_Blueprint_2nd_Edition_Part1.pdf).
 
 ### Dedicated AV Emergency Access Corridor
 

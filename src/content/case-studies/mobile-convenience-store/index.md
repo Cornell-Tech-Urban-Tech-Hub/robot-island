@@ -17,7 +17,7 @@ media:
 
   - file: "process-video.mp4"
     caption: "Animation showing autonomous retail vehicle circulation and curbside interaction."
-slug: "autonomous-mobile-retail-network"
+slug: "mobile-convenience-store"
 ---
 
 ## Summary
@@ -90,7 +90,9 @@ Moreover, the proposed solution does not involve sensitive user data in the form
 
 Finally, the proposal will also serve the interests of elderly residents, tourists not familiar with apps, and those lacking smartphones.
 
-## Blueprints
+## Relevant Blueprints for Autonomous Urbanism
+
+The following urban design strategies are drawn from the [NACTO Blueprint for Autonomous Urbanism, 2nd Edition](https://www.nacto.org/wp-content/uploads/NACTO_Blueprint_2nd_Edition_Part1.pdf).
 
 ### Shared Mobility Nodes
 

@@ -54,7 +54,9 @@ This solution utilizes the campus of Cornell Tech as a “living lab” in order
 
 To guarantee pedestrian safety, the system ensures that there is the “pedestrian-first” principle in place regarding how the car interacts with other things in the shared space, where the vehicles will give way to any movement and ensure that the speed does not exceed 5km/h. Issues of accessibility and equity have been addressed in the system through the use of the low floor structure of the vehicle as well as automated ramps, which will ensure that disabled students are able to board the cars on their own. In order to address issues of job losses due to automation, a proper retraining program has been put in place, whereby former library logistics workers will be trained to become fleet supervisors and digital resource managers. Lastly, the issue of privacy has been addressed through the banning of facial recognition cameras in the vehicle.
 
-## Blueprints
+## Relevant Blueprints for Autonomous Urbanism
+
+The following urban design strategies are drawn from the [NACTO Blueprint for Autonomous Urbanism, 2nd Edition](https://www.nacto.org/wp-content/uploads/NACTO_Blueprint_2nd_Edition_Part1.pdf).
 
 ### Slow Zones and Shared Space Design:
 

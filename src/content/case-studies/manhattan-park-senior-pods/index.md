@@ -69,7 +69,9 @@ The service is positioned as a short-distance accessibility supplement rather th
 
 Very low operating speeds, shared-space markers, obvious pod stops, curb extensions, and a designated Foodtown pickup and drop-off zone all help to alleviate pedestrian and visitor concerns. The pods don't stop at random along the road or obstruct pedestrian traffic in general. A straightforward software, large-font interfaces, voice cues, and front desk assistance for seniors who would rather not use a phone all help to satisfy the technology concerns of older residents. Protective vehicle design, remote operator monitoring, emergency stop features, and a narrow geofenced operating domain all help to solve safety issues.
 
-## Blueprints
+## Relevant Blueprints for Autonomous Urbanism
+
+The following urban design strategies are drawn from the [NACTO Blueprint for Autonomous Urbanism, 2nd Edition](https://www.nacto.org/wp-content/uploads/NACTO_Blueprint_2nd_Edition_Part1.pdf).
 
 ### Dedicated Accessible Pickup and Drop-off Zones
 
