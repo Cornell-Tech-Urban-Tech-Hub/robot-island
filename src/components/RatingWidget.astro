@@ -1,0 +1,362 @@
+---
+import type { CaseStudyRatings } from "../lib/types";
+
+export interface Props {
+	slug: string;
+	initialData?: CaseStudyRatings;
+}
+
+const { slug, initialData } = Astro.props;
+
+function renderStars(average: number): string {
+	const fullStars = Math.floor(average);
+	const hasHalfStar = average % 1 >= 0.5;
+	const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+	let stars = "";
+	stars += "★".repeat(fullStars);
+	if (hasHalfStar) stars += "⯨";
+	stars += "☆".repeat(emptyStars);
+
+	return stars;
+}
+---
+
+<div class="rating-widget" data-slug={slug} data-initial={JSON.stringify(initialData)}>
+	<div class="rating-container">
+		<div class="rating-interactive">
+			<span class="rating-label">Rate:</span>
+			<div class="star-buttons">
+				{
+					[1, 2, 3, 4, 5].map((score) => (
+						<button
+							type="button"
+							class="star-btn"
+							data-score={score}
+							aria-label={`Rate ${score} stars`}
+						>
+							☆
+						</button>
+					))
+				}
+			</div>
+		</div>
+		<div class="rating-summary">
+			{
+				initialData && initialData.summary.totalRatings > 0 ? (
+					<>
+						<span class="rating-stars">
+							{renderStars(initialData.summary.averageScore)}
+						</span>
+						<span class="rating-count">
+							({initialData.summary.totalRatings})
+						</span>
+					</>
+				) : (
+					<span class="rating-empty">No ratings yet</span>
+				)
+			}
+		</div>
+		<div class="rating-message" style="display: none;"></div>
+	</div>
+</div>
+
+<style>
+	.rating-widget {
+		margin-top: 0.75rem;
+		padding-top: 0.75rem;
+		border-top: 1px solid rgba(0, 0, 0, 0.1);
+	}
+
+	.rating-container {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.rating-interactive {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.rating-label {
+		font-family: var(--font-sans);
+		font-size: 0.8rem;
+		font-weight: 600;
+		color: rgba(0, 0, 0, 0.7);
+	}
+
+	.star-buttons {
+		display: flex;
+		gap: 0.15rem;
+	}
+
+	.star-btn {
+		background: none;
+		border: none;
+		font-size: 1.25rem;
+		cursor: pointer;
+		padding: 0.2rem;
+		color: rgba(0, 102, 255, 0.3);
+		transition: color 0.15s, transform 0.1s;
+		line-height: 1;
+		min-width: 28px;
+		min-height: 28px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.star-btn:hover {
+		color: rgba(0, 102, 255, 0.7);
+		transform: scale(1.15);
+	}
+
+	.star-btn:focus {
+		outline: 2px solid var(--color-accent);
+		outline-offset: 2px;
+		border-radius: 3px;
+	}
+
+	.star-btn.active {
+		color: var(--color-accent);
+	}
+
+	.star-btn.filled {
+		color: var(--color-accent);
+	}
+
+	.rating-summary {
+		font-family: var(--font-sans);
+		font-size: 0.8rem;
+		color: rgba(0, 0, 0, 0.6);
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+	}
+
+	.rating-stars {
+		color: var(--color-accent);
+		font-size: 0.9rem;
+		letter-spacing: 0.05em;
+	}
+
+	.rating-count {
+		color: rgba(0, 0, 0, 0.5);
+		font-size: 0.75rem;
+	}
+
+	.rating-empty {
+		color: rgba(0, 0, 0, 0.4);
+		font-style: italic;
+	}
+
+	.rating-message {
+		font-family: var(--font-sans);
+		font-size: 0.75rem;
+		color: var(--color-accent);
+		font-weight: 600;
+	}
+
+	.rating-message.error {
+		color: #dc2626;
+	}
+
+	@media (max-width: 768px) {
+		.rating-interactive {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+	}
+</style>
+
+<script>
+	import { getOrCreateSessionId } from "../lib/session";
+
+	interface RatingWidgetElement extends HTMLElement {
+		dataset: {
+			slug: string;
+			initial?: string;
+		};
+	}
+
+	function initRatingWidget() {
+		const widgets = document.querySelectorAll(".rating-widget");
+
+		widgets.forEach(async (widget) => {
+			const widgetEl = widget as RatingWidgetElement;
+			const slug = widgetEl.dataset.slug;
+			let initialData = widgetEl.dataset.initial
+				? JSON.parse(widgetEl.dataset.initial)
+				: null;
+
+			const starButtons = widget.querySelectorAll(".star-btn");
+			const summaryEl = widget.querySelector(".rating-summary");
+			const messageEl = widget.querySelector(
+				".rating-message",
+			) as HTMLElement;
+
+			const sessionId = getOrCreateSessionId();
+
+			// If no initial data, fetch from API
+			if (!initialData) {
+				try {
+					const response = await fetch(
+						`/api/ratings/${slug}?sessionId=${sessionId}`,
+					);
+					const result = await response.json();
+					if (result.success && result.data) {
+						initialData = result.data;
+						// Update summary display
+						updateSummaryDisplay(initialData);
+					}
+				} catch (error) {
+					console.error("Error fetching initial ratings:", error);
+				}
+			}
+
+			// Check if user has already rated
+			let userRating = 0;
+			if (initialData && initialData.ratings) {
+				const userRatingData = initialData.ratings.find(
+					(r: any) => r.sessionId === sessionId,
+				);
+				if (userRatingData) {
+					userRating = userRatingData.score;
+					updateStarButtons(userRating);
+				}
+			}
+
+			// Hover effect
+			starButtons.forEach((btn, index) => {
+				btn.addEventListener("mouseenter", () => {
+					highlightStars(index + 1);
+				});
+			});
+
+			widget.addEventListener("mouseleave", () => {
+				updateStarButtons(userRating);
+			});
+
+			// Click handler
+			starButtons.forEach((btn, index) => {
+				btn.addEventListener("click", async () => {
+					const score = index + 1;
+					await submitRating(score);
+				});
+			});
+
+			function highlightStars(count: number) {
+				starButtons.forEach((btn, i) => {
+					if (i < count) {
+						btn.textContent = "★";
+						btn.classList.add("active");
+					} else {
+						btn.textContent = "☆";
+						btn.classList.remove("active");
+					}
+				});
+			}
+
+			function updateStarButtons(count: number) {
+				starButtons.forEach((btn, i) => {
+					if (i < count) {
+						btn.textContent = "★";
+						btn.classList.add("filled");
+					} else {
+						btn.textContent = "☆";
+						btn.classList.remove("filled");
+					}
+				});
+			}
+
+			function updateSummaryDisplay(data: any) {
+				if (summaryEl && data && data.summary) {
+					const { averageScore, totalRatings } = data.summary;
+					if (totalRatings > 0) {
+						const stars = renderStars(averageScore);
+						summaryEl.innerHTML = `
+							<span class="rating-stars">${stars}</span>
+							<span class="rating-count">(${totalRatings})</span>
+						`;
+					} else {
+						summaryEl.innerHTML = `
+							<span class="rating-empty">No ratings yet</span>
+						`;
+					}
+				}
+			}
+
+			async function submitRating(score: number) {
+				try {
+					const response = await fetch(`/api/ratings/${slug}`, {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({ score, sessionId }),
+					});
+
+					const data = await response.json();
+
+					if (data.success && data.data) {
+						userRating = score;
+						updateStarButtons(score);
+
+						// Update summary display
+						if (summaryEl) {
+							const { averageScore, totalRatings } =
+								data.data.summary;
+							const stars = renderStars(averageScore);
+							summaryEl.innerHTML = `
+								<span class="rating-stars">${stars}</span>
+								<span class="rating-count">(${totalRatings})</span>
+							`;
+						}
+
+						// Show success message
+						if (messageEl) {
+							messageEl.textContent = "Thanks for rating!";
+							messageEl.style.display = "block";
+							messageEl.classList.remove("error");
+							setTimeout(() => {
+								messageEl.style.display = "none";
+							}, 3000);
+						}
+					} else {
+						throw new Error(data.error || "Failed to submit rating");
+					}
+				} catch (error) {
+					console.error("Error submitting rating:", error);
+					if (messageEl) {
+						messageEl.textContent = "Error submitting rating";
+						messageEl.classList.add("error");
+						messageEl.style.display = "block";
+					}
+				}
+			}
+
+			function renderStars(average: number): string {
+				const fullStars = Math.floor(average);
+				const hasHalfStar = average % 1 >= 0.5;
+				const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+				let stars = "";
+				stars += "★".repeat(fullStars);
+				if (hasHalfStar) stars += "⯨";
+				stars += "☆".repeat(emptyStars);
+
+				return stars;
+			}
+		});
+	}
+
+	// Initialize on page load
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initRatingWidget);
+	} else {
+		initRatingWidget();
+	}
+
+	// Re-initialize on Astro page transitions
+	document.addEventListener("astro:page-load", initRatingWidget);
+</script>

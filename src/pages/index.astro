@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import RatingDisplay from "../components/RatingDisplay.astro";
 import { getCollection } from "astro:content";
 
 const allCaseStudies = await getCollection("case-studies");
@@ -8,6 +9,23 @@ const allCaseStudies = await getCollection("case-studies");
 const passengerStudies = allCaseStudies.filter(s => s.data.type === "passenger");
 const freightStudies = allCaseStudies.filter(s => s.data.type === "freight");
 const serviceStudies = allCaseStudies.filter(s => s.data.type === "service");
+
+// Fetch ratings for all case studies
+const slugs = allCaseStudies.map(s => s.slug);
+let ratingsData: Record<string, any> = {};
+try {
+	const ratingsResponse = await fetch(`${Astro.url.origin}/api/ratings`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ slugs })
+	});
+	const result = await ratingsResponse.json();
+	if (result.success && result.data) {
+		ratingsData = result.data;
+	}
+} catch (error) {
+	console.error('Error fetching ratings:', error);
+}
 
 const geojsonUrls = import.meta.glob(
 	"/src/content/case-studies/**/*.geojson",
@@ -60,6 +78,10 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 											<div class="card-content">
 												<h3>{study.data.concept}</h3>
 												{study.data.author && <p class="card-author">{study.data.author}</p>}
+												<RatingDisplay
+													slug={study.slug}
+													rating={ratingsData[study.slug]?.summary}
+												/>
 											</div>
 										</article>
 									</a>
@@ -94,6 +116,10 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 											<div class="card-content">
 												<h3>{study.data.concept}</h3>
 												{study.data.author && <p class="card-author">{study.data.author}</p>}
+												<RatingDisplay
+													slug={study.slug}
+													rating={ratingsData[study.slug]?.summary}
+												/>
 											</div>
 										</article>
 									</a>
@@ -128,6 +154,10 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 											<div class="card-content">
 												<h3>{study.data.concept}</h3>
 												{study.data.author && <p class="card-author">{study.data.author}</p>}
+												<RatingDisplay
+													slug={study.slug}
+													rating={ratingsData[study.slug]?.summary}
+												/>
 											</div>
 										</article>
 									</a>

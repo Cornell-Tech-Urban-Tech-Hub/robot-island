@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Footer from "../../components/Footer.astro";
+import RatingWidget from "../../components/RatingWidget.astro";
 import { getCollection } from "astro:content";
 
 export const prerender = true;
@@ -54,6 +55,10 @@ const resolvedMedia = allMedia.map((m: any) => ({
                 {study.data.author && (
                     <p class="header-author">{study.data.author}</p>
                 )}
+                <RatingWidget
+                    slug={study.slug}
+                    client:load
+                />
             </div>
         </header>
 

@@ -1,0 +1,65 @@
+---
+export interface Props {
+	slug: string;
+	rating?: {
+		averageScore: number;
+		totalRatings: number;
+	};
+}
+
+const { rating } = Astro.props;
+
+function renderStars(average: number): string {
+	const fullStars = Math.floor(average);
+	const hasHalfStar = average % 1 >= 0.5;
+	const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+	let stars = "";
+	stars += "★".repeat(fullStars);
+	if (hasHalfStar) stars += "⯨"; // Half star approximation
+	stars += "☆".repeat(emptyStars);
+
+	return stars;
+}
+---
+
+<div class="rating-display">
+	{
+		rating && rating.totalRatings > 0 ? (
+			<span class="rating-stars">
+				{renderStars(rating.averageScore)}
+			</span>
+			<span class="rating-count">({rating.totalRatings})</span>
+		) : (
+			<span class="rating-empty">No ratings yet</span>
+		)
+	}
+</div>
+
+<style>
+	.rating-display {
+		font-family: var(--font-sans);
+		font-size: 0.8rem;
+		color: rgba(0, 0, 0, 0.6);
+		margin-top: 0.25rem;
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+	}
+
+	.rating-stars {
+		color: var(--color-accent);
+		font-size: 0.9rem;
+		letter-spacing: 0.05em;
+	}
+
+	.rating-count {
+		color: rgba(0, 0, 0, 0.5);
+		font-size: 0.75rem;
+	}
+
+	.rating-empty {
+		color: rgba(0, 0, 0, 0.4);
+		font-style: italic;
+	}
+</style>
