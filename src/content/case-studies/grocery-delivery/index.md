@@ -27,7 +27,6 @@ Residents place grocery orders through a mobile app, and the system combines nea
 
 The project focuses on neighborhood-scale delivery instead of large citywide logistics. By using smaller low-speed vehicles and coordinated delivery routes, the system creates a more efficient and pedestrian-friendly approach to urban grocery delivery.
 
----
 
 ## AV Use Case
 
@@ -47,7 +46,6 @@ The vehicle is designed around a six-locker multi-user storage system instead of
 
 All grocery pickup activity happens on the right side of the vehicle, facing the sidewalk and curbside pickup zone instead of the traffic lane. This allows residents to always stand in a safe street-side position while collecting groceries. When the vehicle arrives, residents receive a mobile notification with a verification code. After verification, only the assigned locker door opens, allowing users to safely collect their groceries while protecting the privacy and security of other residents’ orders.
 
----
 
 ### What are they doing?
 
@@ -59,7 +57,6 @@ Unlike services such as Uber Eats, this system does not use one vehicle for each
 
 Vehicles complete neighborhood delivery loops approximately every 15–20 minutes depending on order demand and traffic conditions.
 
----
 
 ### Why here?
 
@@ -71,8 +68,6 @@ In addition, the streets are relatively simple, traffic volumes are lower compar
 
 The neighborhood also has many elderly residents and people who rely on walking or public transportation for daily activities, making grocery accessibility an important community need.
 
----
-
 ## Stakeholders
 
 ### Who participates?
@@ -81,7 +76,6 @@ Local grocery stores prepare and supply grocery orders. The autonomous vehicle c
 
 Technology providers support vehicle software, routing systems, and mobile verification systems used for locker access.
 
----
 
 ### Who is impacted?
 
@@ -91,7 +85,6 @@ At the same time, some traditional delivery jobs may be affected as the system b
 
 The project also affects pedestrians, cyclists, and drivers because the system changes how curb space and residential streets are used.
 
----
 
 ### How does the solution use their capabilities?
 
@@ -99,7 +92,6 @@ Local stores provide grocery inventory and prepare orders for delivery. The AV o
 
 RIOC supports the project through curbside regulations, painted loading zones, and smart curb infrastructure. Residents interact with the system by placing grocery orders, receiving notifications, and unlocking assigned locker compartments through mobile verification.
 
----
 
 ### How does it address their concerns?
 
@@ -111,7 +103,6 @@ The project also reduces the number of delivery vehicles operating independently
 
 Possible job impacts can be reduced by shifting some delivery-related work toward logistics coordination, remote operations, and system maintenance.
 
----
 
 ## Relevant Blueprints for Autonomous Urbanism
 
@@ -125,7 +116,6 @@ The delivery zones include painted curb markings, pickup signage, and smart curb
 
 By treating the curb as a shared public resource, the system supports more efficient neighborhood-scale freight movement while improving the overall use of street space.
 
----
 
 ### Low-Speed Residential Streets
 
@@ -135,7 +125,6 @@ The slower speed improves visibility and reaction time while reducing possible c
 
 Instead of prioritizing fast vehicle throughput, the street is designed around everyday residential life, accessibility, and human-scale movement.
 
----
 
 ### Coordinated Routing System
 
@@ -145,7 +134,6 @@ Nearby grocery orders are grouped together to reduce unnecessary vehicle movemen
 
 This approach creates a more connected and efficient freight network where fewer vehicles can serve more households while reducing traffic pressure and improving the performance of the street.
 
----
 
 ## Methods
 
@@ -156,7 +144,6 @@ This approach creates a more connected and efficient freight network where fewer
 - **Transformation:** First, I used Midjourney to render the 3D design of the autonomous grocery delivery vehicle. I iterated the vehicle design more than 10 times to refine its form, proportions, locker layout, screen position, lighting, and overall visual style. After the vehicle design became more stable, I took screenshots of Main Street from Google Maps to capture the real street environment, including apartment entrances, curbside space, street width, traffic conditions, and overall neighborhood character. Then I used ChatGPT to place the vehicle into the real street-view context and described the grocery delivery interaction in detail, including refrigerated and ambient storage zones, secure locker access, different locker sizes, curbside stopping behavior, and how residents collect groceries from the vehicle.  
 - **Result:** Generated a realistic hero image showing the autonomous grocery delivery vehicle stopping on Main Street while a resident interacts with the vehicle and collects groceries from a secure locker compartment.
 
----
 
 ### Step 2
 
@@ -164,15 +151,12 @@ This approach creates a more connected and efficient freight network where fewer
 - **Transformation:** I took another screenshot from Google Maps to use as the base street image. Then I provided ChatGPT with written requirements describing how the vehicle should move and operate within the real Main Street environment, including driving direction, low-speed behavior, curbside stopping position, relationship to traffic, pedestrian interaction, and how the AV should fit into the existing residential street. I iterated the image more than 5 times to correct visual mistakes such as unrealistic vehicle movement, incorrect street scale, inaccurate curb positioning, and unclear delivery interactions.  
 - **Result:** Produced a street-view image showing how the autonomous grocery delivery vehicle could safely travel and operate within the real neighborhood environment.
 
----
-
 ### Step 3
 
 - **Tool:** ChatGPT  
 - **Transformation:** I created the side-view image by writing detailed text requirements for ChatGPT. I asked ChatGPT to generate a clean side view of the same autonomous grocery delivery vehicle based on the street-view image, while keeping the six-locker layout clear and visible. I described the exact locker arrangement, including smaller lockers 01, 02, 05, and 06, and larger lockers 03 and 04 in the middle. I also refined the image to remove the user and focus only on the vehicle design from the side.  
 - **Result:** Produced a side-view image that clearly shows the vehicle’s six-locker storage layout and overall form.
 
----
 
 ### Step 4
 
