@@ -29,6 +29,22 @@ const assetUrl = (slug: string, file: string | undefined, map: Record<string, st
     return map[`/src/content/case-studies/${slug}/${file}`] ?? "";
 };
 
+const thumbnailUrl = (slug: string, file: string | undefined, map: Record<string, string>, size: 'thumb' | 'medium' = 'thumb') => {
+    if (!file) return "";
+    if (file.startsWith("http")) return file;
+
+    // Get base name without extension
+    const lastDot = file.lastIndexOf('.');
+    const baseName = lastDot > -1 ? file.substring(0, lastDot) : file;
+
+    // Try thumbnail first (they're always .jpg)
+    const thumbFile = `${baseName}-${size}.jpg`;
+    const thumbUrl = map[`/src/content/case-studies/${slug}/${thumbFile}`];
+
+    // Fallback to original if thumbnail doesn't exist
+    return thumbUrl || assetUrl(slug, file, map);
+};
+
 const { study } = Astro.props;
 const { Content } = await study.render();
 const allMedia = study.data.media || [];
@@ -40,6 +56,7 @@ const youtubeId = (url: string) => {
 const resolvedMedia = allMedia.map((m: any) => ({
     ...m,
     resolvedFile: assetUrl(study.slug, m.file, mediaUrls),
+    thumbnailFile: thumbnailUrl(study.slug, m.file, mediaUrls, 'medium'),
 }));
 ---
 
@@ -94,7 +111,7 @@ const resolvedMedia = allMedia.map((m: any) => ({
                                 <video controls src={item.resolvedFile} data-lightbox-index={idx}></video>
                             ) : (
                                 <img
-                                    src={item.resolvedFile}
+                                    src={item.thumbnailFile}
                                     alt={item.caption}
                                     loading="lazy"
                                     class="lightbox-trigger"
@@ -286,7 +303,7 @@ const resolvedMedia = allMedia.map((m: any) => ({
     }
 
     .content-main :global(p) {
-        font-family: Georgia, serif;
+        font-family: var(--font-serif);
         line-height: 1.8;
         margin-bottom: 1.5rem;
     }
@@ -294,7 +311,7 @@ const resolvedMedia = allMedia.map((m: any) => ({
     .content-main :global(ul),
     .content-main :global(ol) {
         padding-left: 2rem;
-        font-family: Georgia, serif;
+        font-family: var(--font-serif);
         margin-bottom: 1.5rem;
     }
 
