@@ -4,7 +4,7 @@ place: "Coler Specialty Hospital and Nursing Facility"
 concept: "Mobility as Medicine"
 description: "A wheelchair-secured autonomous pod loop linking Coler's long-term-care residents to Lighthouse Park, the Octagon, and the Tram, treating mobility as a clinical and civic intervention rather than a convenience."
 author: "Sara Frazer"
-type: "service"
+type: "passenger"
 geojson: "boundary.geojson"
 media:
   - file: "hero-image.png"
