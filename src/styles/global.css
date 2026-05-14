@@ -2,7 +2,7 @@
   Robot Island - Global Styles
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
 
 :root {
   /* Color Palette - Robot Island */
@@ -25,8 +25,8 @@
 
   --color-border: #D1D9E0;
 
-  --font-sans: 'Barlow', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: Georgia, serif;
+  --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Lora', Georgia, serif;
 
   --max-width: 1200px;
   --transition-fast: 150ms ease-in-out;

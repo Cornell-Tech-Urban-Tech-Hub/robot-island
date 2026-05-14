@@ -42,6 +42,23 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 	if (file.startsWith("http")) return file;
 	return map[`/src/content/case-studies/${slug}/${file}`] ?? "";
 }
+
+function thumbnailUrl(slug: string, file: string | undefined, map: Record<string, string>, size: 'thumb' | 'medium' = 'thumb') {
+	if (!file) return "";
+	if (file.startsWith("http")) return file;
+
+	// Get base name without extension
+	const lastDot = file.lastIndexOf('.');
+	const baseName = lastDot > -1 ? file.substring(0, lastDot) : file;
+	const ext = lastDot > -1 ? file.substring(lastDot) : '';
+
+	// Try thumbnail first (they're always .jpg)
+	const thumbFile = `${baseName}-${size}.jpg`;
+	const thumbUrl = map[`/src/content/case-studies/${slug}/${thumbFile}`];
+
+	// Fallback to original if thumbnail doesn't exist
+	return thumbUrl || assetUrl(slug, file, map);
+}
 ---
 
 <Layout title="Robot Island" hideNav={true}>
@@ -60,7 +77,7 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 						<div class="card-grid">
 							{passengerStudies.map((study) => {
 								const featuredMedia = study.data.media?.find(m => m.featured);
-								const cardImage = assetUrl(study.slug, featuredMedia?.file, mediaUrls);
+								const cardImage = thumbnailUrl(study.slug, featuredMedia?.file, mediaUrls, 'thumb');
 								const geojsonUrl = assetUrl(study.slug, study.data.geojson, geojsonUrls);
 								return (
 									<a
@@ -98,7 +115,7 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 						<div class="card-grid">
 							{freightStudies.map((study) => {
 								const featuredMedia = study.data.media?.find(m => m.featured);
-								const cardImage = assetUrl(study.slug, featuredMedia?.file, mediaUrls);
+								const cardImage = thumbnailUrl(study.slug, featuredMedia?.file, mediaUrls, 'thumb');
 								const geojsonUrl = assetUrl(study.slug, study.data.geojson, geojsonUrls);
 								return (
 									<a
@@ -136,7 +153,7 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 						<div class="card-grid">
 							{serviceStudies.map((study) => {
 								const featuredMedia = study.data.media?.find(m => m.featured);
-								const cardImage = assetUrl(study.slug, featuredMedia?.file, mediaUrls);
+								const cardImage = thumbnailUrl(study.slug, featuredMedia?.file, mediaUrls, 'thumb');
 								const geojsonUrl = assetUrl(study.slug, study.data.geojson, geojsonUrls);
 								return (
 									<a
@@ -233,13 +250,12 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 		font-family: var(--font-serif);
 		font-size: 1.5rem;
 		color: rgba(255, 255, 255, 0.85);
-		max-width: 600px;
 		line-height: 1.6;
 		margin-bottom: 1.5rem;
 	}
 
 	.hero .intro {
-		font-family: var(--font-sans);
+		font-family: var(--font-serif);
 		font-size: 1.1rem;
 		color: rgba(255, 255, 255, 0.7);
 		max-width: none;
@@ -612,7 +628,7 @@ function assetUrl(slug: string, file: string | undefined, map: Record<string, st
 						hoverPopup
 							.setLngLat(e.lngLat)
 							.setHTML(
-								`<div style="width:160px;font-family:Barlow,sans-serif;">`
+								`<div style="width:160px;font-family:'Space Grotesk',sans-serif;">`
 								+ imgHtml
 								+ `<div style="padding:6px 8px;">`
 								+ `<strong style="font-size:0.8em;line-height:1.3;display:block;">${cardData?.concept || name}</strong>`
